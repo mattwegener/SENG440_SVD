@@ -1,11 +1,22 @@
+
+#ifndef SVD_MATRIX_H
+#define SVD_MATRIX_H
+
 #include "SVD_math.h"
+#include <stdbool.h>
 
-typedef struct {
-  int n;
-  float elements[n][n];
-} matrix;
+#define N (4)
 
-void SVD_matrix_init();
+typedef float matrix_elem; //< we can change this later to use fixed point
+typedef matrix_elem matrix[N][N]; //< this could actually just be a pointer to matrix_elem type
+
 void SVD_matrix_mul(matrix* matrix1, matrix* matrix2, matrix* result);
 float SVD_matrix_dot(matrix* matrix1, matrix* matrix2, int row1, int col2);
 void SVD_matrix_rotation_angles(matrix* matrix);
+bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2);
+
+#ifdef TESTING
+void SVD_matrix_print(matrix* m);
+#endif
+
+#endif /* SVD_MATRIX_H */
