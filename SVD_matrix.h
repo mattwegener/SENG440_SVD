@@ -17,6 +17,9 @@ bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2);
 
 #ifdef TESTING
 void SVD_matrix_print(matrix* m);
+void TEST_SVD_matrix_equal(void);
+void TEST_SVD_matrix_dot(void);
+void TEST_SVD_matrix_mul(void);
 #endif
 
 #endif /* SVD_MATRIX_H */
