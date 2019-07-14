@@ -33,6 +33,11 @@ int main(void)
                  {0.0,0.0,0.0,0.0,},
                  {0.0,0.0,0.0,0.0,},}; // zeros
 
+    matrix m_expect = { {90.0, 100.0, 110.0, 120.0,},
+                        {202.0, 228.0, 254.0, 280.0,},
+                        {314.0, 356.0, 398.0, 440.0,},
+                        {426.0, 484.0, 542.0, 600.0,},};
+
     // Test : SVD_matrix_print
     SVD_matrix_print(&I);
     println();
@@ -121,6 +126,17 @@ int main(void)
     assert(SVD_matrix_dot(&m1, &ones, 3,1) == 58.0);
     assert(SVD_matrix_dot(&m1, &ones, 3,2) == 58.0);
     assert(SVD_matrix_dot(&m1, &ones, 3,3) == 58.0);
+
+    // Test dot product of two arbitrary columns
+    assert(SVD_matrix_dot(&m1, &m2, 0, 0) == 90.0);
+
+    // Test Matrix multiplication with identity matrix
+    SVD_matrix_mul(&m1, &I, &m3);
+    assert(SVD_matrix_equal(&m1, &m3));
+    SVD_matrix_mul(&I, &m1, &m3);
+    assert(SVD_matrix_equal(&m1, &m3));
+    SVD_matrix_mul(&m1,&m2, &m3);
+    assert(SVD_matrix_equal(&m3, &m_expect));
     // if we get here, we have finished the tests.
     printf("All tests succeeded. Exiting...\n\n");
     return 0;
