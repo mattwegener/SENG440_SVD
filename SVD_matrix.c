@@ -8,8 +8,6 @@ void SVD_matrix_mul(matrix* matrix1, matrix* matrix2, matrix* result){
       (*result)[j][k] = SVD_matrix_dot(matrix1,matrix2,j,k);
     }
   }
-
-
 }
 
 float SVD_matrix_dot(matrix* matrix1, matrix* matrix2, int row1, int col2){
@@ -47,7 +45,7 @@ static matrix I  = {{  1.0,  0.0,  0.0,  0.0, },
                     {  0.0,  1.0,  0.0,  0.0, },
                     {  0.0,  0.0,  1.0,  0.0, },
                     {  0.0,  0.0,  0.0,  1.0, },};
-  
+
 static matrix ones  = {{  1.0,  1.0,  1.0,  1.0, },
                        {  1.0,  1.0,  1.0,  1.0, },
                        {  1.0,  1.0,  1.0,  1.0, },

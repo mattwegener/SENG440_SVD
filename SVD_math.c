@@ -19,8 +19,8 @@ double SVD_sin(double x){
   return result;
 }
 
-double SVD_atan2(double x, double y){
-  double result =  atan2(x,y);
+double SVD_atan2(double y, double x){
+  double result =  atan2(y,x);
   return result;
 }
 
