@@ -1,21 +1,32 @@
+
 #include "SVD_math.h"
 
-double svd_tan(double x){
+// INCLUSION OF math.h REQUIRES -lm COMPILER FLAG
+#include <math.h>
+
+double SVD_tan(double x){
   double result =  tan(x);
   return result;
 }
 
-double svd_cos(double x){
+double SVD_cos(double x){
   double result =  cos(x);
   return result;
 }
 
-double svd_sin(double x){
+double SVD_sin(double x){
   double result =  sin(x);
   return result;
 }
 
-double svd_atan2(double x, double y){
+double SVD_atan2(double x, double y){
   double result =  atan2(x,y);
   return result;
 }
+
+#ifdef TEST
+void TEST_SVD_math()
+{
+  // TODO
+}
+#endif

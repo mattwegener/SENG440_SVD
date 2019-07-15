@@ -39,7 +39,7 @@ bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2)
     return ret;
 }
 
-#ifdef TESTING
+#ifdef TEST
 #include <stdio.h>
 #include <assert.h>
 #define println(...) printf("\n")
