@@ -10,7 +10,15 @@ void SVD_matrix_mul(matrix* matrix1, matrix* matrix2, matrix* result){
   }
 }
 
-void SVD_matrix_trans(matrix* in,matrix* out){
+void SVD_matrix_trans(matrix* in, matrix* out)
+{
+  for ( int i = 0; i < N; i++ )
+  {
+    for ( int j = 0; j < N; j++ )
+    {
+      (*out)[j][i] = (*in)[i][j];
+    }
+  }
 }
 
 float SVD_matrix_dot(matrix* matrix1, matrix* matrix2, int row1, int col2){
@@ -74,6 +82,8 @@ static matrix m_expect = {{90.0, 100.0, 110.0, 120.0,},
                           {202.0, 228.0, 254.0, 280.0,},
                           {314.0, 356.0, 398.0, 440.0,},
                           {426.0, 484.0, 542.0, 600.0,},};
+
+static matrix m1_tran = {{1.0,5.0,9.0,13.0,},{2.0,6.0,10.0,14.0,},{3.0,7.0,11.0,15.0,},{4.0,8.0,12.0,16.0,},};
 
 void SVD_matrix_print(matrix* m)
 {
@@ -185,5 +195,11 @@ void TEST_SVD_matrix_mul()
     assert(SVD_matrix_equal(&m1, &m3));
     SVD_matrix_mul(&m1,&m2, &m3);
     assert(SVD_matrix_equal(&m3, &m_expect));
+}
+
+void TEST_SVD_matrix_trans(void)
+{
+  SVD_matrix_trans(&m1, &m3);
+  assert(SVD_matrix_equal(&m3, &m1_tran));
 }
 #endif
