@@ -11,6 +11,7 @@ typedef float matrix_elem; //< we can change this later to use fixed point
 typedef matrix_elem matrix[N][N]; //< this could actually just be a pointer to matrix_elem type
 
 void SVD_matrix_mul(matrix* matrix1, matrix* matrix2, matrix* result);
+void SVD_matrix_trans(matrix* in, matrix* out);
 float SVD_matrix_dot(matrix* matrix1, matrix* matrix2, int row1, int col2);
 void SVD_matrix_rotation_angles(matrix* matrix);
 bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2);

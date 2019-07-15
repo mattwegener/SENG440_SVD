@@ -10,6 +10,9 @@ void SVD_matrix_mul(matrix* matrix1, matrix* matrix2, matrix* result){
   }
 }
 
+void SVD_matrix_trans(matrix* in,matrix* out){
+}
+
 float SVD_matrix_dot(matrix* matrix1, matrix* matrix2, int row1, int col2){
   matrix_elem dot = 0.0;
   int i;
