@@ -25,6 +25,7 @@ void TEST_SVD_matrix_dot(void);
 void TEST_SVD_matrix_mul(void);
 void TEST_SVD_matrix_trans(void);
 void TEST_SVD_matrix_copy(void);
+void TEST_SVD_matrix_isDiagonal(void);
 #endif
 
 #endif /* SVD_MATRIX_H */

@@ -59,6 +59,25 @@ bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2)
     return ret;
 }
 
+
+bool SVD_matrix_isDiagonal(matrix* in)
+{
+  for (int i = 0; i < N; i++)
+  {
+    for (int j = 0; j < N; j++)
+    {
+      if (i != j)
+      {
+        if ((*in)[i][j] != 0.0)
+          return false;
+      }
+    }
+  }
+
+  // fall through
+  return true;
+}
+
 #ifdef TEST
 #include <stdio.h>
 #include <assert.h>
@@ -219,4 +238,13 @@ void TEST_SVD_matrix_copy(void)
     SVD_matrix_copy(&m1, &m3);
     assert(SVD_matrix_equal(&m1, &m3));
 }
+
+void TEST_SVD_matrix_isDiagonal(void)
+{
+    assert(SVD_matrix_isDiagonal(&I));
+    assert(!SVD_matrix_isDiagonal(&m1));
+}
+
+
+
 #endif
