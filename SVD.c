@@ -45,57 +45,59 @@ void SVD_decompose(matrix* M /*IN*/, matrix* U /*OUT*/, matrix* S /*OUT*/, matri
     //rows: j
     //cols: k
     double sum, diff, qR, qL;
+    while(!SVD_matrix_isDiagonal(&S)){
+        for(int j = 0; j < N; j++){
+            sum = 0; diff = 0;
+            qR = 0; qL = 0;
+            SVD_matrix_copy(&I,&Up); SVD_matrix_copy(&I,&Mp); SVD_matrix_copy(&I,&Vtp);
+            SVD_matrix_copy(&I,&U_pair); SVD_matrix_copy(&I,&V_pair);
+            SVD_matrix_copy(&I,&U_pairt); SVD_matrix_copy(&I,&V_pairt);
+            for(int k = j+1; k < N; k++){
+                //calculate rotation angles
+                sum = SVD_atan2((tmp_M[k][j] + tmp_M[j][k]),(tmp_M[k][k] - tmp_M[j][j]));
+                diff = SVD_atan2((tmp_M[k][j] - tmp_M[j][k]),(tmp_M[k][k] + tmp_M[j][j]));
+                qL = (sum - diff)/2;
+                qR = sum - qL;
 
-    for(int j = 0; j < N; j++){
-        sum = 0; diff = 0;
-        qR = 0; qL = 0;
-        SVD_matrix_copy(&I,&Up); SVD_matrix_copy(&I,&Mp); SVD_matrix_copy(&I,&Vtp);
-        SVD_matrix_copy(&I,&U_pair); SVD_matrix_copy(&I,&V_pair);
-        SVD_matrix_copy(&I,&U_pairt); SVD_matrix_copy(&I,&V_pairt);
-        for(int k = j+1; k < N; k++){
-            //calculate rotation angles
-            sum = SVD_atan2((tmp_M[k][j] + tmp_M[j][k]),(tmp_M[k][k] - tmp_M[j][j]));
-            diff = SVD_atan2((tmp_M[k][j] - tmp_M[j][k]),(tmp_M[k][k] + tmp_M[j][j]));
-            qL = (sum - diff)/2;
-            qR = sum - qL;
+                /* Can use these to check energy transfer to main diagonal
+                pair_m ={
+                {1, 0},
+                {0, 1},
+                };
 
-            /* Can use these to check energy transfer to main diagonal
-            pair_m ={
-            {1, 0},
-            {0, 1},
-            };
+                pair_m[j][j] = (tmp_M[j][j]*SVD_cos(qL) - SVD_sin(qL)*tmp_M[k][j])*SVD_cos(qR) +
+                     (tmp_M[j][k]*SVD_cos(qL) - SVD_sin(qL)*tmp_M[k][k])*-1*SVD_sin(qR);
 
-            pair_m[j][j] = (tmp_M[j][j]*SVD_cos(qL) - SVD_sin(qL)*tmp_M[k][j])*SVD_cos(qR) +
-                 (tmp_M[j][k]*SVD_cos(qL) - SVD_sin(qL)*tmp_M[k][k])*-1*SVD_sin(qR);
+                pair_m[k][k] = (tmp_M[j][j]*SVD_sin(qL) + SVD_cos(qL)*tmp_M[k][j])*SVD_sin(qR) +
+                     (tmp_M[j][k]*SVD_sin(qL) + SVD_cos(qL)*tmp_M[k][k])*SVD_cos(qR);
+                */
 
-            pair_m[k][k] = (tmp_M[j][j]*SVD_sin(qL) + SVD_cos(qL)*tmp_M[k][j])*SVD_sin(qR) +
-                 (tmp_M[j][k]*SVD_sin(qL) + SVD_cos(qL)*tmp_M[k][k])*SVD_cos(qR);
-            */
+                //Create U V rotation matrices for mulitplaction
+                U_pair[j][j] = SVD_cos(qL); U_pair[j][k] = -1*SVD_sin(qL);
+                U_pair[k][j] = SVD_sin(qL); U_pair[k][k] = SVD_cos(qL);
 
-            U_pair[j][j] = SVD_cos(qL); U_pair[j][k] = -1*SVD_sin(qL);
-            U_pair[k][j] = SVD_sin(qL); U_pair[k][k] = SVD_cos(qL);
+                V_pair[j][j] = SVD_cos(qR); V_pair[j][k] = -1*SVD_sin(qR);
+                V_pair[k][j] = SVD_sin(qR); V_pair[k][k] = SVD_cos(qR);
 
-            V_pair[j][j] = SVD_cos(qR); V_pair[j][k] = -1*SVD_sin(qR);
-            V_pair[k][j] = SVD_sin(qR); V_pair[k][k] = SVD_cos(qR);
+                //Transpose matrices
+                SVD_matrix_trans(&U_pair,&U_pairt);
+                SVD_matrix_trans(&V_pair,&V_pairt);
 
-            //transpose matrices
-            SVD_matrix_trans(&U_pair,&U_pairt);
-            SVD_matrix_trans(&V_pair,&V_pairt);
+                //DO algorithm multiplaction
+                SVD_matrix_mul(&U,&U_pairt,&Up);
+                SVD_matrix_mul(&V_pair,&Vt,&Vtp);
 
-            SVD_matrix_mul(&U,&U_pairt,&Up);
-            SVD_matrix_mul(&V_pair,&Vt,&Vtp);
+                SVD_matrix_mul(&U_pair,&tmp_M,&Mp); //U pair * tmp_M -> M'
+                SVD_matrix_mul(&Mp,&V_pairt,&tmp_M); //M' * V pair t -> tmp_M
 
-            SVD_matrix_mul(&U_pair,&tmp_M,&Mp); //U pair * tmp_M -> M'
-            SVD_matrix_mul(&Mp,&V_pairt,&tmp_M); //M' * V pair t -> tmp_M
-
-            //Update S, U, V, Vt
-            SVD_matrix_copy(&Vtp,&Vt);
-            SVD_matrix_trans(&Vt,&V);
-            SVD_matrix_copy(&Up,&U);
-            SVD_matrix_copy(&tmp_M,&S);
-        }
-    }
-
+                //Update S, U, V, Vt
+                SVD_matrix_copy(&Vtp,&Vt);
+                SVD_matrix_trans(&Vt,&V);
+                SVD_matrix_copy(&Up,&U);
+                SVD_matrix_copy(&tmp_M,&S);
+            } //end for
+        }//end for
+    }//end while
 }
 
 
