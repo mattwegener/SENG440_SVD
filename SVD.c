@@ -20,7 +20,7 @@ void SVD_decompose(matrix* M /*IN*/, matrix* U /*OUT*/, matrix* S /*OUT*/, matri
   */
 
   matrix tmp_m, U, Vt;
-  tmp_M = M*;
+  tmp_M = *M;
   U = {{  1.0,  0.0,  0.0,  0.0, },
   {  0.0,  1.0,  0.0,  0.0, },
   {  0.0,  0.0,  1.0,  0.0, },
@@ -73,6 +73,22 @@ void SVD_decompose(matrix* M /*IN*/, matrix* U /*OUT*/, matrix* S /*OUT*/, matri
 
        V_pair[j][j] = SVD_cos(qR); V_pair[j][k] = -1*SVD_sin(qR);
        V_pair[k][j] = SVD_sin(qR); V_pair[k][k] = SVD_cos(qR);
+
+       //transpose matrices
+       SVD_matrix_trans(U_pair,U_pairt);
+       SVD_matrix_trans(V_pair,V_pairt);
+
+       SVD_matrix_mul(U,U_pairt,Up);
+       SVD_matrix_mul(V_pair,Vt,Vtp);
+
+       SVD_matrix_mul(U_pair,tmp_M,Mp); //U pair * M -> M'
+       SVD_matrix_mul(Mp,V_pairt,tmp_M); //M' * V pair t -> M
+
+       //Update V & U
+       U = Up;
+       Vt = Vtp;
+
+
     }
   }
 
