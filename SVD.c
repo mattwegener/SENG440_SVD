@@ -20,7 +20,7 @@ void SVD_decompose(matrix* M /*IN*/, matrix* U /*OUT*/, matrix* S /*OUT*/, matri
     */
 
     matrix tmp_m, Vt;
-    tmp_M = *M;
+    SVD_matrix_copy(&M,&tmp_M);
     U = {{  1.0,  0.0,  0.0,  0.0, },
     {  0.0,  1.0,  0.0,  0.0, },
     {  0.0,  0.0,  1.0,  0.0, },
@@ -49,8 +49,9 @@ void SVD_decompose(matrix* M /*IN*/, matrix* U /*OUT*/, matrix* S /*OUT*/, matri
     for(int j = 0; j < N; j++){
         sum = 0; diff = 0;
         qR = 0; qL = 0;
-        Up = I; Mp = I; Vtp = I;
-        U_pair = I; V_pair = I; U_pairt = I; V_pairt = I;
+        SVD_matrix_copy(&I,&Up); SVD_matrix_copy(&I,&Mp); SVD_matrix_copy(&I,&Vtp);
+        SVD_matrix_copy(&I,&U_pair); SVD_matrix_copy(&I,&V_pair);
+        SVD_matrix_copy(&I,&U_pairt); SVD_matrix_copy(&I,&V_pairt);
         for(int k = j+1; k < N; k++){
             //calculate rotation angles
             sum = SVD_atan2((tmp_M[k][j] + tmp_M[j][k]),(tmp_M[k][k] - tmp_M[j][j]));
@@ -88,10 +89,10 @@ void SVD_decompose(matrix* M /*IN*/, matrix* U /*OUT*/, matrix* S /*OUT*/, matri
             SVD_matrix_mul(&Mp,&V_pairt,&tmp_M); //M' * V pair t -> tmp_M
 
             //Update S, U, V, Vt
-            Vt = Vtp;
+            SVD_matrix_copy(&Vtp,&Vt);
             SVD_matrix_trans(&Vt,&V);
-            U = Up;
-            S = tmp_M;
+            SVD_matrix_copy(&Up,&U);
+            SVD_matrix_copy(&tmp_M,&S);
         }
     }
 
