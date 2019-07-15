@@ -1,5 +1,9 @@
 
 #include "SVD_matrix.h"
+#include <stdio.h>
+
+#define EPS (0.001f)
+
 
 void SVD_matrix_mul(matrix* matrix1, matrix* matrix2, matrix* result){
   int j,k;
@@ -68,7 +72,7 @@ bool SVD_matrix_isDiagonal(matrix* in)
     {
       if (i != j)
       {
-        if ((*in)[i][j] != 0.0)
+        if ((*in)[i][j] >= EPS)
           return false;
       }
     }
@@ -76,6 +80,14 @@ bool SVD_matrix_isDiagonal(matrix* in)
 
   // fall through
   return true;
+}
+
+void SVD_matrix_print(matrix* m)
+{
+  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[0][0], (*m)[0][1], (*m)[0][2], (*m)[0][3]);
+  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[1][0], (*m)[1][1], (*m)[1][2], (*m)[1][3]);
+  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[2][0], (*m)[2][1], (*m)[2][2], (*m)[2][3]);
+  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[3][0], (*m)[3][1], (*m)[3][2], (*m)[3][3]);
 }
 
 #ifdef TEST
@@ -114,14 +126,6 @@ static matrix m_expect = {{90.0, 100.0, 110.0, 120.0,},
                           {426.0, 484.0, 542.0, 600.0,},};
 
 static matrix m1_tran = {{1.0,5.0,9.0,13.0,},{2.0,6.0,10.0,14.0,},{3.0,7.0,11.0,15.0,},{4.0,8.0,12.0,16.0,},};
-
-void SVD_matrix_print(matrix* m)
-{
-  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[0][0], (*m)[0][1], (*m)[0][2], (*m)[0][3]);
-  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[1][0], (*m)[1][1], (*m)[1][2], (*m)[1][3]);
-  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[2][0], (*m)[2][1], (*m)[2][2], (*m)[2][3]);
-  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[3][0], (*m)[3][1], (*m)[3][2], (*m)[3][3]);
-}
 
 void TEST_SVD_matrix_equal()
 {

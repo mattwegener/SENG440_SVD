@@ -4,24 +4,26 @@
 // INCLUSION OF math.h REQUIRES -lm COMPILER FLAG
 #include <math.h>
 
-double SVD_tan(double x){
-  double result =  tan(x);
+float SVD_tan(float x){
+  float result =  tanf(x);
   return result;
 }
 
-double SVD_cos(double x){
-  double result =  cos(x);
+float SVD_cos(float x){
+  float result =  cosf(x);
   return result;
 }
 
-double SVD_sin(double x){
-  double result =  sin(x);
+float SVD_sin(float x){
+  float result =  sinf(x);
   return result;
 }
 
-double SVD_atan2(double y, double x){
-  double result =  atan2(y,x);
-  return result;
+float SVD_atan2(float y, float x){
+  if ( fabs(x) >= fabs(y) )
+    return atan2f(y,x);
+  else
+    return ((float)(M_PI_2) - atan2f(x, y));
 }
 
 #ifdef TEST

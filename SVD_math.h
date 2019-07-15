@@ -2,10 +2,10 @@
 #ifndef SVD_MATH_H
 #define SVD_MATH_H
 
-double SVD_tan(double x);
-double SVD_sin(double x);
-double SVD_cos(double x);
-double SVD_atan2(double y, double x);
+float SVD_tan(float x);
+float SVD_sin(float x);
+float SVD_cos(float x);
+float SVD_atan2(float y, float x);
 
 #ifdef TEST
 void TEST_SVD_math(void);
