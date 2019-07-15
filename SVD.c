@@ -102,8 +102,30 @@ void SVD_decompose(matrix* M /*IN*/, matrix* U /*OUT*/, matrix* S /*OUT*/, matri
 
 
 #ifdef TEST
+
+static matrix M  = {{  31,  77,  -11,  26, },
+                    {  -42,  14, 79,  -53, },
+                    {  -68,  -10,  45, 90, },
+                    {  34,  16,  38,  -19, },};
+static matrix U  = {{  1.0,  0.0,  0.0,  0.0, },
+                    {  0.0,  1.0,  0.0,  0.0, },
+                    {  0.0,  0.0,  1.0,  0.0, },
+                    {  0.0,  0.0,  0.0,  1.0, },};
+static matrix V  = {{  1.0,  0.0,  0.0,  0.0, },
+                    {  0.0,  1.0,  0.0,  0.0, },
+                    {  0.0,  0.0,  1.0,  0.0, },
+                    {  0.0,  0.0,  0.0,  1.0, },};
+static matrix S  = {{  1.0,  0.0,  0.0,  0.0, },
+                    {  0.0,  1.0,  0.0,  0.0, },
+                    {  0.0,  0.0,  1.0,  0.0, },
+                    {  0.0,  0.0,  0.0,  1.0, },};
+
 void TEST_SVD_decompose(void)
 {
     // TODO
+    SVD_decompose(&M, &U, &S, &V);
+    SVD_matrix_print(&U);
+    SVD_matrix_print(&S);
+    SVD_matrix_print(&V);
 }
 #endif

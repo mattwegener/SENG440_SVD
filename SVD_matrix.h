@@ -17,6 +17,7 @@ float SVD_matrix_dot(matrix* matrix1, matrix* matrix2, int row1, int col2);
 void SVD_matrix_rotation_angles(matrix* matrix);
 bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2);
 bool SVD_matrix_isDiagonal(matrix* in);
+void SVD_matrix_print(matrix* in);
 
 #ifdef TEST
 void SVD_matrix_print(matrix* m);
