@@ -21,8 +21,15 @@ void SVD_matrix_trans(matrix* in, matrix* out)
   }
 }
 
-void SVD_matrix_copy(matrix* in, matrix* out){
-
+void SVD_matrix_copy(matrix* in, matrix* out)
+{
+    for( int i = 0; i < N; i++ )
+    {
+        for ( int j = 0; j < N; j++ )
+        {
+            (*out)[i][j] = (*in)[i][j];
+        }
+    }
 }
 
 float SVD_matrix_dot(matrix* matrix1, matrix* matrix2, int row1, int col2){
@@ -205,5 +212,11 @@ void TEST_SVD_matrix_trans(void)
 {
   SVD_matrix_trans(&m1, &m3);
   assert(SVD_matrix_equal(&m3, &m1_tran));
+}
+
+void TEST_SVD_matrix_copy(void)
+{
+    SVD_matrix_copy(&m1, &m3);
+    assert(SVD_matrix_equal(&m1, &m3));
 }
 #endif

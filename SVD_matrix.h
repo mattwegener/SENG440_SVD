@@ -23,6 +23,7 @@ void TEST_SVD_matrix_equal(void);
 void TEST_SVD_matrix_dot(void);
 void TEST_SVD_matrix_mul(void);
 void TEST_SVD_matrix_trans(void);
+void TEST_SVD_matrix_copy(void);
 #endif
 
 #endif /* SVD_MATRIX_H */
