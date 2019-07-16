@@ -2,47 +2,47 @@
 #include "SVD_matrix.h"
 #include <stdio.h>
 
-void SVD_matrix_mul(matrix* matrix1, matrix* matrix2, matrix* result){
+void SVD_matrix_mul(matrix matrix1, matrix matrix2, matrix result){
   int j,k;
   for(j = 0; j < N; j++){
     for(k = 0; k < N; k++){
-      (*result)[j][k] = SVD_matrix_dot(matrix1,matrix2,j,k);
+      result[j][k] = SVD_matrix_dot(matrix1,matrix2,j,k);
     }
   }
 }
 
-void SVD_matrix_trans(matrix* in, matrix* out)
+void SVD_matrix_trans(matrix in, matrix out)
 {
   for ( int i = 0; i < N; i++ )
   {
     for ( int j = 0; j < N; j++ )
     {
-      (*out)[j][i] = (*in)[i][j];
+      out[j][i] = in[i][j];
     }
   }
 }
 
-void SVD_matrix_copy(matrix* in, matrix* out)
+void SVD_matrix_copy(matrix in, matrix out)
 {
     for( int i = 0; i < N; i++ )
     {
         for ( int j = 0; j < N; j++ )
         {
-            (*out)[i][j] = (*in)[i][j];
+            out[i][j] = in[i][j];
         }
     }
 }
 
-float SVD_matrix_dot(matrix* matrix1, matrix* matrix2, int row1, int col2){
+float SVD_matrix_dot(matrix matrix1, matrix matrix2, int row1, int col2){
   matrix_elem dot = 0.0;
   int i;
   for(i = 0; i < N; i++){
-    dot += (*matrix1)[row1][i] * (*matrix2)[i][col2];
+    dot += matrix1[row1][i] * matrix2[i][col2];
   }
   return dot;
 }
 
-bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2)
+bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
 {
     bool ret = true;
     int i,j;
@@ -50,7 +50,7 @@ bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2)
     {
       for (j = 0; j < N; j++)
       {
-        if (SVD_abs( (*matrix1)[i][j] - (*matrix2)[i][j]) > EPS)
+        if (SVD_abs( matrix1[i][j] - matrix2[i][j]) > EPS)
         {
           ret = false;
           break;
@@ -61,7 +61,7 @@ bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2)
 }
 
 
-bool SVD_matrix_isDiagonal(matrix* in)
+bool SVD_matrix_isDiagonal(matrix in)
 {
   for (int i = 0; i < N; i++)
   {
@@ -69,7 +69,7 @@ bool SVD_matrix_isDiagonal(matrix* in)
     {
       if (i != j)
       {
-        if (SVD_abs((*in)[i][j]) >= EPS)
+        if (SVD_abs(in[i][j]) >= EPS)
           return false;
       }
     }
@@ -79,12 +79,12 @@ bool SVD_matrix_isDiagonal(matrix* in)
   return true;
 }
 
-void SVD_matrix_print(matrix* m)
+void SVD_matrix_print(matrix m)
 {
-  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[0][0], (*m)[0][1], (*m)[0][2], (*m)[0][3]);
-  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[1][0], (*m)[1][1], (*m)[1][2], (*m)[1][3]);
-  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[2][0], (*m)[2][1], (*m)[2][2], (*m)[2][3]);
-  printf("%10.5f %10.5f %10.5f %10.5f\n", (*m)[3][0], (*m)[3][1], (*m)[3][2], (*m)[3][3]);
+  printf("%10.5f %10.5f %10.5f %10.5f\n", m[0][0], m[0][1], m[0][2], m[0][3]);
+  printf("%10.5f %10.5f %10.5f %10.5f\n", m[1][0], m[1][1], m[1][2], m[1][3]);
+  printf("%10.5f %10.5f %10.5f %10.5f\n", m[2][0], m[2][1], m[2][2], m[2][3]);
+  printf("%10.5f %10.5f %10.5f %10.5f\n", m[3][0], m[3][1], m[3][2], m[3][3]);
 }
 
 #ifdef TEST
@@ -127,123 +127,123 @@ static matrix m1_tran = {{1.0,5.0,9.0,13.0,},{2.0,6.0,10.0,14.0,},{3.0,7.0,11.0,
 void TEST_SVD_matrix_equal()
 {
   // Test : test SVD_matrix_equal
-  assert(SVD_matrix_equal(&m1, &m2));
+  assert(SVD_matrix_equal(m1, m2));
 }
 void TEST_SVD_matrix_dot()
 {
 // Test : test that dot product with identity gives selected element
-    assert(SVD_matrix_dot(&I,&m1, 0, 0) == 1.0);
-    assert(SVD_matrix_dot(&I,&m1, 0, 1) == 2.0);
-    assert(SVD_matrix_dot(&I,&m1, 0, 2) == 3.0);
-    assert(SVD_matrix_dot(&I,&m1, 0, 3) == 4.0);
+    assert(SVD_matrix_dot(I,m1, 0, 0) == 1.0);
+    assert(SVD_matrix_dot(I,m1, 0, 1) == 2.0);
+    assert(SVD_matrix_dot(I,m1, 0, 2) == 3.0);
+    assert(SVD_matrix_dot(I,m1, 0, 3) == 4.0);
 
-    assert(SVD_matrix_dot(&I,&m1, 1, 0) == 5.0);
-    assert(SVD_matrix_dot(&I,&m1, 1, 1) == 6.0);
-    assert(SVD_matrix_dot(&I,&m1, 1, 2) == 7.0);
-    assert(SVD_matrix_dot(&I,&m1, 1, 3) == 8.0);
+    assert(SVD_matrix_dot(I,m1, 1, 0) == 5.0);
+    assert(SVD_matrix_dot(I,m1, 1, 1) == 6.0);
+    assert(SVD_matrix_dot(I,m1, 1, 2) == 7.0);
+    assert(SVD_matrix_dot(I,m1, 1, 3) == 8.0);
 
-    assert(SVD_matrix_dot(&I,&m1, 2, 0) == 9.0);
-    assert(SVD_matrix_dot(&I,&m1, 2, 1) == 10.0);
-    assert(SVD_matrix_dot(&I,&m1, 2, 2) == 11.0);
-    assert(SVD_matrix_dot(&I,&m1, 2, 3) == 12.0);
+    assert(SVD_matrix_dot(I,m1, 2, 0) == 9.0);
+    assert(SVD_matrix_dot(I,m1, 2, 1) == 10.0);
+    assert(SVD_matrix_dot(I,m1, 2, 2) == 11.0);
+    assert(SVD_matrix_dot(I,m1, 2, 3) == 12.0);
 
-    assert(SVD_matrix_dot(&I,&m1, 3, 0) == 13.0);
-    assert(SVD_matrix_dot(&I,&m1, 3, 1) == 14.0);
-    assert(SVD_matrix_dot(&I,&m1, 3, 2) == 15.0);
-    assert(SVD_matrix_dot(&I,&m1, 3, 3) == 16.0);
+    assert(SVD_matrix_dot(I,m1, 3, 0) == 13.0);
+    assert(SVD_matrix_dot(I,m1, 3, 1) == 14.0);
+    assert(SVD_matrix_dot(I,m1, 3, 2) == 15.0);
+    assert(SVD_matrix_dot(I,m1, 3, 3) == 16.0);
     // reverse order
-    assert(SVD_matrix_dot(&m1,&I, 0, 0) == 1.0);
-    assert(SVD_matrix_dot(&m1,&I, 0, 1) == 2.0);
-    assert(SVD_matrix_dot(&m1,&I, 0, 2) == 3.0);
-    assert(SVD_matrix_dot(&m1,&I, 0, 3) == 4.0);
+    assert(SVD_matrix_dot(m1,I, 0, 0) == 1.0);
+    assert(SVD_matrix_dot(m1,I, 0, 1) == 2.0);
+    assert(SVD_matrix_dot(m1,I, 0, 2) == 3.0);
+    assert(SVD_matrix_dot(m1,I, 0, 3) == 4.0);
 
-    assert(SVD_matrix_dot(&m1,&I, 1, 0) == 5.0);
-    assert(SVD_matrix_dot(&m1,&I, 1, 1) == 6.0);
-    assert(SVD_matrix_dot(&m1,&I, 1, 2) == 7.0);
-    assert(SVD_matrix_dot(&m1,&I, 1, 3) == 8.0);
+    assert(SVD_matrix_dot(m1,I, 1, 0) == 5.0);
+    assert(SVD_matrix_dot(m1,I, 1, 1) == 6.0);
+    assert(SVD_matrix_dot(m1,I, 1, 2) == 7.0);
+    assert(SVD_matrix_dot(m1,I, 1, 3) == 8.0);
 
-    assert(SVD_matrix_dot(&m1,&I, 2, 0) == 9.0);
-    assert(SVD_matrix_dot(&m1,&I, 2, 1) == 10.0);
-    assert(SVD_matrix_dot(&m1,&I, 2, 2) == 11.0);
-    assert(SVD_matrix_dot(&m1,&I, 2, 3) == 12.0);
+    assert(SVD_matrix_dot(m1,I, 2, 0) == 9.0);
+    assert(SVD_matrix_dot(m1,I, 2, 1) == 10.0);
+    assert(SVD_matrix_dot(m1,I, 2, 2) == 11.0);
+    assert(SVD_matrix_dot(m1,I, 2, 3) == 12.0);
 
-    assert(SVD_matrix_dot(&m1,&I, 3, 0) == 13.0);
-    assert(SVD_matrix_dot(&m1,&I, 3, 1) == 14.0);
-    assert(SVD_matrix_dot(&m1,&I, 3, 2) == 15.0);
-    assert(SVD_matrix_dot(&m1,&I, 3, 3) == 16.0);
+    assert(SVD_matrix_dot(m1,I, 3, 0) == 13.0);
+    assert(SVD_matrix_dot(m1,I, 3, 1) == 14.0);
+    assert(SVD_matrix_dot(m1,I, 3, 2) == 15.0);
+    assert(SVD_matrix_dot(m1,I, 3, 3) == 16.0);
 
     // Test : test that dot product of [1 1 1 1] with column of matrix gives sum of column
-    assert(SVD_matrix_dot(&ones, &m1, 0,0) == 28.0);
-    assert(SVD_matrix_dot(&ones, &m1, 0,1) == 32.0);
-    assert(SVD_matrix_dot(&ones, &m1, 0,2) == 36.0);
-    assert(SVD_matrix_dot(&ones, &m1, 0,3) == 40.0);
+    assert(SVD_matrix_dot(ones, m1, 0,0) == 28.0);
+    assert(SVD_matrix_dot(ones, m1, 0,1) == 32.0);
+    assert(SVD_matrix_dot(ones, m1, 0,2) == 36.0);
+    assert(SVD_matrix_dot(ones, m1, 0,3) == 40.0);
 
-    assert(SVD_matrix_dot(&ones, &m1, 1,0) == 28.0);
-    assert(SVD_matrix_dot(&ones, &m1, 1,1) == 32.0);
-    assert(SVD_matrix_dot(&ones, &m1, 1,2) == 36.0);
-    assert(SVD_matrix_dot(&ones, &m1, 1,3) == 40.0);
+    assert(SVD_matrix_dot(ones, m1, 1,0) == 28.0);
+    assert(SVD_matrix_dot(ones, m1, 1,1) == 32.0);
+    assert(SVD_matrix_dot(ones, m1, 1,2) == 36.0);
+    assert(SVD_matrix_dot(ones, m1, 1,3) == 40.0);
 
-    assert(SVD_matrix_dot(&ones, &m1, 2,0) == 28.0);
-    assert(SVD_matrix_dot(&ones, &m1, 2,1) == 32.0);
-    assert(SVD_matrix_dot(&ones, &m1, 2,2) == 36.0);
-    assert(SVD_matrix_dot(&ones, &m1, 2,3) == 40.0);
+    assert(SVD_matrix_dot(ones, m1, 2,0) == 28.0);
+    assert(SVD_matrix_dot(ones, m1, 2,1) == 32.0);
+    assert(SVD_matrix_dot(ones, m1, 2,2) == 36.0);
+    assert(SVD_matrix_dot(ones, m1, 2,3) == 40.0);
 
-    assert(SVD_matrix_dot(&ones, &m1, 3,0) == 28.0);
-    assert(SVD_matrix_dot(&ones, &m1, 3,1) == 32.0);
-    assert(SVD_matrix_dot(&ones, &m1, 3,2) == 36.0);
-    assert(SVD_matrix_dot(&ones, &m1, 3,3) == 40.0);
+    assert(SVD_matrix_dot(ones, m1, 3,0) == 28.0);
+    assert(SVD_matrix_dot(ones, m1, 3,1) == 32.0);
+    assert(SVD_matrix_dot(ones, m1, 3,2) == 36.0);
+    assert(SVD_matrix_dot(ones, m1, 3,3) == 40.0);
     // reverse order
-    assert(SVD_matrix_dot(&m1, &ones, 0,0) == 10.0);
-    assert(SVD_matrix_dot(&m1, &ones, 0,1) == 10.0);
-    assert(SVD_matrix_dot(&m1, &ones, 0,2) == 10.0);
-    assert(SVD_matrix_dot(&m1, &ones, 0,3) == 10.0);
+    assert(SVD_matrix_dot(m1, ones, 0,0) == 10.0);
+    assert(SVD_matrix_dot(m1, ones, 0,1) == 10.0);
+    assert(SVD_matrix_dot(m1, ones, 0,2) == 10.0);
+    assert(SVD_matrix_dot(m1, ones, 0,3) == 10.0);
 
-    assert(SVD_matrix_dot(&m1, &ones, 1,0) == 26.0);
-    assert(SVD_matrix_dot(&m1, &ones, 1,1) == 26.0);
-    assert(SVD_matrix_dot(&m1, &ones, 1,2) == 26.0);
-    assert(SVD_matrix_dot(&m1, &ones, 1,3) == 26.0);
+    assert(SVD_matrix_dot(m1, ones, 1,0) == 26.0);
+    assert(SVD_matrix_dot(m1, ones, 1,1) == 26.0);
+    assert(SVD_matrix_dot(m1, ones, 1,2) == 26.0);
+    assert(SVD_matrix_dot(m1, ones, 1,3) == 26.0);
 
-    assert(SVD_matrix_dot(&m1, &ones, 2,0) == 42.0);
-    assert(SVD_matrix_dot(&m1, &ones, 2,1) == 42.0);
-    assert(SVD_matrix_dot(&m1, &ones, 2,2) == 42.0);
-    assert(SVD_matrix_dot(&m1, &ones, 2,3) == 42.0);
+    assert(SVD_matrix_dot(m1, ones, 2,0) == 42.0);
+    assert(SVD_matrix_dot(m1, ones, 2,1) == 42.0);
+    assert(SVD_matrix_dot(m1, ones, 2,2) == 42.0);
+    assert(SVD_matrix_dot(m1, ones, 2,3) == 42.0);
 
-    assert(SVD_matrix_dot(&m1, &ones, 3,0) == 58.0);
-    assert(SVD_matrix_dot(&m1, &ones, 3,1) == 58.0);
-    assert(SVD_matrix_dot(&m1, &ones, 3,2) == 58.0);
-    assert(SVD_matrix_dot(&m1, &ones, 3,3) == 58.0);
+    assert(SVD_matrix_dot(m1, ones, 3,0) == 58.0);
+    assert(SVD_matrix_dot(m1, ones, 3,1) == 58.0);
+    assert(SVD_matrix_dot(m1, ones, 3,2) == 58.0);
+    assert(SVD_matrix_dot(m1, ones, 3,3) == 58.0);
 
     // Test dot product of two arbitrary columns
-    assert(SVD_matrix_dot(&m1, &m2, 0, 0) == 90.0);
+    assert(SVD_matrix_dot(m1, m2, 0, 0) == 90.0);
 }
 
 void TEST_SVD_matrix_mul()
 {
   // Test Matrix multiplication with identity matrix
-    SVD_matrix_mul(&m1, &I, &m3);
-    assert(SVD_matrix_equal(&m1, &m3));
-    SVD_matrix_mul(&I, &m1, &m3);
-    assert(SVD_matrix_equal(&m1, &m3));
-    SVD_matrix_mul(&m1,&m2, &m3);
-    assert(SVD_matrix_equal(&m3, &m_expect));
+    SVD_matrix_mul(m1, I, m3);
+    assert(SVD_matrix_equal(m1, m3));
+    SVD_matrix_mul(I, m1, m3);
+    assert(SVD_matrix_equal(m1, m3));
+    SVD_matrix_mul(m1,m2, m3);
+    assert(SVD_matrix_equal(m3, m_expect));
 }
 
 void TEST_SVD_matrix_trans(void)
 {
-  SVD_matrix_trans(&m1, &m3);
-  assert(SVD_matrix_equal(&m3, &m1_tran));
+  SVD_matrix_trans(m1, m3);
+  assert(SVD_matrix_equal(m3, m1_tran));
 }
 
 void TEST_SVD_matrix_copy(void)
 {
-    SVD_matrix_copy(&m1, &m3);
-    assert(SVD_matrix_equal(&m1, &m3));
+    SVD_matrix_copy(m1, m3);
+    assert(SVD_matrix_equal(m1, m3));
 }
 
 void TEST_SVD_matrix_isDiagonal(void)
 {
-    assert(SVD_matrix_isDiagonal(&I));
-    assert(!SVD_matrix_isDiagonal(&m1));
+    assert(SVD_matrix_isDiagonal(I));
+    assert(!SVD_matrix_isDiagonal(m1));
 }
 
 
