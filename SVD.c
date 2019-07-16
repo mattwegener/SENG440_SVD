@@ -114,7 +114,7 @@ void SVD_decompose(matrix* M /*IN*/, matrix* U /*OUT*/, matrix* S /*OUT*/, matri
         for (int j = 0; j < N; j++)
         {
             // set to absolute value
-            (*S)[i][j] = fabs((*S)[i][j]);
+            (*S)[i][j] = SVD_abs((*S)[i][j]);
             // make anything with smaller than the epsilon => 0.0
             if ((*S)[i][j] < EPS)
             {

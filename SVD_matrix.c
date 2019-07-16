@@ -50,7 +50,7 @@ bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2)
     {
       for (j = 0; j < N; j++)
       {
-        if ((*matrix1)[i][j] - (*matrix2)[i][j] > EPS)
+        if (SVD_abs( (*matrix1)[i][j] - (*matrix2)[i][j]) > EPS)
         {
           ret = false;
           break;
@@ -69,7 +69,7 @@ bool SVD_matrix_isDiagonal(matrix* in)
     {
       if (i != j)
       {
-        if ((*in)[i][j] >= EPS)
+        if (SVD_abs((*in)[i][j]) >= EPS)
           return false;
       }
     }

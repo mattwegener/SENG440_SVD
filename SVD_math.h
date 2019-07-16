@@ -8,6 +8,7 @@ float SVD_tan(float x);
 float SVD_sin(float x);
 float SVD_cos(float x);
 float SVD_atan(float y, float x);
+float SVD_abs(float x);
 
 #ifdef TEST
 void TEST_SVD_math(void);

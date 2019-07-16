@@ -23,6 +23,11 @@ float SVD_atan(float y, float x){
     return atanf(y/x);
 }
 
+float SVD_abs(float x)
+{
+    return fabs(x);
+}
+
 #ifdef TEST
 void TEST_SVD_math()
 {
