@@ -153,12 +153,12 @@ void TEST_SVD_decompose(void)
 {
     // TODO
     SVD_decompose(Min, Uout, Sout, Vout);
-    printf("\nUout = \n");
+    /*printf("\nUout = \n");
     SVD_matrix_print(Uout);
     printf("\nSout = \n");
     SVD_matrix_print(Sout);
     printf("\nVout = \n");
-    SVD_matrix_print(Vout);
+    SVD_matrix_print(Vout);*/
 
     assert(SVD_matrix_equal(Sout, S_expect));
 }
