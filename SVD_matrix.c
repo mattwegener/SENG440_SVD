@@ -2,9 +2,6 @@
 #include "SVD_matrix.h"
 #include <stdio.h>
 
-#define EPS (0.001f)
-
-
 void SVD_matrix_mul(matrix* matrix1, matrix* matrix2, matrix* result){
   int j,k;
   for(j = 0; j < N; j++){
@@ -53,7 +50,7 @@ bool SVD_matrix_equal(matrix* matrix1, matrix* matrix2)
     {
       for (j = 0; j < N; j++)
       {
-        if ((*matrix1)[i][j] != (*matrix2)[i][j])
+        if ((*matrix1)[i][j] - (*matrix2)[i][j] > EPS)
         {
           ret = false;
           break;

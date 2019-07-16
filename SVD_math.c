@@ -19,11 +19,8 @@ float SVD_sin(float x){
   return result;
 }
 
-float SVD_atan2(float y, float x){
-  if ( fabs(x) >= fabs(y) )
-    return atan2f(y,x);
-  else
-    return ((float)(M_PI_2) - atan2f(x, y));
+float SVD_atan(float y, float x){
+    return atanf(y/x);
 }
 
 #ifdef TEST
