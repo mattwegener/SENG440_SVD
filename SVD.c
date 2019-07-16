@@ -1,6 +1,5 @@
 
 #include "SVD.h"
-#include <math.h>
 
 static matrix I  = {{  1.0,  0.0,  0.0,  0.0, },
                     {  0.0,  1.0,  0.0,  0.0, },

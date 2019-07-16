@@ -2,13 +2,13 @@
 #ifndef SVD_MATH_H
 #define SVD_MATH_H
 
-#define EPS (0.0001f)
+#include "SVD_defs.h"
 
-float SVD_tan(float x);
-float SVD_sin(float x);
-float SVD_cos(float x);
-float SVD_atan(float y, float x);
-float SVD_abs(float x);
+matrix_elem SVD_tan(matrix_elem x);
+matrix_elem SVD_sin(matrix_elem x);
+matrix_elem SVD_cos(matrix_elem x);
+matrix_elem SVD_atan(matrix_elem y, matrix_elem x);
+matrix_elem SVD_abs(matrix_elem x);
 
 #ifdef TEST
 void TEST_SVD_math(void);
