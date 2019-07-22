@@ -4,7 +4,7 @@
 
 #include "SVD_math.h"
 #include "SVD_defs.h"
-#include <stdbool.h>
+//#include <stdbool.h>
 
 void SVD_matrix_mul(matrix matrix1, matrix matrix2, matrix result);
 void SVD_matrix_trans(matrix in, matrix out);
@@ -14,9 +14,9 @@ void SVD_matrix_rotation_angles(matrix matrix);
 bool SVD_matrix_equal(matrix matrix1, matrix matrix2);
 bool SVD_matrix_isDiagonal(matrix in);
 void SVD_matrix_print(matrix in);
-void SVD_matrix_print(matrix m);
 
 #ifdef TEST
+void SVD_matrix_print(matrix m);
 void TEST_SVD_matrix_equal(void);
 void TEST_SVD_matrix_dot(void);
 void TEST_SVD_matrix_mul(void);

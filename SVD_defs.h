@@ -8,4 +8,6 @@
 typedef float matrix_elem; //< we can change this later to use fixed point
 typedef matrix_elem matrix[N][N]; //< this could actually just be a pointer to matrix_elem type
 
+typedef enum bool {true = 1, false = 0,} bool;
+
 #endif

@@ -1,6 +1,5 @@
 
 #include "SVD_matrix.h"
-#include <stdio.h>
 
 void SVD_matrix_mul(matrix matrix1, matrix matrix2, matrix result){
   int j,k;
@@ -79,6 +78,11 @@ bool SVD_matrix_isDiagonal(matrix in)
   return true;
 }
 
+#ifdef TEST
+#include <stdio.h>
+#include <assert.h>
+#define println(...) printf("\n")
+
 void SVD_matrix_print(matrix m)
 {
   printf("%10.5f %10.5f %10.5f %10.5f\n", m[0][0], m[0][1], m[0][2], m[0][3]);
@@ -87,10 +91,7 @@ void SVD_matrix_print(matrix m)
   printf("%10.5f %10.5f %10.5f %10.5f\n", m[3][0], m[3][1], m[3][2], m[3][3]);
 }
 
-#ifdef TEST
-#include <stdio.h>
-#include <assert.h>
-#define println(...) printf("\n")
+
 static matrix I  = {{  1.0,  0.0,  0.0,  0.0, },
                     {  0.0,  1.0,  0.0,  0.0, },
                     {  0.0,  0.0,  1.0,  0.0, },
