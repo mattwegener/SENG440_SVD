@@ -33,7 +33,7 @@ void SVD_matrix_copy(matrix in, matrix out)
     }
 }
 
-float SVD_matrix_dot(matrix matrix1, matrix matrix2, int row1, int col2){
+int32_t SVD_matrix_dot(matrix matrix1, matrix matrix2, int row1, int col2){
     matrix_elem dot = 0;
     int i;
     for(i = 0; i < N; i++){
