@@ -79,6 +79,15 @@ bool SVD_matrix_isDiagonal(matrix in)
   return true;
 }
 
+void SVD_matrix_int_to_fix(matrix m, int q){
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+
+        }
+    }
+}
+void SVD_matrix_fix_to_int(matrix m, int q);
+
 void SVD_matrix_print(matrix m)
 {
   printf("%10.5f %10.5f %10.5f %10.5f\n", m[0][0], m[0][1], m[0][2], m[0][3]);

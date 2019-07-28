@@ -15,6 +15,8 @@ bool SVD_matrix_equal(matrix matrix1, matrix matrix2);
 bool SVD_matrix_isDiagonal(matrix in);
 void SVD_matrix_print(matrix in);
 void SVD_matrix_print(matrix m);
+void SVD_matrix_int_to_fix(matrix m, int q);
+void SVD_matrix_fix_to_int(matrix m, int q);
 
 #ifdef TEST
 void TEST_SVD_matrix_equal(void);

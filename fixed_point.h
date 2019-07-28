@@ -1,6 +1,8 @@
 #ifndef FIXED_POINT_H
 #define FIXED_POINT_H
 
+/*Reference: http://infocenter.arm.com/help/topic/com.arm.doc.dai0033a/DAI0033A_fixedpoint_appsnote.pdf */
+
 /* A Simple C program to illustrate the use of Fixed Point Operations */
 #include <stdio.h>
 #include <stdlib.h>

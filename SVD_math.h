@@ -3,6 +3,7 @@
 #define SVD_MATH_H
 
 #include "SVD_defs.h"
+#include "fixed_point.h"
 
 matrix_elem SVD_tan(matrix_elem x);
 matrix_elem SVD_sin(matrix_elem x);
