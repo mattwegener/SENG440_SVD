@@ -34,12 +34,13 @@ void SVD_matrix_copy(matrix in, matrix out)
 }
 
 float SVD_matrix_dot(matrix matrix1, matrix matrix2, int row1, int col2){
-  matrix_elem dot = 0.0;
-  int i;
-  for(i = 0; i < N; i++){
-    dot += matrix1[row1][i] * matrix2[i][col2];
-  }
-  return dot;
+    matrix_elem dot = 0;
+    int i;
+    for(i = 0; i < N; i++){
+        matrix_elem Ftemp = FMUL(matrix1[row1][i],matrix2[i][col2],Q);
+        dot = FADD(dot,Ftemp);
+    }
+    return dot;
 }
 
 bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
@@ -50,7 +51,7 @@ bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
     {
       for (j = 0; j < N; j++)
       {
-        if (SVD_abs( matrix1[i][j] - matrix2[i][j]) > EPS)
+        if (SVD_abs(FSUB(matrix1[i][j],matrix2[i][j]) ) > EPS)
         {
           ret = false;
           break;
@@ -82,11 +83,17 @@ bool SVD_matrix_isDiagonal(matrix in)
 void SVD_matrix_int_to_fix(matrix m, int q){
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
-
+            FCONV(m[i][j],0,Q);
         }
     }
 }
-void SVD_matrix_fix_to_int(matrix m, int q);
+void SVD_matrix_fix_to_int(matrix m, int q){
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+            FCONV(m[i][j],Q,0);
+        }
+    }
+}
 
 void SVD_matrix_print(matrix m)
 {

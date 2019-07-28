@@ -63,28 +63,28 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 SVD_matrix_copy(I,Vtp);
                 SVD_matrix_copy(I,U_pair);
                 SVD_matrix_copy(I,V_pair);
-                SVD_matrix_copy(I,U_pair_trans); 
+                SVD_matrix_copy(I,U_pair_trans);
                 SVD_matrix_copy(I,V_pair_trans);
-                
+
                 //calculate rotation angles
-                num1 = S[k][j] + S[j][k];
-                num2 = S[k][j] - S[j][k];
-                den1 = S[k][k] - S[j][j];
-                den2 = S[k][k] + S[j][j];
+                num1 = FADD(S[k][j], S[j][k]);
+                num2 = FSUB(S[k][j], S[j][k]);
+                den1 = FSUB(S[k][k], S[j][j]);
+                den2 = FADD(S[k][k], S[j][j]);
 
                 sum = SVD_atan( num1, den1 );
                 diff = SVD_atan( num2, den2 );
-                qL = (sum - diff)/2;
-                qR = sum - qL;
-                
+                qL = FDIVI(FSUB(sum, diff),2);
+                qR = FSUB(sum, qL);
+
                 //Create U V rotation matrices for mulitplaction
                 U_pair[j][j] = SVD_cos(qL);
-                U_pair[j][k] = -1*SVD_sin(qL);
+                U_pair[j][k] = FMULI(SVD_sin(qL),-1);
                 U_pair[k][j] = SVD_sin(qL);
                 U_pair[k][k] = SVD_cos(qL);
 
                 V_pair[j][j] = SVD_cos(qR);
-                V_pair[j][k] = -1*SVD_sin(qR);
+                V_pair[j][k] = FMULI(SVD_sin(qR),-1);
                 V_pair[k][j] = SVD_sin(qR);
                 V_pair[k][k] = SVD_cos(qR);
 
