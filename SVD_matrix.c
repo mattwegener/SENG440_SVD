@@ -33,7 +33,7 @@ void SVD_matrix_copy(matrix in, matrix out)
     }
 }
 
-int32_t SVD_matrix_dot(matrix matrix1, matrix matrix2, int row1, int col2){
+matrix_elem SVD_matrix_dot(matrix matrix1, matrix matrix2, int row1, int col2){
     matrix_elem dot = 0;
     int i;
     for(i = 0; i < N; i++){
@@ -97,10 +97,10 @@ void SVD_matrix_fix_to_int(matrix m, int q){
 
 void SVD_matrix_print(matrix m)
 {
-  printf("%10.5f %10.5f %10.5f %10.5f\n", m[0][0], m[0][1], m[0][2], m[0][3]);
-  printf("%10.5f %10.5f %10.5f %10.5f\n", m[1][0], m[1][1], m[1][2], m[1][3]);
-  printf("%10.5f %10.5f %10.5f %10.5f\n", m[2][0], m[2][1], m[2][2], m[2][3]);
-  printf("%10.5f %10.5f %10.5f %10.5f\n", m[3][0], m[3][1], m[3][2], m[3][3]);
+  printf("%d %d %d %d\n", m[0][0], m[0][1], m[0][2], m[0][3]);
+  printf("%d %d %d %d\n", m[1][0], m[1][1], m[1][2], m[1][3]);
+  printf("%d %d %d %d\n", m[2][0], m[2][1], m[2][2], m[2][3]);
+  printf("%d %d %d %d\n", m[3][0], m[3][1], m[3][2], m[3][3]);
 }
 
 #ifdef TEST

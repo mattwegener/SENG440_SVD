@@ -118,7 +118,7 @@ matrix_elem SVD_cos(matrix_elem x){
   {
       result = FADD(SEG5_BIAS_C, FMUL(SEG5_SLOPE_C, temp_x, Q));
   }
-  else if (temp_x <= PI)
+  else /*if (temp_x <= PI)*/ // allow approximation to continue past bounds of function
   {
       result = FADD(SEG6_BIAS_C, FMUL(SEG6_SLOPE_C, temp_x, Q));
   }
@@ -128,13 +128,14 @@ matrix_elem SVD_cos(matrix_elem x){
 }
 
 matrix_elem SVD_sin(matrix_elem x){
-   matrix_elem result;
+  matrix_elem result = 0;
   matrix_elem temp_x;
 
   if (x < 0)
     temp_x = -x;
   else
     temp_x = x;
+
 
   if (temp_x == 0)
     return 0;
@@ -169,7 +170,7 @@ matrix_elem SVD_sin(matrix_elem x){
   {
       result = FADD(SEG5_BIAS_S, FMUL(SEG5_SLOPE_S, temp_x, Q));
   }
-  else if (temp_x <= PI)
+  else /* if (temp_x <= PI) */ // outside of bounds just continue the approximation
   {
       result = FADD(SEG6_BIAS_S, FMUL(SEG6_SLOPE_S, temp_x, Q));
   }
@@ -189,7 +190,7 @@ matrix_elem SVD_atan(matrix_elem y, matrix_elem x){
       ret = arctan(FDIV(y,x,Q));
     else
     {
-      ret = arctan(FDIV(x,y,Q);
+      ret = arctan(FDIV(x,y,Q));
       ret = PI_2 - ret;
     } 
 
@@ -201,10 +202,26 @@ matrix_elem SVD_abs(matrix_elem x)
 }
 
 #ifdef TEST
+<<<<<<< Updated upstream
 int32_t x_array = {-12868, -12458, -12049, -11639, -11230, -10820, -10410, -10001, -9591, -9182, -8772, -8362, -7953, -7543, -7134, -6724, -6314, -5905, -5495, -5086, -4676, -4266, -3857, -3447, -3038, -2628, -2218, -1809, -1399, -990, -580, -170, 239, 649, 1058, 1468, 1878, 2287, 2697, 3106, 3516, 3926, 4335, 4745, 5154, 5564, 5974, 6383, 6793, 7202, 7612, 8022, 8431, 8841, 9250, 9660, 10070, 10479, 10889, 11298, 11708, 12118, 12527, };
 matrix_elem atan_arg[81] = {-4096, -3994, -3891, -3789, -3686, -3584, -3482, -3379, -3277, -3174, -3072, -2970, -2867, -2765, -2662, -2560, -2458, -2355, -2253, -2150, -2048, -1946, -1843, -1741, -1638, -1536, -1434, -1331, -1229, -1126, -1024, -922, -819, -717, -614, -512, -410, -307, -205, -102, 0, 102, 205, 307, 410, 512, 614, 717, 819, 922, 1024, 1126, 1229, 1331, 1434, 1536, 1638, 1741, 1843, 1946, 2048, 2150, 2253, 2355, 2458, 2560, 2662, 2765, 2867, 2970, 3072, 3174, 3277, 3379, 3482, 3584, 3686, 3789, 3891, 3994, 4096, };
 void TEST_SVD_math()
 {
-  assert()
+
+    printf("\n\n\n=============SINE=================\n\n");
+    // test the sine
+    for (int i = 0; i < 63; i++)
+    {
+      matrix_elem y = SVD_sin(x_array[i]);
+      printf("qx = %d, sin(qx) = %d \t\t x = %f, sin(x) = %f\n", x_array[i], y, TOFLT(x_array[i], Q), TOFLT(y, Q));
+    }
+
+    printf("\n\n\n============COSINE================\n\n");
+    // test the cosine
+    for (int i = 0; i < 63; i++)
+    {
+      matrix_elem y = SVD_cos(x_array[i]);
+      printf("qx = %d, cos(qx) = %d \t\t x = %f, cos(x) = %f\n", x_array[i], y, TOFLT(x_array[i], Q), TOFLT(y, Q));
+    }
 }
 #endif
