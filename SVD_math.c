@@ -2,52 +2,51 @@
 #include "SVD_defs.h"
 #include "fixed_point.h"
 
-#define PI_2      (6433)
-#define PI_3      (4289)
-#define PI_6      (2144)
-#define PI_2_3    (8578)
-#define PI_5_6    (10723)
-#define PI        (12867)
+#define PI_6      (134)
+#define PI_3      (268)
+#define PI_2      (402)
+#define PI_2_3    (536)
+#define PI_5_6    (670)
+#define PI        (804)
 
 // SINE
-#define SEG1_SLOPE_S    (3911)
-#define SEG2_SLOPE_S    (2863)
-#define SEG3_SLOPE_S    (1048)
-#define SEG4_SLOPE_S    (-1048)
-#define SEG5_SLOPE_S    (-2863)
-#define SEG6_SLOPE_S    (-3911)
+#define SEG1_SLOPE_S    (244)
+#define SEG2_SLOPE_S    (178)
+#define SEG3_SLOPE_S    (65)
+#define SEG4_SLOPE_S    (-65)
+#define SEG5_SLOPE_S    (-178)
+#define SEG6_SLOPE_S    (-244)
 
 #define SEG1_BIAS_S     (0)
-#define SEG2_BIAS_S     (548)
-#define SEG3_BIAS_S     (2449)
-#define SEG4_BIAS_S     (5742)
-#define SEG5_BIAS_S     (9544)
-#define SEG6_BIAS_S     (12288)
+#define SEG2_BIAS_S     (34)
+#define SEG3_BIAS_S     (153)
+#define SEG4_BIAS_S     (358)
+#define SEG5_BIAS_S     (596)
+#define SEG6_BIAS_S     (768)
 
 
 // COSINE
 
-#define SEG1_SLOPE_C    (-1048)
-#define SEG2_SLOPE_C    (-2863)
-#define SEG3_SLOPE_C    (-3911)
-#define SEG4_SLOPE_C    (-3911)
-#define SEG5_SLOPE_C    (-2863)
-#define SEG6_SLOPE_C    (-1048)
+#define SEG1_SLOPE_C    (-65)
+#define SEG2_SLOPE_C    (-178)
+#define SEG3_SLOPE_C    (-244)
+#define SEG4_SLOPE_C    (-244)
+#define SEG5_SLOPE_C    (-278)
+#define SEG6_SLOPE_C    (-65)
 
-#define SEG1_BIAS_C     (4092)
-#define SEG2_BIAS_C     (5046)
-#define SEG3_BIAS_C     (6144)
-#define SEG4_BIAS_C     (6144)
-#define SEG5_BIAS_C     (3949)
-#define SEG6_BIAS_C     (-803)
+#define SEG1_BIAS_C     (256)
+#define SEG2_BIAS_C     (315)
+#define SEG3_BIAS_C     (384)
+#define SEG4_BIAS_C     (384)
+#define SEG5_BIAS_C     (246)
+#define SEG6_BIAS_C     (-50)
 
 
-// arctangent
+// arctangent the calculation is in Q = 12 format
 #define COEFF_0644  (2637)
 #define COEFF_0928  (3801)
 #define COEFF_0142  (581)
 
-#define FIX_1     (1 << Q)
 #define FIX_0_5   (1 << (Q - 1))
 
 // precondition: x is in fix-point format with Q as the fractional bit length
@@ -58,22 +57,25 @@ static matrix_elem arctan(matrix_elem x)
   matrix_elem ret = 0;
   matrix_elem temp = 0;
 
+  // do the operation in q = 12
+  matrix_elem x_temp = FCONV(x, Q, Q12);
+
   if (/*x >= -FIX_1 &&*/ x < -FIX_0_5)
   {
-    temp = FMUL(x, COEFF_0644, Q);
+    temp = FMUL(x_temp, COEFF_0644, Q12);
     ret = FSUB(temp, COEFF_0142);
   }
   else if ( x >= -FIX_0_5 && x <= FIX_0_5)
   {
-    ret = FMUL(x, COEFF_0928,Q);
+    ret = FMUL(x_temp, COEFF_0928,Q12);
   }
   else if (x > FIX_0_5 /*&& x <= FIX_1*/)
   {
-    temp = FMUL(x, COEFF_0644, Q);
+    temp = FMUL(x_temp, COEFF_0644, Q12);
     ret = FADD(temp, COEFF_0142);
   }
 
-  return ret;
+  return FCONV(ret, Q12, Q); // return as q = 8
 }
 
 matrix_elem SVD_tan(matrix_elem x){
@@ -218,7 +220,8 @@ void TEST_SVD_math()
     {
       matrix_elem y = SVD_sin(x_array[i]);
       float yf = sinf(TOFLT(x_array[i], Q));
-      assert( fabs(yf - TOFLT(y,Q)) <=  0.05);
+      printf("x = %f, y = %f, yf = %f\n", TOFLT(x_array[i], Q), TOFLT(y, Q), yf);
+      //assert( fabs(yf - TOFLT(y,Q)) <=  0.05);
     }
 
     // test the cosine

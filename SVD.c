@@ -1,10 +1,10 @@
 
 #include "SVD.h"
 
-static matrix I  = {{  1.0,  0.0,  0.0,  0.0, },
-                    {  0.0,  1.0,  0.0,  0.0, },
-                    {  0.0,  0.0,  1.0,  0.0, },
-                    {  0.0,  0.0,  0.0,  1.0, },};
+static matrix I  = {{  FIX_1,  0,       0,      0, },
+                    {  0,      FIX_1,   0,      0, },
+                    {  0,      0,       FIX_1,  0, },
+                    {  0,      0,       0,      FIX_1, },};  
 
 void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V /*OUT*/ )
 {
@@ -42,14 +42,14 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     */
     //rows: j
     //cols: k
-    matrix_elem num1 = 0.0;
-    matrix_elem num2 = 0.0;
-    matrix_elem den1 = 0.0;
-    matrix_elem den2 = 0.0;
-    matrix_elem sum = 0.0;
-    matrix_elem diff = 0.0;
-    matrix_elem qR = 0.0;
-    matrix_elem qL = 0.0;
+    matrix_elem num1 = 0;
+    matrix_elem num2 = 0;
+    matrix_elem den1 = 0;
+    matrix_elem den2 = 0;
+    matrix_elem sum = 0;
+    matrix_elem diff = 0;
+    matrix_elem qR = 0;
+    matrix_elem qL = 0;
 
     while(!SVD_matrix_isDiagonal(S))
     {
@@ -114,11 +114,6 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
         {
             // set to absolute value
             S[i][j] = SVD_abs(S[i][j]);
-            // make anything with smaller than the epsilon => 0.0
-            if (S[i][j] < EPS)
-            {
-                S[i][j] = 0.0;
-            }
         }
     }
 }

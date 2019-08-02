@@ -51,7 +51,7 @@ bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
     {
       for (j = 0; j < N; j++)
       {
-        if (SVD_abs(FSUB(matrix1[i][j],matrix2[i][j]) ) > EPS)
+        if (matrix1[i][j] != matrix2[i][j])
         {
           ret = false;
           break;
@@ -70,7 +70,7 @@ bool SVD_matrix_isDiagonal(matrix in)
     {
       if (i != j)
       {
-        if (SVD_abs(in[i][j]) >= EPS)
+        if (SVD_abs(in[i][j]) > 0);
           return false;
       }
     }
@@ -83,14 +83,14 @@ bool SVD_matrix_isDiagonal(matrix in)
 void SVD_matrix_int_to_fix(matrix m, int q){
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
-            FCONV(m[i][j],0,Q);
+            m[i][j] = FCONV(m[i][j],0,Q);
         }
     }
 }
 void SVD_matrix_fix_to_int(matrix m, int q){
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
-            FCONV(m[i][j],Q,0);
+            m[i][j] = FCONV(m[i][j],Q,0);
         }
     }
 }
@@ -107,38 +107,37 @@ void SVD_matrix_print(matrix m)
 #include <stdio.h>
 #include <assert.h>
 #define println(...) printf("\n")
-static matrix I  = {{  1.0,  0.0,  0.0,  0.0, },
-                    {  0.0,  1.0,  0.0,  0.0, },
-                    {  0.0,  0.0,  1.0,  0.0, },
-                    {  0.0,  0.0,  0.0,  1.0, },};
+static matrix I  = {{  FIX_1,  0,       0,      0, },
+                    {  0,      FIX_1,   0,      0, },
+                    {  0,      0,       FIX_1,  0, },
+                    {  0,      0,       0,      FIX_1, },};
+static matrix ones  = {{  FIX_1,  FIX_1,  FIX_1,  FIX_1, },
+                       {  FIX_1,  FIX_1,  FIX_1,  FIX_1, },
+                       {  FIX_1,  FIX_1,  FIX_1,  FIX_1, },
+                       {  FIX_1,  FIX_1,  FIX_1,  FIX_1, },};
 
-static matrix ones  = {{  1.0,  1.0,  1.0,  1.0, },
-                       {  1.0,  1.0,  1.0,  1.0, },
-                       {  1.0,  1.0,  1.0,  1.0, },
-                       {  1.0,  1.0,  1.0,  1.0, },};
+static matrix m1 = {{ 1,  2,  3,  4,},
+                    { 5,  6,  7,  8,},
+                    { 9, 10, 11, 12,},
+                    {13, 14, 15, 16,},};
 
-static matrix m1 = {{ 1.0,  2.0,  3.0,  4.0,},
-                    { 5.0,  6.0,  7.0,  8.0,},
-                    { 9.0, 10.0, 11.0, 12.0,},
-                    {13.0, 14.0, 15.0, 16.0,},};
-
-static matrix m2 = {{ 1.0,  2.0,  3.0,  4.0,},
-                    { 5.0,  6.0,  7.0,  8.0,},
-                    { 9.0, 10.0, 11.0, 12.0,},
-                    {13.0, 14.0, 15.0, 16.0,},};
+static matrix m2 = {{ 1,  2,  3,  4,},
+                    { 5,  6,  7,  8,},
+                    { 9, 10, 11, 12,},
+                    {13, 14, 15, 16,},};
 
 // for use as result
-static matrix m3 = {{0.0,0.0,0.0,0.0,},
-                    {0.0,0.0,0.0,0.0,},
-                    {0.0,0.0,0.0,0.0,},
-                    {0.0,0.0,0.0,0.0,},}; // zeros
+static matrix m3 = {{0,0,0,0,},
+                    {0,0,0,0,},
+                    {0,0,0,0,},
+                    {0,0,0,0,},}; // zeros
 
-static matrix m_expect = {{90.0, 100.0, 110.0, 120.0,},
-                          {202.0, 228.0, 254.0, 280.0,},
-                          {314.0, 356.0, 398.0, 440.0,},
-                          {426.0, 484.0, 542.0, 600.0,},};
+static matrix m_expect = {{90, 100, 110, 120,},
+                          {202, 228, 254, 280,},
+                          {314, 356, 398, 440,},
+                          {426, 484, 542, 600,},};
 
-static matrix m1_tran = {{1.0,5.0,9.0,13.0,},{2.0,6.0,10.0,14.0,},{3.0,7.0,11.0,15.0,},{4.0,8.0,12.0,16.0,},};
+static matrix m1_tran = {{1,5,9,13,},{2,6,10,14,},{3,7,11,15,},{4,8,12,16,},};
 
 void TEST_SVD_matrix_equal()
 {
@@ -230,7 +229,10 @@ void TEST_SVD_matrix_dot()
     assert(SVD_matrix_dot(m1, ones, 3,3) == 58.0);
 
     // Test dot product of two arbitrary columns
-    assert(SVD_matrix_dot(m1, m2, 0, 0) == 90.0);
+    SVD_matrix_int_to_fix(m1, Q);
+    SVD_matrix_int_to_fix(m2, Q);
+    SVD_matrix_int_to_fix(m_expect, Q);
+    assert(SVD_matrix_dot(m1, m2, 0, 0) == TOFIX(90.0, Q));
 }
 
 void TEST_SVD_matrix_mul()
