@@ -25,6 +25,7 @@ an integer */
 
 /* convert a from q1 format to q2 format */
 #define FCONV(a, q1, q2) (((q2)>(q1)) ? (a)<<((q2)-(q1)) : (a)>>((q1)-(q2)))
+#define TOINT(a, q)         ( (a) >> (q) ) 
 
 /* the general operation between a in q1 format and b in q2 format
 returning the result in q3 format */

@@ -28,7 +28,7 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     matrix Mp = {0};
     matrix Vtp = {0};
     matrix U_pair, V_pair, U_pair_trans, V_pair_trans;
-
+    
     SVD_matrix_copy(M,S);
     SVD_matrix_copy(I, U);
     SVD_matrix_copy(I, Vt);
@@ -51,12 +51,20 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     matrix_elem qR = 0;
     matrix_elem qL = 0;
 
+    int sweeps = 0;
+    printf("START ALGO\n");
+
     while(!SVD_matrix_isDiagonal(S))
     {
+        printf("START SWEEP %d\n", sweeps);
+        printf("\n\n");
         for(int j = 0; j < N-1; j++)
         {
             for(int k = j+1; k < N; k++)
             {
+                printf("Pair %d -- %d\n", j, k);
+                SVD_matrix_print(S);
+                printf("\n\n");
                 // reload all matrices to identity
                 SVD_matrix_copy(I,Up);
                 SVD_matrix_copy(I,Mp);
@@ -66,16 +74,26 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 SVD_matrix_copy(I,U_pair_trans);
                 SVD_matrix_copy(I,V_pair_trans);
 
+                printf("break 1\n");
                 //calculate rotation angles
                 num1 = FADD(S[k][j], S[j][k]);
                 num2 = FSUB(S[k][j], S[j][k]);
                 den1 = FSUB(S[k][k], S[j][j]);
                 den2 = FADD(S[k][k], S[j][j]);
 
+                printf("kj = %d, jk = %d, num1 = kj + jk = %d\n", TOINT(S[k][j],Q), TOINT(S[j][k],Q), TOINT(num1,Q));
+                printf("kj = %d, jk = %d, num2 = kj - jk = %d\n", TOINT(S[k][j],Q), TOINT(S[j][k],Q), TOINT(num2,Q));
+                printf("kk = %d, jj = %d, den1 = kk - jj = %d\n", TOINT(S[k][k],Q), TOINT(S[j][j],Q), TOINT(den1,Q));
+                printf("kk = %d, jj = %d, den2 = kk + jj = %d\n", TOINT(S[k][k],Q), TOINT(S[j][j],Q), TOINT(den2,Q));
+
                 sum = SVD_atan( num1, den1 );
+                printf("sum = %f\n", TOFLT(sum, Q));
                 diff = SVD_atan( num2, den2 );
+                printf("diff = %f\n", TOFLT(diff, Q));
                 qL = FDIVI(FSUB(sum, diff),2);
+                printf("ql = %f\n", TOFLT(qL, Q));
                 qR = FSUB(sum, qL);
+                printf("qR = %f\n", TOFLT(qR, Q));
 
                 //Create U V rotation matrices for mulitplaction
                 U_pair[j][j] = SVD_cos(qL);
@@ -83,29 +101,43 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 U_pair[k][j] = SVD_sin(qL);
                 U_pair[k][k] = SVD_cos(qL);
 
+                printf("break 4\n");
                 V_pair[j][j] = SVD_cos(qR);
                 V_pair[j][k] = FMULI(SVD_sin(qR),-1);
                 V_pair[k][j] = SVD_sin(qR);
                 V_pair[k][k] = SVD_cos(qR);
 
+                printf("break 5\n");
                 //Transpose matrices
                 SVD_matrix_trans(U_pair, U_pair_trans);
                 SVD_matrix_trans(V_pair, V_pair_trans);
 
+                printf("break 6\n");
                 //DO algorithm multiplaction
                 SVD_matrix_mul(U, U_pair_trans, Up);
                 SVD_matrix_mul(V_pair, Vt, Vtp);
-
+                
+                printf("break 7\n");
                 SVD_matrix_mul(U_pair,S,Mp); //U pair * S -> M'
                 SVD_matrix_mul(Mp,V_pair_trans,S); //M' * V pair t -> S
 
+                printf("break 8\n");
                 //Update S, U, V, Vt
                 SVD_matrix_copy(Vtp,Vt);
                 SVD_matrix_trans(Vt,V);
                 SVD_matrix_copy(Up,U);
+
+                printf("break 9\n\n");
             } //end for
         }//end for
+
+        printf("END SWEEP\n");
+        sweeps++;
     }//end while
+
+    printf("END ALGO\n");
+    SVD_matrix_print(S);
+    printf("\n\n");
 
     // matrix is diagonalized, now normalize
     for (int i = 0; i < N; i++)
@@ -122,31 +154,48 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
 #ifdef TEST
 #include <assert.h>
 #include <stdio.h>
-static matrix Min  = {{  31.0,  77.0,  -11.0,  26.0, },
-                    {  -42.0,  14.0, 79.0,  -53.0, },
-                    {  -68.0,  -10.0,  45.0, 90.0, },
-                    {  34.0,  16.0,  38.0,  -19.0, },};
-static matrix Uout  = {{  1.0,  0.0,  0.0,  0.0, },
-                    {  0.0,  1.0,  0.0,  0.0, },
-                    {  0.0,  0.0,  1.0,  0.0, },
-                    {  0.0,  0.0,  0.0,  1.0, },};
-static matrix Vout  = {{  1.0,  0.0,  0.0,  0.0, },
-                    {  0.0,  1.0,  0.0,  0.0, },
-                    {  0.0,  0.0,  1.0,  0.0, },
-                    {  0.0,  0.0,  0.0,  1.0, },};
-static matrix Sout  = {{  1.0,  0.0,  0.0,  0.0, },
-                    {  0.0,  1.0,  0.0,  0.0, },
-                    {  0.0,  0.0,  1.0,  0.0, },
-                    {  0.0,  0.0,  0.0,  1.0, },};
+static matrix Min  =   {{  31,  77,  -11,  26, },
+                        {  -42,  14, 79,  -53, },
+                        {  -68,  -10,  45, 90, },
+                        {  34,  16,  38,  -19, },};
 
-static matrix S_expect = {{ 85.57032,   0.00000,    0.00000,    0.00000,  },
-                          { 0.00000,  126.42876,    0.00000,    0.00000,  },
-                          { 0.00000,    0.00000,  110.90500,    0.00000,  },
-                          { 0.00000,    0.00000,    0.00000,   34.00837,  },};
+static matrix Uout  =  {{  1,  0,  0,  0, },
+                        {  0,  1,  0,  0, },
+                        {  0,  0,  1,  0, },
+                        {  0,  0,  0,  1, },};
+
+static matrix Vout  =  {{  1,  0,  0,  0, },
+                        {  0,  1,  0,  0, },
+                        {  0,  0,  1,  0, },
+                        {  0,  0,  0,  1, },};
+
+static matrix Sout  =  {{  1,  0,  0,  0, },
+                        {  0,  0,  1,  0, },
+                        {  0,  1,  0,  0, },
+                        {  0,  0,  0,  1, },};
+
+static float S_expect_float[N][N] =  {{ 85.57032,   0.00000,    0.00000,    0.00000,  },
+                                { 0.00000,  126.42876,    0.00000,    0.00000,  },
+                                { 0.00000,    0.00000,  110.90500,    0.00000,  },
+                                { 0.00000,    0.00000,    0.00000,   34.00837,  },};
+
+static matrix S_expect;
 
 void TEST_SVD_decompose(void)
 {
-    // TODO
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            S_expect[i][j] = TOFIX(S_expect_float[i][j], Q);
+        }
+    }
+
+    SVD_matrix_int_to_fix(Min, Q);
+    SVD_matrix_int_to_fix(Vout, Q);
+    SVD_matrix_int_to_fix(Sout, Q);
+    SVD_matrix_int_to_fix(Uout, Q);
+
     SVD_decompose(Min, Uout, Sout, Vout);
     /*printf("\nUout = \n");
     SVD_matrix_print(Uout);

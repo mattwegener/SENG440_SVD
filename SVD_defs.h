@@ -8,7 +8,7 @@
 #define N       (4)             //< Matrix size NxN
 #define Q8      (8)
 #define Q12     (12)            //< q for arctan
-#define Q       (Q8)            //< q for floating point
+#define Q       (8)            //< q for floating point
 #define FIX_1     (1 << Q) 
 
 typedef int32_t matrix_elem; //< we can change this later to use fixed point

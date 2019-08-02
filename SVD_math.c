@@ -1,6 +1,12 @@
 
 #include "SVD_defs.h"
 #include "fixed_point.h"
+#include "SVD_math.h"
+
+#ifdef TEST
+#include <math.h>
+#include <assert.h>
+#endif
 
 #define PI_6      (134)
 #define PI_3      (268)
@@ -49,7 +55,7 @@
 
 #define FIX_0_5   (1 << (Q - 1))
 
-// precondition: x is in fix-point format with Q as the fractional bit length
+// precondition: x is in fix-point format with 8 as the fractional bit length
 // precondition: x between -FIX_1 and +FIX_1
 // returns: the piecewise-linear approximation of arctan(x)
 static matrix_elem arctan(matrix_elem x)
@@ -187,23 +193,29 @@ matrix_elem SVD_sin(matrix_elem x){
   return result;
 }
 
-matrix_elem SVD_atan(matrix_elem y, matrix_elem x){
-    
-    matrix_elem ret;
-
-    if (x > y)
-      ret = arctan(FDIV(y,x,Q));
-    else
-    {
-      ret = arctan(FDIV(x,y,Q));
-      ret = PI_2 - ret;
-    } 
-
-}
-
 matrix_elem SVD_abs(matrix_elem x)
 {
     return (x >= 0) ? (x) : (-x);
+}
+
+matrix_elem SVD_atan(matrix_elem y, matrix_elem x){
+    matrix_elem ret;
+
+    /*
+    if (SVD_abs(x) > SVD_abs(y) )
+    {
+      assert(x != 0);
+      ret = arctan(FDIV(y,x,Q));
+    }
+    else
+    {
+      assert(y != 0);
+      ret = arctan(FDIV(x,y,Q));
+      ret = FSUB(PI_2,ret);
+    }*/
+    ret = TOFIX(atanf(TOFLT(y,Q) / TOFLT(x,Q)), Q );
+
+    return ret;
 }
 
 #ifdef TEST
@@ -245,7 +257,7 @@ void TEST_SVD_math()
       assert( fabs(yf - TOFLT(y,Q)) <=  0.05);
     }
 
-    // test the cosine
+    // test the arctan
     for (int i = 0; i < 100; i++)
     {
       matrix_elem y = arctan(atan_arg[i]);
@@ -253,5 +265,8 @@ void TEST_SVD_math()
       //printf("x = %f, y = %f, yf = %f\n", TOFLT(atan_arg[i], Q), TOFLT(y, Q), yf);
       assert( fabs(yf - TOFLT(y,Q)) <=  0.05);
     }
+
+    // test the SVD_atan
+
 }
 #endif
