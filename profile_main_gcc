@@ -1,17 +1,20 @@
 #!/bin/bash
 
+rm -r profiling
+mkdir profiling
+
 rm gmon.out
 gcc profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -pg -o gprof_profile_main
-./gprof_profile_main
-gprof gprof_profile_main gmon.out > gprof_profile_main_data.txt
+./profiling/gprof_profile_main
+gprof gprof_profile_main gmon.out > ./profiling/gprof_profile_main_data.txt
 rm gmon.out
 
 rm ./callgrind.out.*
 gcc main.c SVD.c SVD_matrix.c SVD_math.c -lm -marm -mfloat-abi=hard -o callgrind_profile_main
 valgrind --tool=callgrind ./callgrind_profile_main
 log_file=$(find . -name 'callgrind.out.*')
-callgrind_annotate --auto=yes --inclusive=no $log_file > callgrind_exclusive.txt
-callgrind_annotate --auto=yes --inclusive=yes $log_file > callgrind_inclusive.txt
+callgrind_annotate --auto=yes --inclusive=no $log_file > ./profiling/callgrind_exclusive.txt
+callgrind_annotate --auto=yes --inclusive=yes $log_file > ./profiling/callgrind_inclusive.txt
 rm ./callgrind.out.*
 
 
