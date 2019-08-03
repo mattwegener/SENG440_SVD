@@ -21,7 +21,7 @@ matrix Sout  = {{  1.0,  0.0,  0.0,  0.0, },
 int main(){
 
     // run 1 million times for profiling
-    for (unsigned int i = 0; i < 1000000; i++)
+    for (unsigned int i = 0; i < 10000; i++)
     {
         SVD_decompose(Min, Uout, Sout, Vout);
     }
