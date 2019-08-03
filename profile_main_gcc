@@ -1,0 +1,7 @@
+#!/bin/bash
+
+gcc profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -pg -o profile_main
+./profile_main
+gprof profile_main gmon.out > profile_main_data.txt
+
+
