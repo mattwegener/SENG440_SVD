@@ -5,7 +5,7 @@ mkdir profiling
 
 rm gmon.out
 gcc profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -pg -o gprof_profile_main
-./profiling/gprof_profile_main
+./gprof_profile_main
 gprof gprof_profile_main gmon.out > ./profiling/gprof_profile_main_data.txt
 rm gmon.out
 
