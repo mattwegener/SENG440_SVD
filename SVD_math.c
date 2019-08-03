@@ -55,6 +55,9 @@
 
 #define FIX_0_5   (1 << (Q - 1))
 
+#define FIX_1_Q12    (1 << 12)
+#define FIX_0_5_Q12  (1 << 11)
+
 // precondition: x is in fix-point format with 8 as the fractional bit length
 // precondition: x between -FIX_1 and +FIX_1
 // returns: the piecewise-linear approximation of arctan(x)
@@ -66,16 +69,16 @@ static matrix_elem arctan(matrix_elem x)
   // do the operation in q = 12
   matrix_elem x_temp = FCONV(x, Q, Q12);
 
-  if (/*x >= -FIX_1 &&*/ x < -FIX_0_5)
+  if (/*x >= -FIX_1 &&*/ x_temp < -FIX_0_5_Q12)
   {
     temp = FMUL(x_temp, COEFF_0644, Q12);
     ret = FSUB(temp, COEFF_0142);
   }
-  else if ( x >= -FIX_0_5 && x <= FIX_0_5)
+  else if ( x_temp >= -FIX_0_5_Q12 && x <= FIX_0_5_Q12)
   {
-    ret = FMUL(x_temp, COEFF_0928,Q12);
+    ret = FMUL(x_temp, COEFF_0928, Q12);
   }
-  else if (x > FIX_0_5 /*&& x <= FIX_1*/)
+  else if (x_temp > FIX_0_5_Q12 /*&& x <= FIX_1*/)
   {
     temp = FMUL(x_temp, COEFF_0644, Q12);
     ret = FADD(temp, COEFF_0142);
@@ -201,7 +204,6 @@ matrix_elem SVD_abs(matrix_elem x)
 matrix_elem SVD_atan(matrix_elem y, matrix_elem x){
     matrix_elem ret;
 
-    /*
     if (SVD_abs(x) > SVD_abs(y) )
     {
       assert(x != 0);
@@ -211,10 +213,14 @@ matrix_elem SVD_atan(matrix_elem y, matrix_elem x){
     {
       assert(y != 0);
       ret = arctan(FDIV(x,y,Q));
-      ret = FSUB(PI_2,ret);
-    }*/
-    ret = TOFIX(atanf(TOFLT(y,Q) / TOFLT(x,Q)), Q );
 
+      if ( ret < 0)
+        ret = FSUB( -PI_2, ret);
+      else
+        ret = FSUB(PI_2,ret);
+    }
+    //ret = TOFIX(atanf(TOFLT(y,Q) / TOFLT(x,Q)), Q );
+    //ret = arctan(FDIV(y,x,Q));
     return ret;
 }
 

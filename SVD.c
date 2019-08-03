@@ -97,7 +97,7 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
 
                 //Create U V rotation matrices for mulitplaction
                 U_pair[j][j] = SVD_cos(qL);
-                U_pair[j][k] = FMULI(SVD_sin(qL),-1);
+                U_pair[j][k] = FMULI(SVD_sin(qL), -1);
                 U_pair[k][j] = SVD_sin(qL);
                 U_pair[k][k] = SVD_cos(qL);
 
@@ -132,6 +132,7 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
         }//end for
 
         printf("END SWEEP\n");
+        if (sweeps == 5) return;
         sweeps++;
     }//end while
 
