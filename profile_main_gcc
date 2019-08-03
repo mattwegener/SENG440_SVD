@@ -8,6 +8,11 @@ gcc profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard 
 ./gprof_profile_main
 gprof gprof_profile_main gmon.out > ./profiling/gprof_profile_main_data.txt
 rm gmon.out
+rm ./gprof_profile_main
+
+gcc profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -DTIME_TEST -o time_profile_main
+./time_profile_main > ./profiling/time_profile_main.txt
+rm ./time_profile_main
 
 rm ./callgrind.out.*
 gcc main.c SVD.c SVD_matrix.c SVD_math.c -lm -marm -mfloat-abi=hard -o callgrind_profile_main
@@ -16,6 +21,5 @@ log_file=$(find . -name 'callgrind.out.*')
 callgrind_annotate --auto=yes --inclusive=no $log_file > ./profiling/callgrind_exclusive.txt
 callgrind_annotate --auto=yes --inclusive=yes $log_file > ./profiling/callgrind_inclusive.txt
 rm ./callgrind.out.*
-
-
+rm ./callgrind_profile_main
 
