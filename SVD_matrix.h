@@ -71,13 +71,20 @@ static inline void SVD_matrix_trans(matrix in, matrix out)
 
 static inline void SVD_matrix_copy(matrix in, matrix out)
 {
+    /*
     for( int i = 0; i < N; i++ )
     {
         for ( int j = 0; j < N; j++ )
         {
             out[i][j] = in[i][j];
         }
+    }*/
+
+    for(int i = 0; i<N; i++){
+        float32x4_t temp = vld1q_f32(&(in[i][0]));
+        vst1q_f32(&(out[i][0]),temp);
     }
+
 }
 
 static inline bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
