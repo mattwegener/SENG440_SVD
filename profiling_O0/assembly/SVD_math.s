@@ -12,31 +12,8 @@
 	.file	"SVD_math.c"
 	.text
 	.align	2
-	.global	SVD_tan
-	.arch armv7-a
-	.syntax unified
-	.arm
-	.fpu neon
-	.type	SVD_tan, %function
-SVD_tan:
-	@ args = 0, pretend = 0, frame = 16
-	@ frame_needed = 1, uses_anonymous_args = 0
-	push	{fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #16
-	vstr.32	s0, [fp, #-16]
-	vldr.32	s0, [fp, #-16]
-	bl	tanf
-	vstr.32	s0, [fp, #-8]
-	ldr	r3, [fp, #-8]	@ float
-	vmov	s15, r3
-	vmov.f32	s0, s15
-	sub	sp, fp, #4
-	@ sp needed
-	pop	{fp, pc}
-	.size	SVD_tan, .-SVD_tan
-	.align	2
 	.global	SVD_cos
+	.arch armv7-a
 	.syntax unified
 	.arm
 	.fpu neon

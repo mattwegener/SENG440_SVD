@@ -247,66 +247,297 @@ SVD_matrix_copy:
 	.fpu neon
 	.type	SVD_matrix_isDiagonal, %function
 SVD_matrix_isDiagonal:
-	@ args = 0, pretend = 0, frame = 16
+	@ args = 0, pretend = 0, frame = 760
 	@ frame_needed = 1, uses_anonymous_args = 0
-	push	{fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #16
-	str	r0, [fp, #-16]
+	@ link register save eliminated.
+	str	fp, [sp, #-4]!
+	add	fp, sp, #0
+	sub	sp, sp, #764
+	str	r0, [fp, #-760]
+	ldr	r3, [fp, #-760]
+	str	r3, [fp, #-628]
+	ldr	r3, [fp, #-628]
+	vld4.32	{d16, d18, d20, d22}, [r3]
+	add	r3, r3, #32
+	vld4.32	{d17, d19, d21, d23}, [r3]
+	sub	r3, fp, #4
+	sub	r3, r3, #752
+	vstmia	r3, {d16-d23}
+	sub	r3, fp, #4
+	sub	r3, r3, #752
+	vldmia	r3, {d16-d23}
+	sub	r3, fp, #4
+	sub	r3, r3, #688
+	vstmia	r3, {d16-d23}
+	movw	r3, #46871
+	movt	r3, 14545
+	str	r3, [fp, #-624]	@ float
+	ldr	r3, [fp, #-624]	@ float
+	vdup.32	q8, r3
+	vstr	d16, [fp, #-20]
+	vstr	d17, [fp, #-12]
+	sub	r3, fp, #4
+	sub	r3, r3, #688
+	vld1.64	{d16-d17}, [r3:64]
+	vstr	d16, [fp, #-620]
+	vstr	d17, [fp, #-612]
+	vldr	d16, [fp, #-620]
+	vldr	d17, [fp, #-612]
+	vmov	d16, d17  @ v2sf
+	vmov	d18, d16  @ v2sf
+	sub	r3, fp, #4
+	sub	r3, r3, #688
+	vldr	d16, [r3, #32]
+	vldr	d17, [r3, #40]
+	vstr	d16, [fp, #-604]
+	vstr	d17, [fp, #-596]
+	vldr	d16, [fp, #-604]
+	vldr	d17, [fp, #-596]
+	vstr	d18, [fp, #-580]
+	vstr	d16, [fp, #-588]
+	vldr	d17, [fp, #-580]
+	vldr	d16, [fp, #-588]
+	vswp	d16, d17
+	vstr	d16, [fp, #-36]
+	vstr	d17, [fp, #-28]
+	sub	r3, fp, #4
+	sub	r3, r3, #688
+	vldr	d16, [r3, #16]
+	vldr	d17, [r3, #24]
+	vstr	d16, [fp, #-572]
+	vstr	d17, [fp, #-564]
+	vldr	d16, [fp, #-572]
+	vldr	d17, [fp, #-564]
+	vmov	d16, d17  @ v2sf
+	vmov	d18, d16  @ v2sf
+	sub	r3, fp, #4
+	sub	r3, r3, #688
+	vldr	d16, [r3, #48]
+	vldr	d17, [r3, #56]
+	vstr	d16, [fp, #-556]
+	vstr	d17, [fp, #-548]
+	vldr	d16, [fp, #-556]
+	vldr	d17, [fp, #-548]
+	vstr	d18, [fp, #-532]
+	vstr	d16, [fp, #-540]
+	vldr	d17, [fp, #-532]
+	vldr	d16, [fp, #-540]
+	vswp	d16, d17
+	vstr	d16, [fp, #-52]
+	vstr	d17, [fp, #-44]
+	sub	r3, fp, #4
+	sub	r3, r3, #688
+	vld1.64	{d16-d17}, [r3:64]
+	vstr	d16, [fp, #-524]
+	vstr	d17, [fp, #-516]
+	vldr	d16, [fp, #-524]
+	vldr	d17, [fp, #-516]
+	vmov.32	r3, d16[1]
+	str	r3, [fp, #-488]	@ float
+	vldr	d16, [fp, #-68]
+	vldr	d17, [fp, #-60]
+	vstr	d16, [fp, #-508]
+	vstr	d17, [fp, #-500]
+	ldr	r3, [fp, #-488]	@ float
+	vldr	d16, [fp, #-508]
+	vldr	d17, [fp, #-500]
+	vmov.32	d16[0], r3
+	vstr	d16, [fp, #-68]
+	vstr	d17, [fp, #-60]
+	sub	r3, fp, #4
+	sub	r3, r3, #688
+	vldr	d16, [r3, #16]
+	vldr	d17, [r3, #24]
+	vstr	d16, [fp, #-484]
+	vstr	d17, [fp, #-476]
+	vldr	d16, [fp, #-484]
+	vldr	d17, [fp, #-476]
+	vmov.32	r3, d16[0]
+	str	r3, [fp, #-448]	@ float
+	vldr	d16, [fp, #-68]
+	vldr	d17, [fp, #-60]
+	vstr	d16, [fp, #-468]
+	vstr	d17, [fp, #-460]
+	ldr	r3, [fp, #-448]	@ float
+	vldr	d16, [fp, #-468]
+	vldr	d17, [fp, #-460]
+	vmov.32	d16[1], r3
+	vstr	d16, [fp, #-68]
+	vstr	d17, [fp, #-60]
+	sub	r3, fp, #4
+	sub	r3, r3, #688
+	vldr	d16, [r3, #32]
+	vldr	d17, [r3, #40]
+	vstr	d16, [fp, #-444]
+	vstr	d17, [fp, #-436]
+	vldr	d16, [fp, #-444]
+	vldr	d17, [fp, #-436]
+	vmov.32	r3, d17[1]
+	str	r3, [fp, #-408]	@ float
+	vldr	d16, [fp, #-68]
+	vldr	d17, [fp, #-60]
+	vstr	d16, [fp, #-428]
+	vstr	d17, [fp, #-420]
+	ldr	r3, [fp, #-408]	@ float
+	vldr	d16, [fp, #-428]
+	vldr	d17, [fp, #-420]
+	vmov.32	d17[0], r3
+	vstr	d16, [fp, #-68]
+	vstr	d17, [fp, #-60]
+	sub	r3, fp, #4
+	sub	r3, r3, #688
+	vldr	d16, [r3, #48]
+	vldr	d17, [r3, #56]
+	vstr	d16, [fp, #-404]
+	vstr	d17, [fp, #-396]
+	vldr	d16, [fp, #-404]
+	vldr	d17, [fp, #-396]
+	vmov.32	r3, d17[0]
+	str	r3, [fp, #-368]	@ float
+	vldr	d16, [fp, #-68]
+	vldr	d17, [fp, #-60]
+	vstr	d16, [fp, #-388]
+	vstr	d17, [fp, #-380]
+	ldr	r3, [fp, #-368]	@ float
+	vldr	d16, [fp, #-388]
+	vldr	d17, [fp, #-380]
+	vmov.32	d17[1], r3
+	vstr	d16, [fp, #-68]
+	vstr	d17, [fp, #-60]
+	vldr	d16, [fp, #-36]
+	vldr	d17, [fp, #-28]
+	vstr	d16, [fp, #-348]
+	vstr	d17, [fp, #-340]
+	vldr	d16, [fp, #-20]
+	vldr	d17, [fp, #-12]
+	vstr	d16, [fp, #-364]
+	vstr	d17, [fp, #-356]
+	vldr	d16, [fp, #-348]
+	vldr	d17, [fp, #-340]
+	vldr	d18, [fp, #-364]
+	vldr	d19, [fp, #-356]
+	vacge.f32	q8, q8, q9
+	vstr	d16, [fp, #-84]
+	vstr	d17, [fp, #-76]
+	vldr	d16, [fp, #-52]
+	vldr	d17, [fp, #-44]
+	vstr	d16, [fp, #-316]
+	vstr	d17, [fp, #-308]
+	vldr	d16, [fp, #-20]
+	vldr	d17, [fp, #-12]
+	vstr	d16, [fp, #-332]
+	vstr	d17, [fp, #-324]
+	vldr	d16, [fp, #-316]
+	vldr	d17, [fp, #-308]
+	vldr	d18, [fp, #-332]
+	vldr	d19, [fp, #-324]
+	vacge.f32	q8, q8, q9
+	vstr	d16, [fp, #-100]
+	vstr	d17, [fp, #-92]
+	vldr	d16, [fp, #-68]
+	vldr	d17, [fp, #-60]
+	vstr	d16, [fp, #-284]
+	vstr	d17, [fp, #-276]
+	vldr	d16, [fp, #-20]
+	vldr	d17, [fp, #-12]
+	vstr	d16, [fp, #-300]
+	vstr	d17, [fp, #-292]
+	vldr	d16, [fp, #-284]
+	vldr	d17, [fp, #-276]
+	vldr	d18, [fp, #-300]
+	vldr	d19, [fp, #-292]
+	vacge.f32	q8, q8, q9
+	vstr	d16, [fp, #-116]
+	vstr	d17, [fp, #-108]
+	vldr	d16, [fp, #-84]
+	vldr	d17, [fp, #-76]
+	vstr	d16, [fp, #-252]
+	vstr	d17, [fp, #-244]
+	vldr	d16, [fp, #-100]
+	vldr	d17, [fp, #-92]
+	vstr	d16, [fp, #-268]
+	vstr	d17, [fp, #-260]
+	vldr	d18, [fp, #-252]
+	vldr	d19, [fp, #-244]
+	vldr	d16, [fp, #-268]
+	vldr	d17, [fp, #-260]
+	vadd.i32	q8, q9, q8
+	vstr	d16, [fp, #-132]
+	vstr	d17, [fp, #-124]
+	vldr	d16, [fp, #-132]
+	vldr	d17, [fp, #-124]
+	vstr	d16, [fp, #-220]
+	vstr	d17, [fp, #-212]
+	vldr	d16, [fp, #-116]
+	vldr	d17, [fp, #-108]
+	vstr	d16, [fp, #-236]
+	vstr	d17, [fp, #-228]
+	vldr	d18, [fp, #-220]
+	vldr	d19, [fp, #-212]
+	vldr	d16, [fp, #-236]
+	vldr	d17, [fp, #-228]
+	vadd.i32	q8, q9, q8
+	vstr	d16, [fp, #-132]
+	vstr	d17, [fp, #-124]
 	mov	r3, #0
-	str	r3, [fp, #-8]
-	b	.L19
-.L25:
+	str	r3, [fp, #-136]
+	vldr	d16, [fp, #-132]
+	vldr	d17, [fp, #-124]
+	vstr	d16, [fp, #-204]
+	vstr	d17, [fp, #-196]
+	vldr	d16, [fp, #-204]
+	vldr	d17, [fp, #-196]
+	vmov.32	r3, d16[0]
+	mov	r2, r3
+	ldr	r3, [fp, #-136]
+	add	r3, r3, r2
+	str	r3, [fp, #-136]
+	vldr	d16, [fp, #-132]
+	vldr	d17, [fp, #-124]
+	vstr	d16, [fp, #-188]
+	vstr	d17, [fp, #-180]
+	vldr	d16, [fp, #-188]
+	vldr	d17, [fp, #-180]
+	vmov.32	r3, d16[1]
+	mov	r2, r3
+	ldr	r3, [fp, #-136]
+	add	r3, r3, r2
+	str	r3, [fp, #-136]
+	vldr	d16, [fp, #-132]
+	vldr	d17, [fp, #-124]
+	vstr	d16, [fp, #-172]
+	vstr	d17, [fp, #-164]
+	vldr	d16, [fp, #-172]
+	vldr	d17, [fp, #-164]
+	vmov.32	r3, d17[0]
+	mov	r2, r3
+	ldr	r3, [fp, #-136]
+	add	r3, r3, r2
+	str	r3, [fp, #-136]
+	vldr	d16, [fp, #-132]
+	vldr	d17, [fp, #-124]
+	vstr	d16, [fp, #-156]
+	vstr	d17, [fp, #-148]
+	vldr	d16, [fp, #-156]
+	vldr	d17, [fp, #-148]
+	vmov.32	r3, d17[1]
+	mov	r2, r3
+	ldr	r3, [fp, #-136]
+	add	r3, r3, r2
+	str	r3, [fp, #-136]
+	ldr	r3, [fp, #-136]
+	cmp	r3, #0
+	beq	.L44
 	mov	r3, #0
-	str	r3, [fp, #-12]
-	b	.L20
-.L24:
-	ldr	r2, [fp, #-8]
-	ldr	r3, [fp, #-12]
-	cmp	r2, r3
-	beq	.L21
-	ldr	r3, [fp, #-8]
-	lsl	r3, r3, #4
-	ldr	r2, [fp, #-16]
-	add	r2, r2, r3
-	ldr	r3, [fp, #-12]
-	lsl	r3, r3, #2
-	add	r3, r2, r3
-	vldr.32	s15, [r3]
-	vmov.f32	s0, s15
-	bl	SVD_abs
-	vmov.f32	s14, s0
-	vldr.32	s15, .L27
-	vcmpe.f32	s14, s15
-	vmrs	APSR_nzcv, FPSCR
-	blt	.L21
-	mov	r3, #0
-	b	.L23
-.L21:
-	ldr	r3, [fp, #-12]
-	add	r3, r3, #1
-	str	r3, [fp, #-12]
-.L20:
-	ldr	r3, [fp, #-12]
-	cmp	r3, #3
-	ble	.L24
-	ldr	r3, [fp, #-8]
-	add	r3, r3, #1
-	str	r3, [fp, #-8]
-.L19:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
-	ble	.L25
+	b	.L46
+.L44:
 	mov	r3, #1
-.L23:
+.L46:
 	mov	r0, r3
-	sub	sp, fp, #4
+	add	sp, fp, #0
 	@ sp needed
-	pop	{fp, pc}
-.L28:
-	.align	2
-.L27:
-	.word	953267991
+	ldr	fp, [sp], #4
+	bx	lr
 	.size	SVD_matrix_isDiagonal, .-SVD_matrix_isDiagonal
 	.data
 	.align	2
@@ -389,17 +620,17 @@ SVD_decompose:
 	str	r3, [fp, #-56]	@ float
 	mov	r3, #0
 	str	r3, [fp, #-60]	@ float
-	b	.L30
-.L35:
+	b	.L48
+.L53:
 	mov	r3, #0
 	str	r3, [fp, #-16]
-	b	.L31
-.L34:
+	b	.L49
+.L52:
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-20]
-	b	.L32
-.L33:
+	b	.L50
+.L51:
 	sub	r3, fp, #188
 	mov	r1, r3
 	movw	r0, #:lower16:I
@@ -669,31 +900,31 @@ SVD_decompose:
 	ldr	r3, [fp, #-20]
 	add	r3, r3, #1
 	str	r3, [fp, #-20]
-.L32:
+.L50:
 	ldr	r3, [fp, #-20]
 	cmp	r3, #3
-	ble	.L33
+	ble	.L51
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-16]
-.L31:
+.L49:
 	ldr	r3, [fp, #-16]
 	cmp	r3, #2
-	ble	.L34
-.L30:
+	ble	.L52
+.L48:
 	ldr	r0, [fp, #-584]
 	bl	SVD_matrix_isDiagonal
 	mov	r3, r0
 	cmp	r3, #0
-	beq	.L35
+	beq	.L53
 	mov	r3, #0
 	str	r3, [fp, #-24]
-	b	.L36
-.L41:
+	b	.L54
+.L59:
 	mov	r3, #0
 	str	r3, [fp, #-28]
-	b	.L37
-.L40:
+	b	.L55
+.L58:
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-584]
@@ -721,10 +952,10 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s15, [r3]
-	vldr.32	s14, .L43
+	vldr.32	s14, .L61
 	vcmpe.f32	s15, s14
 	vmrs	APSR_nzcv, FPSCR
-	bpl	.L38
+	bpl	.L56
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-584]
@@ -734,28 +965,28 @@ SVD_decompose:
 	add	r3, r2, r3
 	mov	r2, #0
 	str	r2, [r3]	@ float
-.L38:
+.L56:
 	ldr	r3, [fp, #-28]
 	add	r3, r3, #1
 	str	r3, [fp, #-28]
-.L37:
+.L55:
 	ldr	r3, [fp, #-28]
 	cmp	r3, #3
-	ble	.L40
+	ble	.L58
 	ldr	r3, [fp, #-24]
 	add	r3, r3, #1
 	str	r3, [fp, #-24]
-.L36:
+.L54:
 	ldr	r3, [fp, #-24]
 	cmp	r3, #3
-	ble	.L41
+	ble	.L59
 	nop
 	sub	sp, fp, #8
 	@ sp needed
 	pop	{r4, fp, pc}
-.L44:
+.L62:
 	.align	2
-.L43:
+.L61:
 	.word	953267991
 	.size	SVD_decompose, .-SVD_decompose
 	.ident	"GCC: (GNU) 8.2.1 20180801 (Red Hat 8.2.1-2)"

@@ -12,20 +12,8 @@
 	.file	"SVD_math.c"
 	.text
 	.align	2
-	.global	SVD_tan
-	.arch armv7-a
-	.syntax unified
-	.arm
-	.fpu neon
-	.type	SVD_tan, %function
-SVD_tan:
-	@ args = 0, pretend = 0, frame = 0
-	@ frame_needed = 0, uses_anonymous_args = 0
-	@ link register save eliminated.
-	b	tanf
-	.size	SVD_tan, .-SVD_tan
-	.align	2
 	.global	SVD_cos
+	.arch armv7-a
 	.syntax unified
 	.arm
 	.fpu neon
