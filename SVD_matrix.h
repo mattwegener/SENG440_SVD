@@ -108,17 +108,46 @@ static inline bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
 
 static inline bool SVD_matrix_isDiagonal(matrix in)
 {
-  for (int i = 0; i < N; i++)
-  {
-    for (int j = 0; j < N; j++)
+    /*
+    for (int i = 0; i < N; i++)
     {
-      if (i != j)
-      {
-        if (SVD_abs(in[i][j]) >= EPS)
-          return false;
-      }
+        for (int j = 0; j < N; j++)
+        {
+            if (i != j)
+            {
+                if (SVD_abs(in[i][j]) >= EPS)
+                  return false;
+            }
+        }
     }
-  }
+    */
+
+    //SIMD Implementation
+    float32x4_t result, off_1, off_2, off_3, comp;
+
+    float32x4x4_t temp_in = vld4q_f32(&(in[0][0]));
+    eps = vdupq_n_f32(EPS);
+
+    off_1 = vcombine_f32(vget_high_f32(temp_in.val[0]),vget_low_f32(temp_in.val[2]));
+    off_2 = vcombine_f32(vget_high_f32(temp_in.val[1]),vget_low_f32(temp_in.val[3]));
+    off_3 = {   vgetq_lane_32(temp_in.val[0],1),
+                vgetq_lane_32(temp_in.val[1],0),
+                vgetq_lane_32(temp_in.val[2],3),
+                vgetq_lane_32(temp_in.val[3],2),};
+
+    off_1 = vcageq_f32(off_1, eps);
+    off_2 = vcageq_f32(off_2, eps);
+    off_3 = vcageq_f32(off_3, eps);
+
+    result = vaddq_f32(off_1, off_2);
+    result = vaddq_f32(result, off_3);
+
+    float total = 0;
+    for(int i = 0; i<N; i++){
+        total += result[i];
+    }
+
+    if(total > 0) return false;
 
   // fall through
   return true;
