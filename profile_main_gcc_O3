@@ -2,26 +2,24 @@
 
 rm -r profiling_O3
 mkdir profiling_O3
-
 rm gmon.out
+rm ./callgrind.out.*
+
 gcc -static profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -mfpu=neon -O3 -pg -o gprof_profile_main_O3
 ./gprof_profile_main_O3
 gprof gprof_profile_main_O3 gmon.out > ./profiling_O3/gprof_profile_main_data_O3.txt
-rm gmon.out
-rm ./gprof_profile_main_O3
+
 
 gcc -static profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -mfpu=neon -DTIME_TEST -O3 -o time_profile_main_O3
 ./time_profile_main_O3 > ./profiling_O3/time_profile_main_O3.txt
-rm ./time_profile_main_O3
 
-rm ./callgrind.out.*
+
 gcc -static main.c SVD.c SVD_matrix.c SVD_math.c -lm -lc -marm -mfloat-abi=hard -mfpu=neon -O3 -o callgrind_profile_main_O3
 valgrind --tool=callgrind ./callgrind_profile_main_O3
 log_file=$(find . -name 'callgrind.out.*')
 callgrind_annotate --auto=yes --inclusive=no $log_file > ./profiling_O3/callgrind_profile_main_O3_exclusive.txt
 callgrind_annotate --auto=yes --inclusive=yes $log_file > ./profiling_O3/callgrind_profile_main_O3_inclusive.txt
-rm ./callgrind.out.*
-rm ./callgrind_profile_main_O3
+
 
 cd profiling_O3
 mkdir assembly
@@ -29,3 +27,9 @@ cd assembly
 gcc -static ../../main.c ../../SVD.c ../../SVD_matrix.c ../../SVD_math.c -lm -lc -mfpu=neon -marm -mfloat-abi=hard -O3 -S
 cd ..
 cd ..
+
+rm gmon.out
+rm ./callgrind.out.*
+rm ./gprof_profile_main_O3
+rm ./time_profile_main_O3
+rm ./callgrind_profile_main_O3
