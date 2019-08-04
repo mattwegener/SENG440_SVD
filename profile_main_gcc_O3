@@ -26,6 +26,6 @@ rm ./callgrind_profile_main_O3
 cd profiling_O3
 mkdir assembly
 cd assembly
-gcc ../../main.c ../SVD.c ../SVD_matrix.c ../SVD_math.c -ln -marm -mfloat-abi=hard -O3 -S
+gcc ../../main.c ../../SVD.c ../../SVD_matrix.c ../../SVD_math.c -ln -marm -mfloat-abi=hard -O3 -S
 cd ..
 cd ..
