@@ -130,10 +130,11 @@ static inline bool SVD_matrix_isDiagonal(matrix in)
 
     off_1 = vcombine_f32(vget_high_f32(temp_in.val[0]),vget_low_f32(temp_in.val[2]));
     off_2 = vcombine_f32(vget_high_f32(temp_in.val[1]),vget_low_f32(temp_in.val[3]));
-    off_3 = {   vgetq_lane_f32(temp_in.val[0],1),
-                vgetq_lane_f32(temp_in.val[1],0),
-                vgetq_lane_f32(temp_in.val[2],3),
-                vgetq_lane_f32(temp_in.val[3],2),};
+
+    off_3 = vsetq_lane_f32( vgetq_lane_f32(temp_in.val[0],1), off_3, 0);
+    off_3 = vsetq_lane_f32( vgetq_lane_f32(temp_in.val[1],0), off_3, 1);
+    off_3 = vsetq_lane_f32( vgetq_lane_f32(temp_in.val[2],3), off_3, 2);
+    off_3 = vsetq_lane_f32( vgetq_lane_f32(temp_in.val[3],2), off_3, 3);
 
     off_1 = vcageq_f32(off_1, eps);
     off_2 = vcageq_f32(off_2, eps);
