@@ -2,10 +2,17 @@
 #include "SVD_matrix.h"
 
 void SVD_matrix_mul(matrix matrix1, matrix matrix2, matrix result){
-  int j,k;
-  for(j = 0; j < N; j++){
-    for(k = 0; k < N; k++){
-      result[j][k] = SVD_matrix_dot(matrix1,matrix2,j,k);
+  
+  int i,j,k;
+  
+  for(j = 0; j < N; j++)
+  {
+    for(k = 0; k < N; k++)
+    {
+        result[j][k] = 0;
+        for(i = 0; i < N; i++){
+            result[j][k] += matrix1[j][i] * matrix2[i][k];
+        }
     }
   }
 }
