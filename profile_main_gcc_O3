@@ -4,13 +4,13 @@ rm -r profiling_O3
 mkdir profiling_O3
 
 rm gmon.out
-gcc profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -O3 -pg -o gprof_profile_main_O3
+gcc profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -mfpu=neon -O3 -pg -o gprof_profile_main_O3
 ./gprof_profile_main_O3
 gprof gprof_profile_main_O3 gmon.out > ./profiling_O3/gprof_profile_main_data_O3.txt
 rm gmon.out
 rm ./gprof_profile_main_O3
 
-gcc profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -DTIME_TEST -O3 -o time_profile_main_O3
+gcc profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -mfpu=neon -DTIME_TEST -O3 -o time_profile_main_O3
 ./time_profile_main_O3 > ./profiling_O3/time_profile_main_O3.txt
 rm ./time_profile_main_O3
 
@@ -26,6 +26,6 @@ rm ./callgrind_profile_main_O3
 cd profiling_O3
 mkdir assembly
 cd assembly
-gcc ../../main.c ../../SVD.c ../../SVD_matrix.c ../../SVD_math.c -ln -marm -mfloat-abi=hard -O3 -S
+gcc ../../main.c ../../SVD.c ../../SVD_matrix.c ../../SVD_math.c -ln -marm -mfloat-abi=hard -mfpu=neon -O3 -S
 cd ..
 cd ..
