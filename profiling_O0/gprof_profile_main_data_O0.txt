@@ -3,17 +3,17 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  us/call  us/call  name    
- 67.91      5.22     5.22 15360000     0.34     0.34  SVD_matrix_dot
- 12.12      6.15     0.93  2190000     0.43     0.43  SVD_matrix_copy
-  8.08      6.77     0.62   960000     0.65     6.08  SVD_matrix_mul
-  3.39      7.03     0.26    10000    26.03   764.83  SVD_decompose
-  3.26      7.28     0.25   720000     0.35     0.35  SVD_matrix_trans
-  3.00      7.51     0.23   960000     0.24     0.24  SVD_cos
-  1.56      7.63     0.12   960000     0.13     0.13  SVD_sin
-  0.52      7.67     0.04                             SVD_tan
-  0.26      7.69     0.02   480000     0.04     0.04  SVD_atan
-  0.00      7.69     0.00   320000     0.00     0.00  SVD_abs
-  0.00      7.69     0.00    50000     0.00     0.00  SVD_matrix_isDiagonal
+ 68.75      5.14     5.14 15360000     0.33     0.33  SVD_matrix_dot
+  8.98      5.81     0.67  2190000     0.31     0.31  SVD_matrix_copy
+  7.50      6.37     0.56   960000     0.58     5.93  SVD_matrix_mul
+  4.96      6.74     0.37    10000    37.04   746.81  SVD_decompose
+  4.15      7.05     0.31   720000     0.43     0.43  SVD_matrix_trans
+  3.08      7.28     0.23   960000     0.24     0.24  SVD_cos
+  1.88      7.42     0.14   960000     0.15     0.15  SVD_sin
+  0.27      7.44     0.02   480000     0.04     0.04  SVD_atan
+  0.27      7.46     0.02    50000     0.40     0.50  SVD_matrix_isDiagonal
+  0.13      7.47     0.01   320000     0.03     0.03  SVD_abs
+  0.13      7.48     0.01                             SVD_tan
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -51,56 +51,56 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 0.13% of 7.69 seconds
+granularity: each sample hit covers 2 byte(s) for 0.13% of 7.48 seconds
 
 index % time    self  children    called     name
-                0.26    7.39   10000/10000       main [2]
-[1]     99.5    0.26    7.39   10000         SVD_decompose [1]
-                0.62    5.22  960000/960000      SVD_matrix_mul [3]
-                0.93    0.00 2190000/2190000     SVD_matrix_copy [5]
-                0.25    0.00  720000/720000      SVD_matrix_trans [6]
+                0.37    7.10   10000/10000       main [2]
+[1]     99.9    0.37    7.10   10000         SVD_decompose [1]
+                0.56    5.14  960000/960000      SVD_matrix_mul [3]
+                0.67    0.00 2190000/2190000     SVD_matrix_copy [5]
+                0.31    0.00  720000/720000      SVD_matrix_trans [6]
                 0.23    0.00  960000/960000      SVD_cos [7]
-                0.12    0.00  960000/960000      SVD_sin [8]
+                0.14    0.00  960000/960000      SVD_sin [8]
+                0.02    0.01   50000/50000       SVD_matrix_isDiagonal [9]
                 0.02    0.00  480000/480000      SVD_atan [10]
-                0.00    0.00  160000/320000      SVD_abs [11]
-                0.00    0.00   50000/50000       SVD_matrix_isDiagonal [12]
+                0.01    0.00  160000/320000      SVD_abs [11]
 -----------------------------------------------
                                                  <spontaneous>
-[2]     99.5    0.00    7.65                 main [2]
-                0.26    7.39   10000/10000       SVD_decompose [1]
+[2]     99.9    0.00    7.47                 main [2]
+                0.37    7.10   10000/10000       SVD_decompose [1]
 -----------------------------------------------
-                0.62    5.22  960000/960000      SVD_decompose [1]
-[3]     75.9    0.62    5.22  960000         SVD_matrix_mul [3]
-                5.22    0.00 15360000/15360000     SVD_matrix_dot [4]
+                0.56    5.14  960000/960000      SVD_decompose [1]
+[3]     76.2    0.56    5.14  960000         SVD_matrix_mul [3]
+                5.14    0.00 15360000/15360000     SVD_matrix_dot [4]
 -----------------------------------------------
-                5.22    0.00 15360000/15360000     SVD_matrix_mul [3]
-[4]     67.8    5.22    0.00 15360000         SVD_matrix_dot [4]
+                5.14    0.00 15360000/15360000     SVD_matrix_mul [3]
+[4]     68.7    5.14    0.00 15360000         SVD_matrix_dot [4]
 -----------------------------------------------
-                0.93    0.00 2190000/2190000     SVD_decompose [1]
-[5]     12.1    0.93    0.00 2190000         SVD_matrix_copy [5]
+                0.67    0.00 2190000/2190000     SVD_decompose [1]
+[5]      9.0    0.67    0.00 2190000         SVD_matrix_copy [5]
 -----------------------------------------------
-                0.25    0.00  720000/720000      SVD_decompose [1]
-[6]      3.3    0.25    0.00  720000         SVD_matrix_trans [6]
+                0.31    0.00  720000/720000      SVD_decompose [1]
+[6]      4.1    0.31    0.00  720000         SVD_matrix_trans [6]
 -----------------------------------------------
                 0.23    0.00  960000/960000      SVD_decompose [1]
-[7]      3.0    0.23    0.00  960000         SVD_cos [7]
+[7]      3.1    0.23    0.00  960000         SVD_cos [7]
 -----------------------------------------------
-                0.12    0.00  960000/960000      SVD_decompose [1]
-[8]      1.6    0.12    0.00  960000         SVD_sin [8]
+                0.14    0.00  960000/960000      SVD_decompose [1]
+[8]      1.9    0.14    0.00  960000         SVD_sin [8]
 -----------------------------------------------
-                                                 <spontaneous>
-[9]      0.5    0.04    0.00                 SVD_tan [9]
+                0.02    0.01   50000/50000       SVD_decompose [1]
+[9]      0.3    0.02    0.01   50000         SVD_matrix_isDiagonal [9]
+                0.01    0.00  160000/320000      SVD_abs [11]
 -----------------------------------------------
                 0.02    0.00  480000/480000      SVD_decompose [1]
 [10]     0.3    0.02    0.00  480000         SVD_atan [10]
 -----------------------------------------------
-                0.00    0.00  160000/320000      SVD_decompose [1]
-                0.00    0.00  160000/320000      SVD_matrix_isDiagonal [12]
-[11]     0.0    0.00    0.00  320000         SVD_abs [11]
+                0.01    0.00  160000/320000      SVD_decompose [1]
+                0.01    0.00  160000/320000      SVD_matrix_isDiagonal [9]
+[11]     0.1    0.01    0.00  320000         SVD_abs [11]
 -----------------------------------------------
-                0.00    0.00   50000/50000       SVD_decompose [1]
-[12]     0.0    0.00    0.00   50000         SVD_matrix_isDiagonal [12]
-                0.00    0.00  160000/320000      SVD_abs [11]
+                                                 <spontaneous>
+[12]     0.1    0.01    0.00                 SVD_tan [12]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -195,5 +195,5 @@ Index by function name
 
   [11] SVD_abs                 [5] SVD_matrix_copy         [6] SVD_matrix_trans
   [10] SVD_atan                [4] SVD_matrix_dot          [8] SVD_sin
-   [7] SVD_cos                [12] SVD_matrix_isDiagonal   [9] SVD_tan
+   [7] SVD_cos                 [9] SVD_matrix_isDiagonal  [12] SVD_tan
    [1] SVD_decompose           [3] SVD_matrix_mul

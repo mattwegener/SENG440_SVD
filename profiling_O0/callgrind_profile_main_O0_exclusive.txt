@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.1874' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.1075' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 55243
+Timerange: Basic block 0 - 55238
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O0 (PID 1874, part 1)
+Profiled target:  ./callgrind_profile_main_O0 (PID 1075, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,7 +18,7 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-525,549  PROGRAM TOTALS
+525,543  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
      Ir  file:function
@@ -43,7 +43,7 @@ Auto-annotation:  on
   2,612  ???:SVD_sin'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
   1,984  ???:_dl_check_map_versions'2 [/usr/lib/ld-2.28.so]
   1,731  ???:_dl_cache_libcmp [/usr/lib/ld-2.28.so]
-  1,560  ???:memset [/usr/lib/ld-2.28.so]
+  1,560  ???:memset [/usr/lib/libc-2.28.so]
   1,203  ???:SVD_atan'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
   1,176  ???:__aeabi_uidivmod [/usr/lib/ld-2.28.so]
   1,163  ???:_dl_start [/usr/lib/ld-2.28.so]
@@ -63,14 +63,13 @@ Auto-annotation:  on
     477  ???:_dl_fixup [/usr/lib/ld-2.28.so]
     415  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
     406  ???:_dl_sysdep_start [/usr/lib/ld-2.28.so]
-    396  ???:_dl_check_map_versions [/usr/lib/ld-2.28.so]
     396  ???:_dl_catch_exception'2 [/usr/lib/ld-2.28.so]
-    373  ???:memcpy [/usr/lib/ld-2.28.so]
+    396  ???:_dl_check_map_versions [/usr/lib/ld-2.28.so]
+    373  ???:memcpy [/usr/lib/libc-2.28.so]
     328  ???:init_tls [/usr/lib/ld-2.28.so]
     320  ???:SVD_abs [/root/SENG440_SVD/callgrind_profile_main_O0]
     315  ???:_dl_map_object_from_fd [/usr/lib/ld-2.28.so]
     256  ???:_dl_map_object_deps [/usr/lib/ld-2.28.so]
     250  ???:_dl_fini [/usr/lib/ld-2.28.so]
-    202  ???:strcspn [/usr/lib/ld-2.28.so]
-    194  ???:_dl_add_to_namespace_list [/usr/lib/ld-2.28.so]
+    214  ???:strcspn [/usr/lib/ld-2.28.so]
 

@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.1874' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.1075' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 55243
+Timerange: Basic block 0 - 55238
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O0 (PID 1874, part 1)
+Profiled target:  ./callgrind_profile_main_O0 (PID 1075, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,7 +18,7 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-525,549  PROGRAM TOTALS
+525,543  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
         Ir  file:function
@@ -26,8 +26,8 @@ Auto-annotation:  on
 17,770,825  ???:SVD_sin'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
 17,770,816  ???:SVD_cos'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
  8,719,939  ???:SVD_atan'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-   525,549  ???:0x00000a80 [/usr/lib/ld-2.28.so]
-   525,545  ???:_dl_start [/usr/lib/ld-2.28.so]
+   525,543  ???:0x00000a80 [/usr/lib/ld-2.28.so]
+   525,539  ???:_dl_start [/usr/lib/ld-2.28.so]
    378,211  ???:0x00010458 [/root/SENG440_SVD/callgrind_profile_main_O0]
    376,937  ???:(below main) [/usr/lib/libc-2.28.so]
    376,700  ???:main [/root/SENG440_SVD/callgrind_profile_main_O0]
@@ -39,11 +39,11 @@ Auto-annotation:  on
    366,093  ???:SVD_sin [/root/SENG440_SVD/callgrind_profile_main_O0]
    228,768  ???:SVD_matrix_mul [/root/SENG440_SVD/callgrind_profile_main_O0]
    192,000  ???:SVD_matrix_dot [/root/SENG440_SVD/callgrind_profile_main_O0]
-   145,522  ???:_dl_sysdep_start [/usr/lib/ld-2.28.so]
-   136,369  ???:dl_main [/usr/lib/ld-2.28.so]
-   135,954  ???:_dl_new_object [/usr/lib/ld-2.28.so]
-   134,978  ???:_dl_init_paths [/usr/lib/ld-2.28.so]
-   132,567  ???:handle_ld_preload [/usr/lib/ld-2.28.so]
+   145,534  ???:_dl_sysdep_start [/usr/lib/ld-2.28.so]
+   136,381  ???:dl_main [/usr/lib/ld-2.28.so]
+   135,966  ???:_dl_new_object [/usr/lib/ld-2.28.so]
+   134,990  ???:_dl_init_paths [/usr/lib/ld-2.28.so]
+   132,579  ???:handle_ld_preload [/usr/lib/ld-2.28.so]
    129,306  ???:_dl_map_object_deps [/usr/lib/ld-2.28.so]
    116,899  ???:_dl_receive_error [/usr/lib/ld-2.28.so]
    112,523  ???:init_tls [/usr/lib/ld-2.28.so]

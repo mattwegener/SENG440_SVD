@@ -1,1 +1,1 @@
-Average time taken (10000 tries): 318.205500
+Average time taken (10000 tries): 311.940900
