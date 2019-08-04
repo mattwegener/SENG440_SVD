@@ -4,7 +4,6 @@
 
 #include "SVD_defs.h"
 
-matrix_elem SVD_tan(matrix_elem x);
 matrix_elem SVD_sin(matrix_elem x);
 matrix_elem SVD_cos(matrix_elem x);
 matrix_elem SVD_atan(matrix_elem y, matrix_elem x);
