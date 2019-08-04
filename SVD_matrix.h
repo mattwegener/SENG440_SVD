@@ -108,7 +108,7 @@ static inline bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
 
 static inline bool SVD_matrix_isDiagonal(matrix in)
 {
-    /*
+    
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++)
@@ -120,8 +120,9 @@ static inline bool SVD_matrix_isDiagonal(matrix in)
             }
         }
     }
-    */
-
+    return true; // fall through
+    
+    /* // ACTUALY BETTER THE ORIGINAL WAY
     //SIMD Implementation
     float32x4_t off_1, off_2, off_3, eps;
     uint32x4_t res_1, res_2, res_3, result;
@@ -153,6 +154,7 @@ static inline bool SVD_matrix_isDiagonal(matrix in)
 
     if(total > 0) return false;
     else return true;
+    */
 }
 
 #ifdef TEST
