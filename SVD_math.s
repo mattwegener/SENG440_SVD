@@ -1,128 +1,132 @@
+	.arch armv7-a
+	.eabi_attribute 28, 1
+	.eabi_attribute 20, 1
+	.eabi_attribute 21, 1
+	.eabi_attribute 23, 3
+	.eabi_attribute 24, 1
+	.eabi_attribute 25, 1
+	.eabi_attribute 26, 2
+	.eabi_attribute 30, 6
+	.eabi_attribute 34, 1
+	.eabi_attribute 18, 4
 	.file	"SVD_math.c"
 	.text
-	.globl	SVD_tan
-	.type	SVD_tan, @function
+	.align	2
+	.global	SVD_tan
+	.arch armv7-a
+	.syntax unified
+	.arm
+	.fpu vfpv3-d16
+	.type	SVD_tan, %function
 SVD_tan:
-.LFB0:
-	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$32, %rsp
-	movss	%xmm0, -20(%rbp)
-	movl	-20(%rbp), %eax
-	movl	%eax, -24(%rbp)
-	movss	-24(%rbp), %xmm0
-	call	tanf@PLT
-	movd	%xmm0, %eax
-	movl	%eax, -4(%rbp)
-	movss	-4(%rbp), %xmm0
-	leave
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE0:
+	@ args = 0, pretend = 0, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	push	{fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #16
+	vstr.32	s0, [fp, #-16]
+	vldr.32	s0, [fp, #-16]
+	bl	tanf
+	vstr.32	s0, [fp, #-8]
+	ldr	r3, [fp, #-8]	@ float
+	vmov	s15, r3
+	vmov.f32	s0, s15
+	sub	sp, fp, #4
+	@ sp needed
+	pop	{fp, pc}
 	.size	SVD_tan, .-SVD_tan
-	.globl	SVD_cos
-	.type	SVD_cos, @function
+	.align	2
+	.global	SVD_cos
+	.syntax unified
+	.arm
+	.fpu vfpv3-d16
+	.type	SVD_cos, %function
 SVD_cos:
-.LFB1:
-	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$32, %rsp
-	movss	%xmm0, -20(%rbp)
-	movl	-20(%rbp), %eax
-	movl	%eax, -24(%rbp)
-	movss	-24(%rbp), %xmm0
-	call	cosf@PLT
-	movd	%xmm0, %eax
-	movl	%eax, -4(%rbp)
-	movss	-4(%rbp), %xmm0
-	leave
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE1:
+	@ args = 0, pretend = 0, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	push	{fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #16
+	vstr.32	s0, [fp, #-16]
+	vldr.32	s0, [fp, #-16]
+	bl	cosf
+	vstr.32	s0, [fp, #-8]
+	ldr	r3, [fp, #-8]	@ float
+	vmov	s15, r3
+	vmov.f32	s0, s15
+	sub	sp, fp, #4
+	@ sp needed
+	pop	{fp, pc}
 	.size	SVD_cos, .-SVD_cos
-	.globl	SVD_sin
-	.type	SVD_sin, @function
+	.align	2
+	.global	SVD_sin
+	.syntax unified
+	.arm
+	.fpu vfpv3-d16
+	.type	SVD_sin, %function
 SVD_sin:
-.LFB2:
-	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$32, %rsp
-	movss	%xmm0, -20(%rbp)
-	movl	-20(%rbp), %eax
-	movl	%eax, -24(%rbp)
-	movss	-24(%rbp), %xmm0
-	call	sinf@PLT
-	movd	%xmm0, %eax
-	movl	%eax, -4(%rbp)
-	movss	-4(%rbp), %xmm0
-	leave
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE2:
+	@ args = 0, pretend = 0, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	push	{fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #16
+	vstr.32	s0, [fp, #-16]
+	vldr.32	s0, [fp, #-16]
+	bl	sinf
+	vstr.32	s0, [fp, #-8]
+	ldr	r3, [fp, #-8]	@ float
+	vmov	s15, r3
+	vmov.f32	s0, s15
+	sub	sp, fp, #4
+	@ sp needed
+	pop	{fp, pc}
 	.size	SVD_sin, .-SVD_sin
-	.globl	SVD_atan
-	.type	SVD_atan, @function
+	.align	2
+	.global	SVD_atan
+	.syntax unified
+	.arm
+	.fpu vfpv3-d16
+	.type	SVD_atan, %function
 SVD_atan:
-.LFB3:
-	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$16, %rsp
-	movss	%xmm0, -4(%rbp)
-	movss	%xmm1, -8(%rbp)
-	movss	-4(%rbp), %xmm0
-	divss	-8(%rbp), %xmm0
-	call	atanf@PLT
-	leave
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE3:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	push	{fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	vstr.32	s0, [fp, #-8]
+	vstr.32	s1, [fp, #-12]
+	vldr.32	s14, [fp, #-8]
+	vldr.32	s15, [fp, #-12]
+	vdiv.f32	s13, s14, s15
+	vmov.f32	s0, s13
+	bl	atanf
+	vmov.f32	s15, s0
+	vmov.f32	s0, s15
+	sub	sp, fp, #4
+	@ sp needed
+	pop	{fp, pc}
 	.size	SVD_atan, .-SVD_atan
-	.globl	SVD_abs
-	.type	SVD_abs, @function
+	.align	2
+	.global	SVD_abs
+	.syntax unified
+	.arm
+	.fpu vfpv3-d16
+	.type	SVD_abs, %function
 SVD_abs:
-.LFB4:
-	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	movss	%xmm0, -4(%rbp)
-	movss	-4(%rbp), %xmm1
-	movss	.LC0(%rip), %xmm0
-	andps	%xmm1, %xmm0
-	popq	%rbp
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE4:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	str	fp, [sp, #-4]!
+	add	fp, sp, #0
+	sub	sp, sp, #12
+	vstr.32	s0, [fp, #-8]
+	vldr.32	s15, [fp, #-8]
+	vabs.f32	s15, s15
+	vmov.f32	s0, s15
+	add	sp, fp, #0
+	@ sp needed
+	ldr	fp, [sp], #4
+	bx	lr
 	.size	SVD_abs, .-SVD_abs
-	.section	.rodata
-	.align 16
-.LC0:
-	.long	2147483647
-	.long	0
-	.long	0
-	.long	0
-	.ident	"GCC: (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0"
-	.section	.note.GNU-stack,"",@progbits
+	.ident	"GCC: (GNU) 8.2.1 20180801 (Red Hat 8.2.1-2)"
+	.section	.note.GNU-stack,"",%progbits
