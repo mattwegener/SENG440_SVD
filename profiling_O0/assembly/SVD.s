@@ -15,7 +15,7 @@
 	.arch armv7-a
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_dot, %function
 SVD_matrix_dot:
 	@ args = 0, pretend = 0, frame = 24
@@ -72,7 +72,7 @@ SVD_matrix_dot:
 	.align	2
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_mul, %function
 SVD_matrix_mul:
 	@ args = 0, pretend = 0, frame = 24
@@ -127,55 +127,61 @@ SVD_matrix_mul:
 	.align	2
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_trans, %function
 SVD_matrix_trans:
-	@ args = 0, pretend = 0, frame = 16
+	@ args = 0, pretend = 0, frame = 168
 	@ frame_needed = 1, uses_anonymous_args = 0
 	@ link register save eliminated.
 	str	fp, [sp, #-4]!
 	add	fp, sp, #0
-	sub	sp, sp, #20
-	str	r0, [fp, #-16]
-	str	r1, [fp, #-20]
+	sub	sp, sp, #172
+	str	r0, [fp, #-168]
+	str	r1, [fp, #-172]
+	ldr	r3, [fp, #-168]
+	str	r3, [fp, #-12]
+	ldr	r3, [fp, #-12]
+	vld4.32	{d16, d18, d20, d22}, [r3]
+	add	r3, r3, #32
+	vld4.32	{d17, d19, d21, d23}, [r3]
+	sub	r3, fp, #4
+	sub	r3, r3, #160
+	vstmia	r3, {d16-d23}
+	sub	r3, fp, #4
+	sub	r3, r3, #160
+	vldmia	r3, {d16-d23}
+	sub	r3, fp, #4
+	sub	r3, r3, #96
+	vstmia	r3, {d16-d23}
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L11
-.L14:
-	mov	r3, #0
-	str	r3, [fp, #-12]
 	b	.L12
 .L13:
 	ldr	r3, [fp, #-8]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-16]
-	add	r2, r2, r3
-	ldr	r3, [fp, #-12]
-	lsl	r3, r3, #4
-	ldr	r1, [fp, #-20]
-	add	r1, r1, r3
-	ldr	r3, [fp, #-12]
-	lsl	r3, r3, #2
+	ldr	r2, [fp, #-172]
 	add	r3, r2, r3
-	ldr	r2, [r3]	@ float
+	mov	r1, r3
+	sub	r3, fp, #4
+	sub	r2, r3, #96
 	ldr	r3, [fp, #-8]
-	lsl	r3, r3, #2
-	add	r3, r1, r3
-	str	r2, [r3]	@ float
-	ldr	r3, [fp, #-12]
-	add	r3, r3, #1
-	str	r3, [fp, #-12]
-.L12:
-	ldr	r3, [fp, #-12]
-	cmp	r3, #3
-	ble	.L13
+	lsl	r3, r3, #4
+	add	r3, r2, r3
+	vld1.64	{d16-d17}, [r3:64]
+	str	r1, [fp, #-16]
+	vstr	d16, [fp, #-36]
+	vstr	d17, [fp, #-28]
+	ldr	r3, [fp, #-16]
+	vldr	d16, [fp, #-36]
+	vldr	d17, [fp, #-28]
+	vst1.32	{d16-d17}, [r3]
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L11:
+.L12:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #3
-	ble	.L14
+	ble	.L13
 	nop
 	add	sp, fp, #0
 	@ sp needed
@@ -185,7 +191,7 @@ SVD_matrix_trans:
 	.align	2
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_copy, %function
 SVD_matrix_copy:
 	@ args = 0, pretend = 0, frame = 16
@@ -198,12 +204,12 @@ SVD_matrix_copy:
 	str	r1, [fp, #-20]
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L16
-.L19:
+	b	.L15
+.L18:
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L17
-.L18:
+	b	.L16
+.L17:
 	ldr	r3, [fp, #-8]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-16]
@@ -223,17 +229,17 @@ SVD_matrix_copy:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L17:
+.L16:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L18
+	ble	.L17
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L16:
+.L15:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #3
-	ble	.L19
+	ble	.L18
 	nop
 	add	sp, fp, #0
 	@ sp needed
@@ -243,7 +249,7 @@ SVD_matrix_copy:
 	.align	2
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_isDiagonal, %function
 SVD_matrix_isDiagonal:
 	@ args = 0, pretend = 0, frame = 16
@@ -254,16 +260,16 @@ SVD_matrix_isDiagonal:
 	str	r0, [fp, #-16]
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L21
-.L27:
+	b	.L20
+.L26:
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L22
-.L26:
+	b	.L21
+.L25:
 	ldr	r2, [fp, #-8]
 	ldr	r3, [fp, #-12]
 	cmp	r2, r3
-	beq	.L23
+	beq	.L22
 	ldr	r3, [fp, #-8]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-16]
@@ -275,36 +281,36 @@ SVD_matrix_isDiagonal:
 	vmov.f32	s0, s15
 	bl	SVD_abs
 	vmov.f32	s14, s0
-	vldr.32	s15, .L29
+	vldr.32	s15, .L28
 	vcmpe.f32	s14, s15
 	vmrs	APSR_nzcv, FPSCR
-	blt	.L23
+	blt	.L22
 	mov	r3, #0
-	b	.L25
-.L23:
+	b	.L24
+.L22:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L22:
+.L21:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L26
+	ble	.L25
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L21:
+.L20:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #3
-	ble	.L27
+	ble	.L26
 	mov	r3, #1
-.L25:
+.L24:
 	mov	r0, r3
 	sub	sp, fp, #4
 	@ sp needed
 	pop	{fp, pc}
-.L30:
-	.align	2
 .L29:
+	.align	2
+.L28:
 	.word	953267991
 	.size	SVD_matrix_isDiagonal, .-SVD_matrix_isDiagonal
 	.data
@@ -333,7 +339,7 @@ I:
 	.global	SVD_decompose
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_decompose, %function
 SVD_decompose:
 	@ args = 0, pretend = 0, frame = 576
@@ -388,17 +394,17 @@ SVD_decompose:
 	str	r3, [fp, #-56]	@ float
 	mov	r3, #0
 	str	r3, [fp, #-60]	@ float
-	b	.L32
-.L37:
+	b	.L31
+.L36:
 	mov	r3, #0
 	str	r3, [fp, #-16]
-	b	.L33
-.L36:
+	b	.L32
+.L35:
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-20]
-	b	.L34
-.L35:
+	b	.L33
+.L34:
 	sub	r3, fp, #188
 	mov	r1, r3
 	movw	r0, #:lower16:I
@@ -668,31 +674,31 @@ SVD_decompose:
 	ldr	r3, [fp, #-20]
 	add	r3, r3, #1
 	str	r3, [fp, #-20]
-.L34:
+.L33:
 	ldr	r3, [fp, #-20]
 	cmp	r3, #3
-	ble	.L35
+	ble	.L34
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-16]
-.L33:
+.L32:
 	ldr	r3, [fp, #-16]
 	cmp	r3, #2
-	ble	.L36
-.L32:
+	ble	.L35
+.L31:
 	ldr	r0, [fp, #-584]
 	bl	SVD_matrix_isDiagonal
 	mov	r3, r0
 	cmp	r3, #0
-	beq	.L37
+	beq	.L36
 	mov	r3, #0
 	str	r3, [fp, #-24]
-	b	.L38
-.L43:
+	b	.L37
+.L42:
 	mov	r3, #0
 	str	r3, [fp, #-28]
-	b	.L39
-.L42:
+	b	.L38
+.L41:
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-584]
@@ -720,10 +726,10 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s15, [r3]
-	vldr.32	s14, .L45
+	vldr.32	s14, .L44
 	vcmpe.f32	s15, s14
 	vmrs	APSR_nzcv, FPSCR
-	bpl	.L40
+	bpl	.L39
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-584]
@@ -733,28 +739,28 @@ SVD_decompose:
 	add	r3, r2, r3
 	mov	r2, #0
 	str	r2, [r3]	@ float
-.L40:
+.L39:
 	ldr	r3, [fp, #-28]
 	add	r3, r3, #1
 	str	r3, [fp, #-28]
-.L39:
+.L38:
 	ldr	r3, [fp, #-28]
 	cmp	r3, #3
-	ble	.L42
+	ble	.L41
 	ldr	r3, [fp, #-24]
 	add	r3, r3, #1
 	str	r3, [fp, #-24]
-.L38:
+.L37:
 	ldr	r3, [fp, #-24]
 	cmp	r3, #3
-	ble	.L43
+	ble	.L42
 	nop
 	sub	sp, fp, #8
 	@ sp needed
 	pop	{r4, fp, pc}
-.L46:
-	.align	2
 .L45:
+	.align	2
+.L44:
 	.word	953267991
 	.size	SVD_decompose, .-SVD_decompose
 	.ident	"GCC: (GNU) 8.2.1 20180801 (Red Hat 8.2.1-2)"

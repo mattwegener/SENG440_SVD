@@ -16,7 +16,7 @@
 	.arch armv7-a
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_tan, %function
 SVD_tan:
 	@ args = 0, pretend = 0, frame = 16
@@ -39,7 +39,7 @@ SVD_tan:
 	.global	SVD_cos
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_cos, %function
 SVD_cos:
 	@ args = 0, pretend = 0, frame = 16
@@ -62,7 +62,7 @@ SVD_cos:
 	.global	SVD_sin
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_sin, %function
 SVD_sin:
 	@ args = 0, pretend = 0, frame = 16
@@ -85,7 +85,7 @@ SVD_sin:
 	.global	SVD_atan
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_atan, %function
 SVD_atan:
 	@ args = 0, pretend = 0, frame = 8
@@ -110,7 +110,7 @@ SVD_atan:
 	.global	SVD_abs
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_abs, %function
 SVD_abs:
 	@ args = 0, pretend = 0, frame = 8

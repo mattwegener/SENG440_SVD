@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.1436' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.1758' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 55238
+Timerange: Basic block 0 - 53512
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O0 (PID 1436, part 1)
+Profiled target:  ./callgrind_profile_main_O0 (PID 1758, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,25 +18,25 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-525,543  PROGRAM TOTALS
+504,741  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
         Ir  file:function
 --------------------------------------------------------------------------------
-17,770,825  ???:SVD_sin'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-17,770,816  ???:SVD_cos'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
- 8,719,939  ???:SVD_atan'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-   525,543  ???:0x00000a80 [/usr/lib/ld-2.28.so]
-   525,539  ???:_dl_start [/usr/lib/ld-2.28.so]
-   378,211  ???:0x00010458 [/root/SENG440_SVD/callgrind_profile_main_O0]
-   376,937  ???:(below main) [/usr/lib/libc-2.28.so]
-   376,700  ???:main [/root/SENG440_SVD/callgrind_profile_main_O0]
-   374,204  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O0]
-   372,912  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
-   372,497  ???:SVD_decompose'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-   368,548  ???:SVD_atan [/root/SENG440_SVD/callgrind_profile_main_O0]
-   367,334  ???:SVD_cos [/root/SENG440_SVD/callgrind_profile_main_O0]
-   366,093  ???:SVD_sin [/root/SENG440_SVD/callgrind_profile_main_O0]
+16,751,233  ???:SVD_sin'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+16,751,224  ???:SVD_cos'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+ 8,220,547  ???:SVD_atan'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+   504,741  ???:0x00000a80 [/usr/lib/ld-2.28.so]
+   504,737  ???:_dl_start [/usr/lib/ld-2.28.so]
+   357,409  ???:0x00010458 [/root/SENG440_SVD/callgrind_profile_main_O0]
+   356,135  ???:(below main) [/usr/lib/libc-2.28.so]
+   355,898  ???:main [/root/SENG440_SVD/callgrind_profile_main_O0]
+   353,396  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O0]
+   352,104  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
+   351,689  ???:SVD_decompose'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+   347,740  ???:SVD_atan [/root/SENG440_SVD/callgrind_profile_main_O0]
+   346,526  ???:SVD_cos [/root/SENG440_SVD/callgrind_profile_main_O0]
+   345,285  ???:SVD_sin [/root/SENG440_SVD/callgrind_profile_main_O0]
    228,768  ???:SVD_matrix_mul [/root/SENG440_SVD/callgrind_profile_main_O0]
    192,000  ???:SVD_matrix_dot [/root/SENG440_SVD/callgrind_profile_main_O0]
    145,534  ???:_dl_sysdep_start [/usr/lib/ld-2.28.so]
@@ -51,7 +51,6 @@ Auto-annotation:  on
     94,577  ???:_dl_lookup_symbol_x [/usr/lib/ld-2.28.so]
     90,470  ???:SVD_matrix_copy'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
     75,002  ???:do_lookup_x [/usr/lib/ld-2.28.so]
-    29,880  ???:SVD_matrix_trans [/root/SENG440_SVD/callgrind_profile_main_O0]
     14,920  ???:check_match [/usr/lib/ld-2.28.so]
     14,754  ???:_dl_catch_exception [/usr/lib/ld-2.28.so]
     14,193  ???:strcmp [/usr/lib/ld-2.28.so]
@@ -59,6 +58,7 @@ Auto-annotation:  on
     13,267  ???:__udivsi3 [/usr/lib/ld-2.28.so]
     12,004  ???:_dl_map_object [/usr/lib/ld-2.28.so]
      9,512  ???:openaux [/usr/lib/ld-2.28.so]
+     9,072  ???:SVD_matrix_trans [/root/SENG440_SVD/callgrind_profile_main_O0]
      9,062  ???:_dl_catch_exception'2 [/usr/lib/ld-2.28.so]
      8,683  ???:__GI___tunables_init [/usr/lib/ld-2.28.so]
      7,694  ???:_dl_map_object_deps'2 [/usr/lib/ld-2.28.so]
@@ -68,4 +68,5 @@ Auto-annotation:  on
      6,274  ???:open_verify.constprop.8 [/usr/lib/ld-2.28.so]
      5,565  ???:_dl_new_object'2 [/usr/lib/ld-2.28.so]
      5,122  ???:_dl_check_map_versions'2 [/usr/lib/ld-2.28.so]
+     4,762  ???:_dl_map_object_from_fd [/usr/lib/ld-2.28.so]
 

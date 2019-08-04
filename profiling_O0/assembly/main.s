@@ -102,7 +102,7 @@ Sout:
 	.arch armv7-a
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	main, %function
 main:
 	@ args = 0, pretend = 0, frame = 0
