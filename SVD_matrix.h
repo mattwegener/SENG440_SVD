@@ -4,6 +4,7 @@
 
 #include "SVD_math.h"
 #include "SVD_defs.h"
+#include <arm_neon.h>
 
 static inline float SVD_matrix_dot(matrix matrix1, matrix matrix2, int row1, int col2){
   matrix_elem dot = 0.0;
