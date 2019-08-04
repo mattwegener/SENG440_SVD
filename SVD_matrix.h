@@ -6,31 +6,77 @@
 #include "SVD_defs.h"
 #include <arm_neon.h>
 
-static inline float SVD_matrix_dot(matrix matrix1, matrix matrix2, int row1, int col2){
-  matrix_elem dot = 0.0;
-  int i;
-  for(i = 0; i < N; i++){
-    dot += matrix1[row1][i] * matrix2[i][col2];
-  }
-  return dot;
-}
+static inline void SVD_matrix_mul(matrix left, matrix right, matrix out)
+{
+  // modified from Coding for NEON --- Part 3: Matrix Multiplication
+    float32x4x4_t left_neon = vld4q_f32(&(left[0][0]));
+    float32x4x4_t right_neon = vld4q_f32(&(right[0][0]));
+    float32x4x4_t out_neon;
+    
+    float32x4_t scalar_vec;
+    
+    ////////// do column 0 ////////////////
+    out_neon.val[0] = vdupq_n_f32(0.0);
 
-static inline void SVD_matrix_mul(matrix matrix1, matrix matrix2, matrix result){
-    int i,j,k;
-    for(j = 0; j < N; j++){
-        for(k = 0; k < N; k++){
-            /*
-            result[j][k] = SVD_matrix_dot(matrix1,matrix2,j,k);
-            */
-            /*
-            result[j][k] = matrix1[j][0] * matrix2[0][k] + matrix1[j][1]*matrix2[1][k] + matrix1[j][3]*matrix2[3][k] + matrix1[j][3]*matrix2[3][k];
-            */
-            result[j][k] = 0;
-            for(i = 0; i < N; i++){
-                result[j][k] += matrix1[j][i] * matrix2[i][k];
-            }
-        }
-    }
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[0], 0) );
+    out_neon.val[0] = vmlaq_f32(out_neon.val[0], scalar_vec, left_neon.val[0]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[0], 1) );
+    out_neon.val[0] = vmlaq_f32(out_neon.val[0], scalar_vec, left_neon.val[1]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[0], 2) );
+    out_neon.val[0] = vmlaq_f32(out_neon.val[0], scalar_vec, left_neon.val[2]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[0], 3) );
+    out_neon.val[0] = vmlaq_f32(out_neon.val[0], scalar_vec, left_neon.val[3]);
+
+    ////////// do column 1 ////////////////
+    out_neon.val[1] = vdupq_n_f32(0.0);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[1], 0) );
+    out_neon.val[1] = vmlaq_f32(out_neon.val[1], scalar_vec, left_neon.val[0]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[1], 1) );
+    out_neon.val[1] = vmlaq_f32(out_neon.val[1], scalar_vec, left_neon.val[1]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[1], 2) );
+    out_neon.val[1] = vmlaq_f32(out_neon.val[1], scalar_vec, left_neon.val[2]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[1], 3) );
+    out_neon.val[1] = vmlaq_f32(out_neon.val[1], scalar_vec, left_neon.val[3]);
+
+    ////////// do column 2 ////////////////
+    out_neon.val[2] = vdupq_n_f32(0.0);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[2], 0) );
+    out_neon.val[2] = vmlaq_f32(out_neon.val[2], scalar_vec, left_neon.val[0]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[2], 1) );
+    out_neon.val[2] = vmlaq_f32(out_neon.val[2], scalar_vec, left_neon.val[1]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[2], 2) );
+    out_neon.val[2] = vmlaq_f32(out_neon.val[2], scalar_vec, left_neon.val[2]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[2], 3) );
+    out_neon.val[2] = vmlaq_f32(out_neon.val[2], scalar_vec, left_neon.val[3]);
+
+    ////////// do column 3 ////////////////
+    out_neon.val[3] = vdupq_n_f32(0.0);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[3], 0) );
+    out_neon.val[3] = vmlaq_f32(out_neon.val[3], scalar_vec, left_neon.val[0]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[3], 1) );
+    out_neon.val[3] = vmlaq_f32(out_neon.val[3], scalar_vec, left_neon.val[1]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[3], 2) );
+    out_neon.val[3] = vmlaq_f32(out_neon.val[3], scalar_vec, left_neon.val[2]);
+
+    scalar_vec = vdupq_n_f32 ( vgetq_lane_f32(right_neon.val[3], 3) );
+    out_neon.val[3] = vmlaq_f32(out_neon.val[3], scalar_vec, left_neon.val[3]);
+   
+    //////////// OUTPUT BACK TO MATRIX ////////////
+    vst4q_f32(&out[0][0], out_neon); 
 }
 
 static inline void SVD_matrix_trans(matrix in, matrix out)
