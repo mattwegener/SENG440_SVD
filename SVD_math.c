@@ -4,11 +4,6 @@
 // INCLUSION OF math.h REQUIRES -lm COMPILER FLAG
 #include <math.h>
 
-matrix_elem SVD_tan(matrix_elem x){
-  matrix_elem result =  tanf(x);
-  return result;
-}
-
 matrix_elem SVD_cos(matrix_elem x){
   matrix_elem result =  cosf(x);
   return result;

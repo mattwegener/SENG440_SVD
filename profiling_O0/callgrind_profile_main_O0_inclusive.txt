@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.1758' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.2087' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 53512
+Timerange: Basic block 0 - 48254
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O0 (PID 1758, part 1)
+Profiled target:  ./callgrind_profile_main_O0 (PID 2087, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,25 +18,25 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-504,741  PROGRAM TOTALS
+441,663  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
         Ir  file:function
 --------------------------------------------------------------------------------
-16,751,233  ???:SVD_sin'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-16,751,224  ???:SVD_cos'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
- 8,220,547  ???:SVD_atan'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-   504,741  ???:0x00000a80 [/usr/lib/ld-2.28.so]
-   504,737  ???:_dl_start [/usr/lib/ld-2.28.so]
-   357,409  ???:0x00010458 [/root/SENG440_SVD/callgrind_profile_main_O0]
-   356,135  ???:(below main) [/usr/lib/libc-2.28.so]
-   355,898  ???:main [/root/SENG440_SVD/callgrind_profile_main_O0]
-   353,396  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O0]
-   352,104  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
-   351,689  ???:SVD_decompose'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-   347,740  ???:SVD_atan [/root/SENG440_SVD/callgrind_profile_main_O0]
-   346,526  ???:SVD_cos [/root/SENG440_SVD/callgrind_profile_main_O0]
-   345,285  ???:SVD_sin [/root/SENG440_SVD/callgrind_profile_main_O0]
+13,894,561  ???:SVD_sin'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+13,894,552  ???:SVD_cos'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+ 6,822,307  ???:SVD_atan'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+   441,663  ???:0x00000a80 [/usr/lib/ld-2.28.so]
+   441,659  ???:_dl_start [/usr/lib/ld-2.28.so]
+   294,331  ???:0x00010458 [/root/SENG440_SVD/callgrind_profile_main_O0]
+   293,057  ???:(below main) [/usr/lib/libc-2.28.so]
+   292,820  ???:main [/root/SENG440_SVD/callgrind_profile_main_O0]
+   290,324  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O0]
+   289,032  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
+   288,905  ???:SVD_decompose'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+   287,548  ???:SVD_atan [/root/SENG440_SVD/callgrind_profile_main_O0]
+   286,334  ???:SVD_cos [/root/SENG440_SVD/callgrind_profile_main_O0]
+   285,093  ???:SVD_sin [/root/SENG440_SVD/callgrind_profile_main_O0]
    228,768  ???:SVD_matrix_mul [/root/SENG440_SVD/callgrind_profile_main_O0]
    192,000  ???:SVD_matrix_dot [/root/SENG440_SVD/callgrind_profile_main_O0]
    145,534  ???:_dl_sysdep_start [/usr/lib/ld-2.28.so]
@@ -49,8 +49,8 @@ Auto-annotation:  on
    112,523  ???:init_tls [/usr/lib/ld-2.28.so]
    111,341  ???:_dl_relocate_object [/usr/lib/ld-2.28.so]
     94,577  ???:_dl_lookup_symbol_x [/usr/lib/ld-2.28.so]
-    90,470  ???:SVD_matrix_copy'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
     75,002  ???:do_lookup_x [/usr/lib/ld-2.28.so]
+    27,686  ???:SVD_matrix_copy'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
     14,920  ???:check_match [/usr/lib/ld-2.28.so]
     14,754  ???:_dl_catch_exception [/usr/lib/ld-2.28.so]
     14,193  ???:strcmp [/usr/lib/ld-2.28.so]
@@ -69,4 +69,5 @@ Auto-annotation:  on
      5,565  ???:_dl_new_object'2 [/usr/lib/ld-2.28.so]
      5,122  ???:_dl_check_map_versions'2 [/usr/lib/ld-2.28.so]
      4,762  ???:_dl_map_object_from_fd [/usr/lib/ld-2.28.so]
+     4,397  ???:memcpy [/usr/lib/libc-2.28.so]
 
