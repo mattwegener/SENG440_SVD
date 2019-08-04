@@ -36,8 +36,9 @@ static inline void SVD_matrix_trans(matrix in, matrix out)
   }
   */
 
-  float32x4x4_t temp_matrix = vld4q_f32(in[0][0]);
+  float32x4x4_t temp_matrix = vld4q_f32(&(in[0][0]);
 
+  /*
   #ifdef TEST
   if(in[0][0] == temp_matrix.val[0].val[0]){
       printf("%f == %f\n", in[0][0],temp_matrix.val[0].val[0]);
@@ -45,6 +46,7 @@ static inline void SVD_matrix_trans(matrix in, matrix out)
       printf("in[0][0] = %f, temp_matrix[0][0] = %f\n", in[0][0],temp_matrix.val[0].val[0]);
   }
   #endif
+  */
 
   /*void vst1q_lane_f32(Scalar_t* N, Vector_t M, int n);
   Scalar_t: float32_t
@@ -63,7 +65,7 @@ static inline void SVD_matrix_trans(matrix in, matrix out)
 
   //for can be unrolled later
   for(int i = 0; i < N; i++){
-      vst1q_lane(out[i][0],temp_matrix.val[i]);
+      vst1q_f32(&(out[i][0]),temp_matrix.val[i]);
   }
 }
 
