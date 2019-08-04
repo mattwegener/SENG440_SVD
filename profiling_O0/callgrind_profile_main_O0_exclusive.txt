@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.1758' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.2087' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 53512
+Timerange: Basic block 0 - 48254
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O0 (PID 1758, part 1)
+Profiled target:  ./callgrind_profile_main_O0 (PID 2087, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,15 +18,15 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-504,741  PROGRAM TOTALS
+441,663  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
      Ir  file:function
 --------------------------------------------------------------------------------
 192,000  ???:SVD_matrix_dot [/root/SENG440_SVD/callgrind_profile_main_O0]
- 90,470  ???:SVD_matrix_copy'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
  41,525  ???:do_lookup_x [/usr/lib/ld-2.28.so]
  36,768  ???:SVD_matrix_mul [/root/SENG440_SVD/callgrind_profile_main_O0]
+ 27,686  ???:SVD_matrix_copy'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
  22,150  ???:_dl_relocate_object [/usr/lib/ld-2.28.so]
  19,575  ???:_dl_lookup_symbol_x [/usr/lib/ld-2.28.so]
  14,193  ???:strcmp [/usr/lib/ld-2.28.so]
@@ -61,7 +61,6 @@ Auto-annotation:  on
     591  ???:_dl_new_object [/usr/lib/ld-2.28.so]
     582  ???:_dl_sort_maps [/usr/lib/ld-2.28.so]
     477  ???:_dl_fixup [/usr/lib/ld-2.28.so]
-    415  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
     406  ???:_dl_sysdep_start [/usr/lib/ld-2.28.so]
     396  ???:_dl_catch_exception'2 [/usr/lib/ld-2.28.so]
     396  ???:_dl_check_map_versions [/usr/lib/ld-2.28.so]
@@ -74,4 +73,8 @@ Auto-annotation:  on
     214  ???:strcspn [/usr/lib/ld-2.28.so]
     194  ???:_dl_add_to_namespace_list [/usr/lib/ld-2.28.so]
     192  ???:memcpy'2 [/usr/lib/ld-2.28.so]
+    175  ???:_dl_next_ld_env_entry [/usr/lib/ld-2.28.so]
+    168  ???:call_init.part.0 [/usr/lib/ld-2.28.so]
+    165  ???:__run_exit_handlers [/usr/lib/libc-2.28.so]
+    160  ???:_IO_flush_all_lockp [/usr/lib/libc-2.28.so]
 

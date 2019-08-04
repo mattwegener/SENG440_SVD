@@ -194,52 +194,47 @@ SVD_matrix_trans:
 	.fpu neon
 	.type	SVD_matrix_copy, %function
 SVD_matrix_copy:
-	@ args = 0, pretend = 0, frame = 16
+	@ args = 0, pretend = 0, frame = 64
 	@ frame_needed = 1, uses_anonymous_args = 0
 	@ link register save eliminated.
 	str	fp, [sp, #-4]!
 	add	fp, sp, #0
-	sub	sp, sp, #20
-	str	r0, [fp, #-16]
-	str	r1, [fp, #-20]
+	sub	sp, sp, #68
+	str	r0, [fp, #-64]
+	str	r1, [fp, #-68]
 	mov	r3, #0
 	str	r3, [fp, #-8]
 	b	.L15
-.L18:
-	mov	r3, #0
-	str	r3, [fp, #-12]
-	b	.L16
 .L17:
 	ldr	r3, [fp, #-8]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-16]
-	add	r2, r2, r3
+	ldr	r2, [fp, #-64]
+	add	r3, r2, r3
+	str	r3, [fp, #-56]
+	ldr	r3, [fp, #-56]
+	vld1.32	{d16-d17}, [r3]
+	vstr	d16, [fp, #-28]
+	vstr	d17, [fp, #-20]
 	ldr	r3, [fp, #-8]
 	lsl	r3, r3, #4
-	ldr	r1, [fp, #-20]
-	add	r1, r1, r3
-	ldr	r3, [fp, #-12]
-	lsl	r3, r3, #2
+	ldr	r2, [fp, #-68]
 	add	r3, r2, r3
-	ldr	r2, [r3]	@ float
-	ldr	r3, [fp, #-12]
-	lsl	r3, r3, #2
-	add	r3, r1, r3
-	str	r2, [r3]	@ float
-	ldr	r3, [fp, #-12]
-	add	r3, r3, #1
-	str	r3, [fp, #-12]
-.L16:
-	ldr	r3, [fp, #-12]
-	cmp	r3, #3
-	ble	.L17
+	str	r3, [fp, #-32]
+	vldr	d16, [fp, #-28]
+	vldr	d17, [fp, #-20]
+	vstr	d16, [fp, #-52]
+	vstr	d17, [fp, #-44]
+	ldr	r3, [fp, #-32]
+	vldr	d16, [fp, #-52]
+	vldr	d17, [fp, #-44]
+	vst1.32	{d16-d17}, [r3]
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
 .L15:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #3
-	ble	.L18
+	ble	.L17
 	nop
 	add	sp, fp, #0
 	@ sp needed
@@ -260,16 +255,16 @@ SVD_matrix_isDiagonal:
 	str	r0, [fp, #-16]
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L20
-.L26:
+	b	.L19
+.L25:
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L21
-.L25:
+	b	.L20
+.L24:
 	ldr	r2, [fp, #-8]
 	ldr	r3, [fp, #-12]
 	cmp	r2, r3
-	beq	.L22
+	beq	.L21
 	ldr	r3, [fp, #-8]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-16]
@@ -281,36 +276,36 @@ SVD_matrix_isDiagonal:
 	vmov.f32	s0, s15
 	bl	SVD_abs
 	vmov.f32	s14, s0
-	vldr.32	s15, .L28
+	vldr.32	s15, .L27
 	vcmpe.f32	s14, s15
 	vmrs	APSR_nzcv, FPSCR
-	blt	.L22
+	blt	.L21
 	mov	r3, #0
-	b	.L24
-.L22:
+	b	.L23
+.L21:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L21:
+.L20:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L25
+	ble	.L24
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L20:
+.L19:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #3
-	ble	.L26
+	ble	.L25
 	mov	r3, #1
-.L24:
+.L23:
 	mov	r0, r3
 	sub	sp, fp, #4
 	@ sp needed
 	pop	{fp, pc}
-.L29:
-	.align	2
 .L28:
+	.align	2
+.L27:
 	.word	953267991
 	.size	SVD_matrix_isDiagonal, .-SVD_matrix_isDiagonal
 	.data
@@ -394,17 +389,17 @@ SVD_decompose:
 	str	r3, [fp, #-56]	@ float
 	mov	r3, #0
 	str	r3, [fp, #-60]	@ float
-	b	.L31
-.L36:
+	b	.L30
+.L35:
 	mov	r3, #0
 	str	r3, [fp, #-16]
-	b	.L32
-.L35:
+	b	.L31
+.L34:
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-20]
-	b	.L33
-.L34:
+	b	.L32
+.L33:
 	sub	r3, fp, #188
 	mov	r1, r3
 	movw	r0, #:lower16:I
@@ -674,31 +669,31 @@ SVD_decompose:
 	ldr	r3, [fp, #-20]
 	add	r3, r3, #1
 	str	r3, [fp, #-20]
-.L33:
+.L32:
 	ldr	r3, [fp, #-20]
 	cmp	r3, #3
-	ble	.L34
+	ble	.L33
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-16]
-.L32:
+.L31:
 	ldr	r3, [fp, #-16]
 	cmp	r3, #2
-	ble	.L35
-.L31:
+	ble	.L34
+.L30:
 	ldr	r0, [fp, #-584]
 	bl	SVD_matrix_isDiagonal
 	mov	r3, r0
 	cmp	r3, #0
-	beq	.L36
+	beq	.L35
 	mov	r3, #0
 	str	r3, [fp, #-24]
-	b	.L37
-.L42:
+	b	.L36
+.L41:
 	mov	r3, #0
 	str	r3, [fp, #-28]
-	b	.L38
-.L41:
+	b	.L37
+.L40:
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-584]
@@ -726,10 +721,10 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s15, [r3]
-	vldr.32	s14, .L44
+	vldr.32	s14, .L43
 	vcmpe.f32	s15, s14
 	vmrs	APSR_nzcv, FPSCR
-	bpl	.L39
+	bpl	.L38
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-584]
@@ -739,28 +734,28 @@ SVD_decompose:
 	add	r3, r2, r3
 	mov	r2, #0
 	str	r2, [r3]	@ float
-.L39:
+.L38:
 	ldr	r3, [fp, #-28]
 	add	r3, r3, #1
 	str	r3, [fp, #-28]
-.L38:
+.L37:
 	ldr	r3, [fp, #-28]
 	cmp	r3, #3
-	ble	.L41
+	ble	.L40
 	ldr	r3, [fp, #-24]
 	add	r3, r3, #1
 	str	r3, [fp, #-24]
-.L37:
+.L36:
 	ldr	r3, [fp, #-24]
 	cmp	r3, #3
-	ble	.L42
+	ble	.L41
 	nop
 	sub	sp, fp, #8
 	@ sp needed
 	pop	{r4, fp, pc}
-.L45:
-	.align	2
 .L44:
+	.align	2
+.L43:
 	.word	953267991
 	.size	SVD_decompose, .-SVD_decompose
 	.ident	"GCC: (GNU) 8.2.1 20180801 (Red Hat 8.2.1-2)"
