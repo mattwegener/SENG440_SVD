@@ -36,7 +36,7 @@ static inline void SVD_matrix_trans(matrix in, matrix out)
   }
   */
 
-  float32x4x4_t temp_matrix = vld4q_f32(&(in[0][0]);
+  float32x4x4_t temp_matrix = vld4q_f32(&(in[0][0]));
 
   /*
   #ifdef TEST
