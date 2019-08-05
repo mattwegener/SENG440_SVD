@@ -5,19 +5,19 @@ mkdir profiling_O0
 rm -f gmon.out
 rm -f ./callgrind.out.*
 
-gcc -static test_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -mfpu=neon -O0 -finline-functions -DTEST -o test_main_O0
+gcc -static test_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -mfpu=neon -O0 -DTEST -o test_main_O0
 ./test_main_O0 > ./profiling_O0/test_results_O0.txt
 
-gcc -static profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -mfpu=neon -O0 -finline-functions -pg -o gprof_profile_main_O0
+gcc -static profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -mfpu=neon -O0 -pg -o gprof_profile_main_O0
 ./gprof_profile_main_O0
 gprof gprof_profile_main_O0 gmon.out > ./profiling_O0/gprof_profile_main_data_O0.txt
 
 
-gcc -static profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -DTIME_TEST -mfpu=neon -O0 -finline-functions -o time_profile_main_O0
+gcc -static profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -DTIME_TEST -mfpu=neon -O0 -o time_profile_main_O0
 ./time_profile_main_O0 > ./profiling_O0/time_profile_main_O0.txt
 
 
-gcc -static main.c SVD.c SVD_matrix.c SVD_math.c -lm -lc -marm -mfloat-abi=hard -mfpu=neon -O0 -finline-functions -o callgrind_profile_main_O0
+gcc -static main.c SVD.c SVD_matrix.c SVD_math.c -lm -lc -marm -mfloat-abi=hard -mfpu=neon -O0 -o callgrind_profile_main_O0
 valgrind --tool=callgrind ./callgrind_profile_main_O0
 log_file=$(find . -name 'callgrind.out.*')
 callgrind_annotate --auto=yes --inclusive=no $log_file > ./profiling_O0/callgrind_profile_main_O0_exclusive.txt
