@@ -1,9 +1,9 @@
 
 #include <stdio.h>
 #include <assert.h>
-//#include "SVD_matrix.h"
+#include "SVD_matrix.h"
 #include "SVD_math.h"
-//#include "SVD.h"
+#include "SVD.h"
 
 /* Compile this with compiler flag "-DTEST" */
 

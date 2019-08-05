@@ -11,7 +11,7 @@
 #define TOFIX(d, q) ((int)( (d)*(double)(1<<(q)) ))
 #define TOFLT(a, q) ( (double)(a) / (double)(1<<(q)) )
 
-/*
+
 static inline matrix_elem SVD_cos(matrix_elem x){
   matrix_elem result =  cosf(x);
   return result;
@@ -21,7 +21,7 @@ static inline matrix_elem SVD_sin(matrix_elem x){
   matrix_elem result =  sinf(x);
   return result;
 }
-*/
+
 #define iABS(x)     ((x > 0) ? (x) : (-x))
 #define ATANQ       (14)
 #define ATAN_QPI_2      (25735) // Q14
@@ -106,12 +106,12 @@ static inline int32_t SVD_atan(int32_t y, int32_t x)
     
 }
 
-/*
+
 static inline matrix_elem SVD_abs(matrix_elem x)
 {
     return fabs(x);
 }
-*/
+
 
 #ifdef TEST
 void TEST_SVD_math(void);
