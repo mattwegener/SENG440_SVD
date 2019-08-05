@@ -22,249 +22,93 @@ SVD_matrix_mul:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	@ link register save eliminated.
-	vldr.32	s15, .L3
-	vldr.32	s14, [r0]
-	vldr.32	s13, [r1]
-	vmov.f32	s11, s15
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r1, #16]
-	vldr.32	s13, [r0, #4]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r1, #32]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r0, #8]
-	vldr.32	s12, [r1, #48]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r0, #12]
-	vmla.f32	s14, s12, s13
+	vldr.32	s14, .L6
+	add	r3, r2, #64
+.L2:
 	vstr.32	s14, [r2]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r1, #4]
-	vldr.32	s14, [r0]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r1, #20]
-	vldr.32	s13, [r0, #4]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r1, #36]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r0, #8]
-	vldr.32	s12, [r1, #52]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r0, #12]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #4]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r1, #8]
-	vldr.32	s14, [r0]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #4]
-	vldr.32	s13, [r1, #24]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #8]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #40]
-	vldr.32	s12, [r0, #12]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #56]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #8]
-	vmov.f32	s11, s15
+	vmov.f32	s12, s14
 	vldr.32	s13, [r0]
-	vldr.32	s14, [r1, #12]
-	vmla.f32	s11, s13, s14
+	vldr.32	s15, [r1]
+	vmla.f32	s12, s13, s15
+	vstr.32	s12, [r2]
+	vmov.f32	s15, s12
+	vldr.32	s13, [r1, #16]
 	vldr.32	s12, [r0, #4]
-	vmov.f32	s14, s11
-	vldr.32	s13, [r1, #28]
-	vldr.32	s11, [r0, #8]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #44]
+	vmla.f32	s15, s12, s13
+	vstr.32	s15, [r2]
+	vldr.32	s12, [r0, #8]
+	vldr.32	s13, [r1, #32]
+	vmla.f32	s15, s12, s13
+	vstr.32	s15, [r2]
 	vldr.32	s12, [r0, #12]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #60]
-	vmla.f32	s14, s12, s13
+	vldr.32	s13, [r1, #48]
+	vmla.f32	s15, s12, s13
+	vstr.32	s14, [r2, #4]
+	vstr.32	s15, [r2]
+	vmov.f32	s12, s14
+	vldr.32	s13, [r0]
+	vldr.32	s15, [r1, #4]
+	vmla.f32	s12, s13, s15
+	vstr.32	s12, [r2, #4]
+	vmov.f32	s15, s12
+	vldr.32	s13, [r1, #20]
+	vldr.32	s12, [r0, #4]
+	vmla.f32	s15, s12, s13
+	vstr.32	s15, [r2, #4]
+	vldr.32	s12, [r0, #8]
+	vldr.32	s13, [r1, #36]
+	vmla.f32	s15, s12, s13
+	vstr.32	s15, [r2, #4]
+	vldr.32	s12, [r0, #12]
+	vldr.32	s13, [r1, #52]
+	vmla.f32	s15, s12, s13
+	vstr.32	s14, [r2, #8]
+	vstr.32	s15, [r2, #4]
+	vmov.f32	s12, s14
+	vldr.32	s13, [r0]
+	vldr.32	s15, [r1, #8]
+	vmla.f32	s12, s13, s15
+	vstr.32	s12, [r2, #8]
+	vmov.f32	s15, s12
+	vldr.32	s13, [r1, #24]
+	vldr.32	s12, [r0, #4]
+	vmla.f32	s15, s12, s13
+	vstr.32	s15, [r2, #8]
+	vldr.32	s12, [r0, #8]
+	vldr.32	s13, [r1, #40]
+	vmla.f32	s15, s12, s13
+	vstr.32	s15, [r2, #8]
+	vldr.32	s12, [r0, #12]
+	vldr.32	s13, [r1, #56]
+	vmla.f32	s15, s12, s13
 	vstr.32	s14, [r2, #12]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r1]
-	vldr.32	s14, [r0, #16]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #20]
-	vldr.32	s13, [r1, #16]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #24]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #32]
-	vldr.32	s12, [r1, #48]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r0, #28]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #16]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r1, #4]
-	vldr.32	s14, [r0, #16]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r1, #20]
-	vldr.32	s13, [r0, #20]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r1, #36]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r0, #24]
-	vldr.32	s12, [r0, #28]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #52]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #20]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r0, #16]
-	vldr.32	s14, [r1, #8]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #20]
-	vldr.32	s13, [r1, #24]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #24]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #40]
-	vldr.32	s12, [r0, #28]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #56]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #24]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r0, #16]
-	vldr.32	s14, [r1, #12]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #20]
+	vstr.32	s15, [r2, #8]
+	vmov.f32	s12, s14
+	vldr.32	s13, [r0]
+	vldr.32	s15, [r1, #12]
+	vmla.f32	s12, s13, s15
+	vstr.32	s12, [r2, #12]
+	vmov.f32	s15, s12
 	vldr.32	s13, [r1, #28]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #24]
-	vmla.f32	s14, s12, s13
+	vldr.32	s12, [r0, #4]
+	vmla.f32	s15, s12, s13
+	vstr.32	s15, [r2, #12]
+	vldr.32	s12, [r0, #8]
 	vldr.32	s13, [r1, #44]
-	vldr.32	s12, [r0, #28]
-	vmla.f32	s14, s11, s13
+	vmla.f32	s15, s12, s13
+	vstr.32	s15, [r2, #12]
+	vldr.32	s12, [r0, #12]
 	vldr.32	s13, [r1, #60]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #28]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r0, #32]
-	vldr.32	s14, [r1]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #36]
-	vldr.32	s13, [r1, #16]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #40]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #32]
-	vldr.32	s12, [r0, #44]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #48]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #32]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r0, #32]
-	vldr.32	s14, [r1, #4]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #36]
-	vldr.32	s13, [r1, #20]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #40]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #36]
-	vldr.32	s12, [r0, #44]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #52]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #36]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r0, #32]
-	vldr.32	s14, [r1, #8]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #36]
-	vldr.32	s13, [r1, #24]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #40]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #40]
-	vldr.32	s12, [r0, #44]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #56]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #40]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r0, #32]
-	vldr.32	s14, [r1, #12]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #36]
-	vldr.32	s13, [r1, #28]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #40]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #44]
-	vldr.32	s12, [r0, #44]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #60]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #44]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r0, #48]
-	vldr.32	s14, [r1]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #52]
-	vldr.32	s13, [r1, #16]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #56]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #32]
-	vldr.32	s12, [r0, #60]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #48]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #48]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r0, #48]
-	vldr.32	s14, [r1, #4]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #52]
-	vldr.32	s13, [r1, #20]
-	vmov.f32	s14, s11
-	vldr.32	s11, [r0, #56]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #36]
-	vldr.32	s12, [r0, #60]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #52]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #52]
-	vmov.f32	s11, s15
-	vldr.32	s13, [r0, #48]
-	vldr.32	s14, [r1, #8]
-	vmla.f32	s11, s13, s14
-	vldr.32	s12, [r0, #52]
-	vmov.f32	s14, s11
-	vldr.32	s13, [r1, #24]
-	vldr.32	s11, [r0, #56]
-	vmla.f32	s14, s12, s13
-	vldr.32	s13, [r1, #40]
-	vldr.32	s12, [r0, #60]
-	vmla.f32	s14, s11, s13
-	vldr.32	s13, [r1, #56]
-	vmla.f32	s14, s12, s13
-	vstr.32	s14, [r2, #56]
-	vldr.32	s12, [r0, #48]
-	vldr.32	s14, [r1, #12]
-	vldr.32	s13, [r0, #52]
-	vmla.f32	s15, s12, s14
-	vldr.32	s14, [r1, #28]
-	vldr.32	s12, [r0, #56]
-	vmla.f32	s15, s13, s14
-	vldr.32	s14, [r1, #44]
-	vldr.32	s13, [r0, #60]
-	vmla.f32	s15, s12, s14
-	vldr.32	s14, [r1, #60]
-	vmla.f32	s15, s13, s14
-	vstr.32	s15, [r2, #60]
+	vmla.f32	s15, s12, s13
+	add	r2, r2, #16
+	vstr.32	s15, [r2, #-4]
+	cmp	r2, r3
+	add	r0, r0, #16
+	bne	.L2
 	bx	lr
-.L4:
+.L7:
 	.align	2
-.L3:
+.L6:
 	.word	0
 	.size	SVD_matrix_mul, .-SVD_matrix_mul
 	.align	2
@@ -281,7 +125,7 @@ SVD_matrix_trans:
 	add	r3, r1, #64
 	cmp	r0, r3
 	cmpcc	r1, r2
-	bcc	.L6
+	bcc	.L9
 	vld4.32	{d16, d18, d20, d22}, [r0]!
 	mov	r3, r1
 	vld4.32	{d17, d19, d21, d23}, [r0]
@@ -292,7 +136,7 @@ SVD_matrix_trans:
 	vst1.32	{q10}, [r2]
 	vst1.32	{q11}, [r1]
 	bx	lr
-.L6:
+.L9:
 	ldr	r3, [r0]	@ float
 	str	r3, [r1]	@ float
 	ldr	r3, [r0, #4]	@ float
@@ -341,7 +185,7 @@ SVD_matrix_copy:
 	add	r3, r1, #16
 	cmp	r0, r3
 	cmpcc	r1, r2
-	bcc	.L9
+	bcc	.L12
 	vld1.32	{q8}, [r0]
 	vst1.32	{q8}, [r1]
 	vld1.32	{q8}, [r2]
@@ -355,7 +199,7 @@ SVD_matrix_copy:
 	add	r1, r1, #48
 	vst1.32	{q8}, [r1]
 	bx	lr
-.L9:
+.L12:
 	ldr	r3, [r0]	@ float
 	str	r3, [r1]	@ float
 	ldr	r3, [r0, #4]	@ float
@@ -404,7 +248,7 @@ SVD_matrix_dot:
 	add	r3, r1, r3, lsl #2
 	vldr.32	s13, [r3]
 	vldr.32	s15, [r2]
-	vldr.32	s0, .L12
+	vldr.32	s0, .L15
 	vldr.32	s14, [r3, #16]
 	vmla.f32	s0, s13, s15
 	vldr.32	s15, [r2, #4]
@@ -416,9 +260,9 @@ SVD_matrix_dot:
 	vldr.32	s15, [r2, #12]
 	vmla.f32	s0, s14, s15
 	bx	lr
-.L13:
+.L16:
 	.align	2
-.L12:
+.L15:
 	.word	0
 	.size	SVD_matrix_dot, .-SVD_matrix_dot
 	.align	2
@@ -433,40 +277,40 @@ SVD_matrix_equal:
 	push	{r4, r5, r6, r7, r8, r9, r10, lr}
 	mov	r9, #1
 	vpush.64	{d8}
-	vldr.32	s16, .L22
+	vldr.32	s16, .L25
 	sub	r1, r1, #16
 	sub	r8, r1, r0
 	add	r5, r0, #16
 	add	r7, r0, #80
-.L15:
+.L18:
 	sub	r4, r5, #16
 	add	r6, r8, r5
-.L17:
+.L20:
 	vldmia.32	r4!, {s0}
 	vldmia.32	r6!, {s15}
 	vsub.f32	s0, s0, s15
 	bl	SVD_abs
 	vcmpe.f32	s0, s16
 	vmrs	APSR_nzcv, FPSCR
-	bgt	.L19
+	bgt	.L22
 	cmp	r4, r5
-	bne	.L17
+	bne	.L20
 	add	r5, r5, #16
 	cmp	r5, r7
-	bne	.L15
-.L14:
+	bne	.L18
+.L17:
 	vldm	sp!, {d8}
 	mov	r0, r9
 	pop	{r4, r5, r6, r7, r8, r9, r10, pc}
-.L19:
+.L22:
 	add	r5, r5, #16
 	cmp	r5, r7
 	mov	r9, #0
-	bne	.L15
-	b	.L14
-.L23:
+	bne	.L18
+	b	.L17
+.L26:
 	.align	2
-.L22:
+.L25:
 	.word	953267991
 	.size	SVD_matrix_equal, .-SVD_matrix_equal
 	.align	2
@@ -482,37 +326,37 @@ SVD_matrix_isDiagonal:
 	mov	r7, r0
 	vpush.64	{d8}
 	mov	r6, #0
-	vldr.32	s16, .L37
-.L25:
+	vldr.32	s16, .L40
+.L28:
 	mov	r5, r7
 	mov	r4, #0
-.L27:
+.L30:
 	cmp	r6, r4
 	add	r4, r4, #1
-	beq	.L30
+	beq	.L33
 	vldr.32	s0, [r5]
 	bl	SVD_abs
 	vcmpe.f32	s0, s16
 	vmrs	APSR_nzcv, FPSCR
-	bge	.L36
-.L30:
+	bge	.L39
+.L33:
 	cmp	r4, #4
 	add	r5, r5, #4
-	bne	.L27
+	bne	.L30
 	add	r6, r6, #1
 	cmp	r6, #4
 	add	r7, r7, #16
-	bne	.L25
+	bne	.L28
 	vldm	sp!, {d8}
 	mov	r0, #1
 	pop	{r4, r5, r6, r7, r8, pc}
-.L36:
+.L39:
 	mov	r0, #0
 	vldm	sp!, {d8}
 	pop	{r4, r5, r6, r7, r8, pc}
-.L38:
+.L41:
 	.align	2
-.L37:
+.L40:
 	.word	953267991
 	.size	SVD_matrix_isDiagonal, .-SVD_matrix_isDiagonal
 	.ident	"GCC: (GNU) 8.2.1 20180801 (Red Hat 8.2.1-2)"

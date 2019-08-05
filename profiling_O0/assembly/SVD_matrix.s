@@ -19,54 +19,96 @@
 	.fpu neon
 	.type	SVD_matrix_mul, %function
 SVD_matrix_mul:
-	@ args = 0, pretend = 0, frame = 24
+	@ args = 0, pretend = 0, frame = 32
 	@ frame_needed = 1, uses_anonymous_args = 0
-	push	{r4, fp, lr}
-	add	fp, sp, #8
-	sub	sp, sp, #28
+	@ link register save eliminated.
+	str	fp, [sp, #-4]!
+	add	fp, sp, #0
+	sub	sp, sp, #36
 	str	r0, [fp, #-24]
 	str	r1, [fp, #-28]
 	str	r2, [fp, #-32]
 	mov	r3, #0
-	str	r3, [fp, #-16]
+	str	r3, [fp, #-12]
 	b	.L2
-.L5:
+.L7:
 	mov	r3, #0
-	str	r3, [fp, #-20]
+	str	r3, [fp, #-16]
 	b	.L3
-.L4:
-	ldr	r3, [fp, #-16]
+.L6:
+	ldr	r3, [fp, #-12]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-32]
-	add	r4, r2, r3
-	ldr	r3, [fp, #-20]
-	ldr	r2, [fp, #-16]
-	ldr	r1, [fp, #-28]
-	ldr	r0, [fp, #-24]
-	bl	SVD_matrix_dot
-	vmov.f32	s15, s0
-	ldr	r3, [fp, #-20]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-16]
 	lsl	r3, r3, #2
-	add	r3, r4, r3
+	add	r3, r2, r3
+	mov	r2, #0
+	str	r2, [r3]	@ float
+	mov	r3, #0
+	str	r3, [fp, #-8]
+	b	.L4
+.L5:
+	ldr	r3, [fp, #-12]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-32]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-16]
+	lsl	r3, r3, #2
+	add	r3, r2, r3
+	vldr.32	s14, [r3]
+	ldr	r3, [fp, #-12]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-24]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-8]
+	lsl	r3, r3, #2
+	add	r3, r2, r3
+	vldr.32	s13, [r3]
+	ldr	r3, [fp, #-8]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-28]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-16]
+	lsl	r3, r3, #2
+	add	r3, r2, r3
+	vldr.32	s15, [r3]
+	vmul.f32	s15, s13, s15
+	ldr	r3, [fp, #-12]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-32]
+	add	r2, r2, r3
+	vadd.f32	s15, s14, s15
+	ldr	r3, [fp, #-16]
+	lsl	r3, r3, #2
+	add	r3, r2, r3
 	vstr.32	s15, [r3]
-	ldr	r3, [fp, #-20]
+	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
-	str	r3, [fp, #-20]
-.L3:
-	ldr	r3, [fp, #-20]
+	str	r3, [fp, #-8]
+.L4:
+	ldr	r3, [fp, #-8]
 	cmp	r3, #3
-	ble	.L4
+	ble	.L5
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-16]
-.L2:
+.L3:
 	ldr	r3, [fp, #-16]
 	cmp	r3, #3
-	ble	.L5
+	ble	.L6
+	ldr	r3, [fp, #-12]
+	add	r3, r3, #1
+	str	r3, [fp, #-12]
+.L2:
+	ldr	r3, [fp, #-12]
+	cmp	r3, #3
+	ble	.L7
 	nop
-	sub	sp, fp, #8
+	add	sp, fp, #0
 	@ sp needed
-	pop	{r4, fp, pc}
+	ldr	fp, [sp], #4
+	bx	lr
 	.size	SVD_matrix_mul, .-SVD_matrix_mul
 	.align	2
 	.global	SVD_matrix_trans
@@ -85,12 +127,12 @@ SVD_matrix_trans:
 	str	r1, [fp, #-20]
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L7
-.L10:
+	b	.L9
+.L12:
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L8
-.L9:
+	b	.L10
+.L11:
 	ldr	r3, [fp, #-8]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-16]
@@ -110,17 +152,17 @@ SVD_matrix_trans:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L8:
+.L10:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L9
+	ble	.L11
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L7:
+.L9:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #3
-	ble	.L10
+	ble	.L12
 	nop
 	add	sp, fp, #0
 	@ sp needed
@@ -144,12 +186,12 @@ SVD_matrix_copy:
 	str	r1, [fp, #-20]
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L12
-.L15:
+	b	.L14
+.L17:
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L13
-.L14:
+	b	.L15
+.L16:
 	ldr	r3, [fp, #-8]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-16]
@@ -169,17 +211,17 @@ SVD_matrix_copy:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L13:
+.L15:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L14
+	ble	.L16
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L12:
+.L14:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #3
-	ble	.L15
+	ble	.L17
 	nop
 	add	sp, fp, #0
 	@ sp needed
@@ -207,8 +249,8 @@ SVD_matrix_dot:
 	str	r3, [fp, #-8]	@ float
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L17
-.L18:
+	b	.L19
+.L20:
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-16]
@@ -232,10 +274,10 @@ SVD_matrix_dot:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L17:
+.L19:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L18
+	ble	.L20
 	ldr	r3, [fp, #-8]	@ float
 	vmov	s15, r3
 	vmov.f32	s0, s15
@@ -262,12 +304,12 @@ SVD_matrix_equal:
 	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L21
-.L27:
+	b	.L23
+.L29:
 	mov	r3, #0
 	str	r3, [fp, #-16]
-	b	.L22
-.L26:
+	b	.L24
+.L28:
 	ldr	r3, [fp, #-12]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-24]
@@ -288,37 +330,37 @@ SVD_matrix_equal:
 	vmov.f32	s0, s15
 	bl	SVD_abs
 	vmov.f32	s14, s0
-	vldr.32	s15, .L31
+	vldr.32	s15, .L33
 	vcmpe.f32	s14, s15
 	vmrs	APSR_nzcv, FPSCR
-	ble	.L30
+	ble	.L32
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L25
-.L30:
+	b	.L27
+.L32:
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-16]
-.L22:
+.L24:
 	ldr	r3, [fp, #-16]
 	cmp	r3, #3
-	ble	.L26
-.L25:
+	ble	.L28
+.L27:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L21:
+.L23:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L27
+	ble	.L29
 	ldr	r3, [fp, #-8]
 	mov	r0, r3
 	sub	sp, fp, #4
 	@ sp needed
 	pop	{fp, pc}
-.L32:
+.L34:
 	.align	2
-.L31:
+.L33:
 	.word	953267991
 	.size	SVD_matrix_equal, .-SVD_matrix_equal
 	.align	2
@@ -336,16 +378,16 @@ SVD_matrix_isDiagonal:
 	str	r0, [fp, #-16]
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L34
-.L40:
+	b	.L36
+.L42:
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L35
-.L39:
+	b	.L37
+.L41:
 	ldr	r2, [fp, #-8]
 	ldr	r3, [fp, #-12]
 	cmp	r2, r3
-	beq	.L36
+	beq	.L38
 	ldr	r3, [fp, #-8]
 	lsl	r3, r3, #4
 	ldr	r2, [fp, #-16]
@@ -357,36 +399,36 @@ SVD_matrix_isDiagonal:
 	vmov.f32	s0, s15
 	bl	SVD_abs
 	vmov.f32	s14, s0
-	vldr.32	s15, .L42
+	vldr.32	s15, .L44
 	vcmpe.f32	s14, s15
 	vmrs	APSR_nzcv, FPSCR
-	blt	.L36
+	blt	.L38
 	mov	r3, #0
-	b	.L38
-.L36:
+	b	.L40
+.L38:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L35:
+.L37:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L39
+	ble	.L41
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L34:
+.L36:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #3
-	ble	.L40
+	ble	.L42
 	mov	r3, #1
-.L38:
+.L40:
 	mov	r0, r3
 	sub	sp, fp, #4
 	@ sp needed
 	pop	{fp, pc}
-.L43:
+.L45:
 	.align	2
-.L42:
+.L44:
 	.word	953267991
 	.size	SVD_matrix_isDiagonal, .-SVD_matrix_isDiagonal
 	.ident	"GCC: (GNU) 8.2.1 20180801 (Red Hat 8.2.1-2)"
