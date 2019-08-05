@@ -126,10 +126,6 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 SVD_matrix_copy(Up,U);
             } //end for
         }//end for
-
-        #ifdef TEST
-        return;
-        #endif
     }//end while
 
     // matrix is diagonalized, now normalize
