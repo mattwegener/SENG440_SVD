@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.3073' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.3279' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 30364
+Timerange: Basic block 0 - 30344
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O3 (PID 3073, part 1)
+Profiled target:  ./callgrind_profile_main_O3 (PID 3279, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,13 +18,13 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-182,417  PROGRAM TOTALS
+182,015  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
      Ir  file:function
 --------------------------------------------------------------------------------
-182,417  ???:0x00000a80 [/usr/lib/ld-2.28.so]
-182,413  ???:_dl_start [/usr/lib/ld-2.28.so]
+182,015  ???:0x00000a80 [/usr/lib/ld-2.28.so]
+182,011  ???:_dl_start [/usr/lib/ld-2.28.so]
 144,804  ???:_dl_sysdep_start [/usr/lib/ld-2.28.so]
 135,651  ???:dl_main [/usr/lib/ld-2.28.so]
 135,236  ???:_dl_new_object [/usr/lib/ld-2.28.so]
@@ -36,12 +36,12 @@ Auto-annotation:  on
 110,655  ???:_dl_relocate_object [/usr/lib/ld-2.28.so]
  93,852  ???:_dl_lookup_symbol_x [/usr/lib/ld-2.28.so]
  74,277  ???:do_lookup_x [/usr/lib/ld-2.28.so]
- 35,815  ???:0x00010450 [/root/SENG440_SVD/callgrind_profile_main_O3]
- 34,554  ???:(below main) [/usr/lib/libc-2.28.so]
- 34,317  ???:main [/root/SENG440_SVD/callgrind_profile_main_O3]
- 31,825  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
- 30,477  ???:SVD_abs [/root/SENG440_SVD/callgrind_profile_main_O3]
- 30,475  ???:SVD_decompose'2 [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 35,413  ???:0x00010450 [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 34,152  ???:(below main) [/usr/lib/libc-2.28.so]
+ 33,915  ???:main [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 31,423  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 30,074  ???:SVD_abs [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 30,072  ???:SVD_decompose'2 [/root/SENG440_SVD/callgrind_profile_main_O3]
  14,907  ???:check_match [/usr/lib/ld-2.28.so]
  14,720  ???:_dl_catch_exception [/usr/lib/ld-2.28.so]
  14,140  ???:strcmp [/usr/lib/ld-2.28.so]
@@ -72,8 +72,8 @@ Auto-annotation:  on
   2,706  ???:cosf [/usr/lib/libm-2.28.so]
   2,689  ???:_dl_catch_error [/usr/lib/ld-2.28.so]
   2,671  ???:memcpy'2 [/usr/lib/ld-2.28.so]
-  2,616  ???:map_doit [/usr/lib/ld-2.28.so]
   2,616  ???:sinf [/usr/lib/libm-2.28.so]
+  2,616  ???:map_doit [/usr/lib/ld-2.28.so]
   2,611  ???:_dl_dst_count [/usr/lib/ld-2.28.so]
   2,484  ???:exit [/usr/lib/libc-2.28.so]
   2,478  ???:__run_exit_handlers [/usr/lib/libc-2.28.so]

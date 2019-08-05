@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.3015' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.3221' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 45068
+Timerange: Basic block 0 - 34220
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O0 (PID 3015, part 1)
+Profiled target:  ./callgrind_profile_main_O0 (PID 3221, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,59 +18,73 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-496,272  PROGRAM TOTALS
+287,664  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
-     Ir  file:function
+    Ir  file:function
 --------------------------------------------------------------------------------
-284,160  ???:SVD_matrix_mul [/root/SENG440_SVD/callgrind_profile_main_O0]
- 41,269  ???:do_lookup_x [/usr/lib/ld-2.28.so]
- 27,686  ???:SVD_matrix_copy'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
- 22,136  ???:_dl_relocate_object [/usr/lib/ld-2.28.so]
- 19,575  ???:_dl_lookup_symbol_x [/usr/lib/ld-2.28.so]
- 14,140  ???:strcmp [/usr/lib/ld-2.28.so]
- 12,411  ???:__udivsi3 [/usr/lib/ld-2.28.so]
-  9,072  ???:SVD_matrix_trans [/root/SENG440_SVD/callgrind_profile_main_O0]
-  8,683  ???:__GI___tunables_init [/usr/lib/ld-2.28.so]
-  7,167  ???:SVD_cos'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-  5,790  ???:check_match [/usr/lib/ld-2.28.so]
-  3,200  ???:_dl_new_object'2 [/usr/lib/ld-2.28.so]
-  2,740  ???:_dl_name_match_p [/usr/lib/ld-2.28.so]
-  2,721  ???:atanf [/usr/lib/libm-2.28.so]
-  2,706  ???:cosf [/usr/lib/libm-2.28.so]
-  2,616  ???:sinf [/usr/lib/libm-2.28.so]
-  2,612  ???:SVD_sin'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-  1,984  ???:_dl_check_map_versions'2 [/usr/lib/ld-2.28.so]
-  1,731  ???:_dl_cache_libcmp [/usr/lib/ld-2.28.so]
-  1,560  ???:memset [/usr/lib/ld-2.28.so]
-  1,203  ???:SVD_atan'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
-  1,163  ???:_dl_start [/usr/lib/ld-2.28.so]
-  1,144  ???:__aeabi_uidivmod [/usr/lib/ld-2.28.so]
-  1,008  ???:_dl_important_hwcaps [/usr/lib/ld-2.28.so]
-    949  ???:_dl_map_object_deps'2 [/usr/lib/ld-2.28.so]
-    909  ???:bcmp [/usr/lib/ld-2.28.so]
-    823  ???:_dl_important_hwcaps'2 [/usr/lib/ld-2.28.so]
-    775  ???:_dl_map_object [/usr/lib/ld-2.28.so]
-    728  ???:open_verify.constprop.8 [/usr/lib/ld-2.28.so]
-    712  ???:index [/usr/lib/ld-2.28.so]
-    703  ???:strlen [/usr/lib/ld-2.28.so]
-    667  ???:malloc [/usr/lib/ld-2.28.so]
-    658  ???:_dl_load_cache_lookup [/usr/lib/ld-2.28.so]
-    602  ???:SVD_matrix_isDiagonal [/root/SENG440_SVD/callgrind_profile_main_O0]
-    591  ???:_dl_new_object [/usr/lib/ld-2.28.so]
-    582  ???:_dl_sort_maps [/usr/lib/ld-2.28.so]
-    477  ???:_dl_fixup [/usr/lib/ld-2.28.so]
-    406  ???:_dl_sysdep_start [/usr/lib/ld-2.28.so]
-    396  ???:_dl_catch_exception'2 [/usr/lib/ld-2.28.so]
-    396  ???:_dl_check_map_versions [/usr/lib/ld-2.28.so]
-    373  ???:memcpy [/usr/lib/ld-2.28.so]
-    328  ???:init_tls [/usr/lib/ld-2.28.so]
-    320  ???:SVD_abs [/root/SENG440_SVD/callgrind_profile_main_O0]
-    315  ???:_dl_map_object_from_fd [/usr/lib/ld-2.28.so]
-    256  ???:_dl_map_object_deps [/usr/lib/ld-2.28.so]
-    250  ???:_dl_fini [/usr/lib/ld-2.28.so]
-    214  ???:strcspn [/usr/lib/ld-2.28.so]
-    194  ???:_dl_add_to_namespace_list [/usr/lib/ld-2.28.so]
-    192  ???:memcpy'2 [/usr/lib/ld-2.28.so]
-    175  ???:_dl_next_ld_env_entry [/usr/lib/ld-2.28.so]
+75,552  ???:SVD_matrix_mul [/root/SENG440_SVD/callgrind_profile_main_O0]
+41,269  ???:do_lookup_x [/usr/lib/ld-2.28.so]
+27,686  ???:SVD_matrix_copy'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+22,136  ???:_dl_relocate_object [/usr/lib/ld-2.28.so]
+19,575  ???:_dl_lookup_symbol_x [/usr/lib/ld-2.28.so]
+14,140  ???:strcmp [/usr/lib/ld-2.28.so]
+12,411  ???:__udivsi3 [/usr/lib/ld-2.28.so]
+ 9,072  ???:SVD_matrix_trans [/root/SENG440_SVD/callgrind_profile_main_O0]
+ 8,683  ???:__GI___tunables_init [/usr/lib/ld-2.28.so]
+ 7,167  ???:SVD_cos'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+ 5,790  ???:check_match [/usr/lib/ld-2.28.so]
+ 3,200  ???:_dl_new_object'2 [/usr/lib/ld-2.28.so]
+ 2,740  ???:_dl_name_match_p [/usr/lib/ld-2.28.so]
+ 2,721  ???:atanf [/usr/lib/libm-2.28.so]
+ 2,706  ???:cosf [/usr/lib/libm-2.28.so]
+ 2,616  ???:sinf [/usr/lib/libm-2.28.so]
+ 2,612  ???:SVD_sin'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+ 1,984  ???:_dl_check_map_versions'2 [/usr/lib/ld-2.28.so]
+ 1,731  ???:_dl_cache_libcmp [/usr/lib/ld-2.28.so]
+ 1,560  ???:memset [/usr/lib/ld-2.28.so]
+ 1,203  ???:SVD_atan'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+ 1,163  ???:_dl_start [/usr/lib/ld-2.28.so]
+ 1,144  ???:__aeabi_uidivmod [/usr/lib/ld-2.28.so]
+ 1,008  ???:_dl_important_hwcaps [/usr/lib/ld-2.28.so]
+   949  ???:_dl_map_object_deps'2 [/usr/lib/ld-2.28.so]
+   909  ???:bcmp [/usr/lib/ld-2.28.so]
+   823  ???:_dl_important_hwcaps'2 [/usr/lib/ld-2.28.so]
+   775  ???:_dl_map_object [/usr/lib/ld-2.28.so]
+   728  ???:open_verify.constprop.8 [/usr/lib/ld-2.28.so]
+   712  ???:index [/usr/lib/ld-2.28.so]
+   703  ???:strlen [/usr/lib/ld-2.28.so]
+   667  ???:malloc [/usr/lib/ld-2.28.so]
+   658  ???:_dl_load_cache_lookup [/usr/lib/ld-2.28.so]
+   602  ???:SVD_matrix_isDiagonal [/root/SENG440_SVD/callgrind_profile_main_O0]
+   591  ???:_dl_new_object [/usr/lib/ld-2.28.so]
+   582  ???:_dl_sort_maps [/usr/lib/ld-2.28.so]
+   477  ???:_dl_fixup [/usr/lib/ld-2.28.so]
+   406  ???:_dl_sysdep_start [/usr/lib/ld-2.28.so]
+   396  ???:_dl_check_map_versions [/usr/lib/ld-2.28.so]
+   396  ???:_dl_catch_exception'2 [/usr/lib/ld-2.28.so]
+   373  ???:memcpy [/usr/lib/ld-2.28.so]
+   328  ???:init_tls [/usr/lib/ld-2.28.so]
+   320  ???:SVD_abs [/root/SENG440_SVD/callgrind_profile_main_O0]
+   315  ???:_dl_map_object_from_fd [/usr/lib/ld-2.28.so]
+   256  ???:_dl_map_object_deps [/usr/lib/ld-2.28.so]
+   250  ???:_dl_fini [/usr/lib/ld-2.28.so]
+   214  ???:strcspn [/usr/lib/ld-2.28.so]
+   194  ???:_dl_add_to_namespace_list [/usr/lib/ld-2.28.so]
+   192  ???:memcpy'2 [/usr/lib/ld-2.28.so]
+   175  ???:_dl_next_ld_env_entry [/usr/lib/ld-2.28.so]
+   168  ???:call_init.part.0 [/usr/lib/ld-2.28.so]
+   165  ???:__run_exit_handlers [/usr/lib/libc-2.28.so]
+   160  ???:_IO_flush_all_lockp [/usr/lib/libc-2.28.so]
+   160  ???:calloc [/usr/lib/ld-2.28.so]
+   160  ???:dl_main [/usr/lib/ld-2.28.so]
+   156  ???:__cxa_finalize [/usr/lib/libc-2.28.so]
+   154  ???:SVD_decompose'2 [/root/SENG440_SVD/callgrind_profile_main_O0]
+   140  ???:_dl_init_paths [/usr/lib/ld-2.28.so]
+   136  ???:__sigsetjmp [/usr/lib/ld-2.28.so]
+   127  ???:_IO_cleanup [/usr/lib/libc-2.28.so]
+   127  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
+   126  ???:mmap [/usr/lib/ld-2.28.so]
+   121  ???:strdup [/usr/lib/ld-2.28.so]
+   115  ???:_dl_setup_hash [/usr/lib/ld-2.28.so]
 

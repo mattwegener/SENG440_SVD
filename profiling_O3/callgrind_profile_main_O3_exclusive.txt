@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.3073' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.3279' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 30364
+Timerange: Basic block 0 - 30344
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O3 (PID 3073, part 1)
+Profiled target:  ./callgrind_profile_main_O3 (PID 3279, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,7 +18,7 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-182,417  PROGRAM TOTALS
+182,015  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
     Ir  file:function
@@ -26,7 +26,7 @@ Auto-annotation:  on
 41,269  ???:do_lookup_x [/usr/lib/ld-2.28.so]
 22,136  ???:_dl_relocate_object [/usr/lib/ld-2.28.so]
 19,575  ???:_dl_lookup_symbol_x [/usr/lib/ld-2.28.so]
-18,194  ???:SVD_decompose'2 [/root/SENG440_SVD/callgrind_profile_main_O3]
+17,791  ???:SVD_decompose'2 [/root/SENG440_SVD/callgrind_profile_main_O3]
 14,140  ???:strcmp [/usr/lib/ld-2.28.so]
 12,411  ???:__udivsi3 [/usr/lib/ld-2.28.so]
  8,683  ???:__GI___tunables_init [/usr/lib/ld-2.28.so]
@@ -83,13 +83,13 @@ Auto-annotation:  on
    115  ???:_dl_setup_hash [/usr/lib/ld-2.28.so]
    115  ???:_init [/usr/lib/libc-2.28.so]
    105  ???:_dl_protect_relro [/usr/lib/ld-2.28.so]
-   103  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
+   104  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
    101  ???:openaux [/usr/lib/ld-2.28.so]
    101  ???:_dl_catch_exception [/usr/lib/ld-2.28.so]
     99  ???:0x00007378 [/usr/lib/libm-2.28.so]
     93  ???:rindex [/usr/lib/libc-2.28.so]
     85  ???:_dl_init [/usr/lib/ld-2.28.so]
     85  ???:_dl_discover_osversion [/usr/lib/ld-2.28.so]
-    84  ???:__tunable_get_val [/usr/lib/ld-2.28.so]
     84  ???:_dl_allocate_tls_init [/usr/lib/ld-2.28.so]
+    84  ???:__tunable_get_val [/usr/lib/ld-2.28.so]
 
