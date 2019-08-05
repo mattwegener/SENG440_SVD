@@ -4,7 +4,6 @@
 // INCLUSION OF math.h REQUIRES -lm COMPILER FLAG
 
 #ifdef TEST
-#include <math.h>
 #include <assert.h>
 #include <stdio.h>
 
