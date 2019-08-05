@@ -119,7 +119,7 @@ static inline int32_t SVD_atan(int32_t y, int32_t x)
     }
     else
     {
-        print(" x not > y\n");
+        printf(" x not > y\n");
 
         x64_temp = x64_temp << ATANQ;
         printf("x64_temp after shift = &llx\n", x64_temp);
@@ -142,7 +142,7 @@ static inline int32_t SVD_atan(int32_t y, int32_t x)
         
     }
 
-    print("ret = %d\n", ret);
+    printf("ret = %d\n", ret);
     return ret;
     
 }
