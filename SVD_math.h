@@ -70,7 +70,7 @@ static inline int32_t SVD_atan(int32_t y, int32_t x)
     int32_t div_res;
     int32_t ret;
 
-    y64_temp = (int16_t)y;
+    y64_temp = (int64_t)y;
     x64_temp = (int64_t)x;
 
     if (iABS(x) >= iABS(y))
