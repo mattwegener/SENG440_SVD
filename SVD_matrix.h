@@ -16,12 +16,21 @@ static inline float SVD_matrix_dot(matrix matrix1, matrix matrix2, int row1, int
 }
 
 static inline void SVD_matrix_mul(matrix matrix1, matrix matrix2, matrix result){
-  int j,k;
-  for(j = 0; j < N; j++){
-    for(k = 0; k < N; k++){
-      result[j][k] = SVD_matrix_dot(matrix1,matrix2,j,k);
+    int i,j,k;
+    for(j = 0; j < N; j++){
+        for(k = 0; k < N; k++){
+            /*
+            result[j][k] = SVD_matrix_dot(matrix1,matrix2,j,k);
+            */
+            /*
+            result[j][k] = matrix1[j][0] * matrix2[0][k] + matrix1[j][1]*matrix2[1][k] + matrix1[j][3]*matrix2[3][k] + matrix1[j][3]*matrix2[3][k];
+            */
+            result[j][k] = 0;
+            for(i = 0; i < N; i++){
+                result[j][k] += matrix1[j][i] * matrix2[i][k];
+            }
+        }
     }
-  }
 }
 
 static inline void SVD_matrix_trans(matrix in, matrix out)
@@ -108,7 +117,7 @@ static inline bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
 
 static inline bool SVD_matrix_isDiagonal(matrix in)
 {
-    
+
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++)
@@ -121,7 +130,7 @@ static inline bool SVD_matrix_isDiagonal(matrix in)
         }
     }
     return true; // fall through
-    
+
     /* // ACTUALY BETTER THE ORIGINAL WAY
     //SIMD Implementation
     float32x4_t off_1, off_2, off_3, eps;
