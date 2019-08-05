@@ -101,19 +101,19 @@ static inline int32_t SVD_atan(int32_t y, int32_t x)
     x64_temp = (int64_t)x;
 
 
-    printf("y64_temp = %llx\n", y64_temp);
-    printf("x64_temp = %llx\n", x64_temp);
+    printf("y64_temp = %ll\n", y64_temp);
+    printf("x64_temp = %ll\n", x64_temp);
 
     if (iABS(x) > iABS(y))
     {
         printf("x > y\n");
 
         y64_temp = y64_temp << ATANQ;
-        printf("y64_temp after shift = %llx\n", y64_temp);
+        printf("y64_temp after shift = %ll\n", y64_temp);
         div_temp = y64_temp / x64_temp;
-        printf("div_temp = %llx\n", div_temp);
+        printf("div_temp = %ll\n", div_temp);
         div_res = (int32_t)div_temp;
-        printf("div_res = %x\n", div_res);
+        printf("div_res = %d\n", div_res);
 
         ret = arctan(div_res);
     }
@@ -122,11 +122,11 @@ static inline int32_t SVD_atan(int32_t y, int32_t x)
         printf(" x not > y\n");
 
         x64_temp = x64_temp << ATANQ;
-        printf("x64_temp after shift = %llx\n", x64_temp);
+        printf("x64_temp after shift = %ll\n", x64_temp);
         div_temp = x64_temp / y64_temp;
-        printf("div_temp = %llx\n", div_temp);
+        printf("div_temp = %ll\n", div_temp);
         div_res = (int32_t)div_temp;
-        printf("div_res = %x\n", div_res);
+        printf("div_res = %d\n", div_res);
 
         
         ret = arctan(div_res);
