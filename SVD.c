@@ -1,6 +1,10 @@
 
 #include "SVD.h"
 
+#ifdef TEST
+#include <stdio.h>
+#endif
+
 static matrix I  = {{  1.0,  0.0,  0.0,  0.0, },
                     {  0.0,  1.0,  0.0,  0.0, },
                     {  0.0,  0.0,  1.0,  0.0, },
