@@ -46,10 +46,10 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     matrix_elem num2 = 0.0;
     matrix_elem den1 = 0.0;
     matrix_elem den2 = 0.0;
-    matrix_elem sum = 0.0;
-    matrix_elem diff = 0.0;
-    matrix_elem qR = 0.0;
-    matrix_elem qL = 0.0;
+    int32_t sum = 0;
+    int32_t diff = 0;
+    int32_t qR = 0;
+    int32_t qL = 0;
 
     while(!SVD_matrix_isDiagonal(S))
     {
@@ -72,10 +72,23 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 den1 = S[k][k] - S[j][j];
                 den2 = S[k][k] + S[j][j];
 
-                sum = SVD_atan( num1, den1 );
-                diff = SVD_atan( num2, den2 );
-                qL = (sum - diff)/2;
-                qR = sum - qL;
+                /////////// FIXED POINT //////////////
+                int32_t temp_num = TOFIX(num1, ATANQ);
+                int32_t temp_den = TOFIX(den1, ATANQ);
+                int32_t temp_qL, temp_qR;
+                sum = SVD_atan( temp_num, temp_den );
+
+                temp_num = TOFIX(num2, ATANQ);
+                temp_den = TOFIX(den2, ATANQ);
+                diff = SVD_atan( temp_num, temp_den );
+                
+                // sum and diff both in ATANQ format
+                temp_qL = (sum - diff)/2;
+                temp_qR = sum - qL;
+
+                qL = TOFLT(temp_qL, ATANQ);
+                qR = TOFLT(temp_qR, ATANQ);
+                /////////////////////////////////////
                 
                 //Create U V rotation matrices for mulitplaction
                 U_pair[j][j] = SVD_cos(qL);

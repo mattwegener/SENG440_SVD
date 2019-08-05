@@ -63,6 +63,7 @@ static inline int32_t arctan(int32_t x)
 
 // preconditions: y, x are in Q.14 format
 // returns it in Q14 format
+  float sx = -3.141592; // 0.06283185
 static inline int32_t SVD_atan(int32_t y, int32_t x)
 {
     int64_t y64_temp, x64_temp;

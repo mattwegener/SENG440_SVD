@@ -24,7 +24,7 @@ void TEST_SVD_math()
     {
       int32_t y = arctan(atan_arg[i]);
       float yf = atanf(TOFLT(atan_arg[i], ATANQ));
-      printf("x = %f, y = %f, yf = %f\n", TOFLT(atan_arg[i], ATANQ), TOFLT(y, ATANQ), yf);
+      //printf("x = %f, y = %f, yf = %f\n", TOFLT(atan_arg[i], ATANQ), TOFLT(y, ATANQ), yf);
       assert( fabs(yf - TOFLT(y,ATANQ)) <=  0.019);
     }
 }
