@@ -6,7 +6,7 @@
 #include "SVD_defs.h"
 #include <arm_neon.h>
 
-static inline __attribute__((always_inline)) void SVD_matrix_mul(matrix left, matrix right, matrix out) 
+static inline void SVD_matrix_mul(matrix left, matrix right, matrix out)
 {
   // modified from Coding for NEON --- Part 3: Matrix Multiplication
     float32x4x4_t left_neon = vld4q_f32(&(left[0][0]));
@@ -79,7 +79,7 @@ static inline __attribute__((always_inline)) void SVD_matrix_mul(matrix left, ma
     vst4q_f32(&out[0][0], out_neon); 
 }
 
-static inline __attribute__((always_inline)) void SVD_matrix_trans(matrix in, matrix out) 
+static inline void SVD_matrix_trans(matrix in, matrix out)
 {
     /*
   for ( int i = 0; i < N; i++ )
@@ -124,7 +124,7 @@ static inline __attribute__((always_inline)) void SVD_matrix_trans(matrix in, ma
   }
 }
 
-static inline __attribute__((always_inline)) void SVD_matrix_copy(matrix in, matrix out) 
+static inline void SVD_matrix_copy(matrix in, matrix out)
 {
     /*
     for( int i = 0; i < N; i++ )
@@ -161,7 +161,7 @@ static inline bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
 }
 
 
-static inline __attribute__((always_inline)) bool SVD_matrix_isDiagonal(matrix in)
+static inline bool SVD_matrix_isDiagonal(matrix in)
 {
 
     for (int i = 0; i < N; i++)
