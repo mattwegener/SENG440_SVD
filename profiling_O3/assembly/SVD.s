@@ -16,7 +16,7 @@
 	.arch armv7-a
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_decompose, %function
 SVD_decompose:
 	@ args = 0, pretend = 0, frame = 536
@@ -230,7 +230,7 @@ SVD_decompose:
 	.word	953267991
 	.size	SVD_decompose, .-SVD_decompose
 	.data
-	.align	2
+	.align	3
 	.set	.LANCHOR0,. + 0
 	.type	I, %object
 	.size	I, 64

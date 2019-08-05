@@ -38,7 +38,7 @@ I:
 	.arch armv7-a
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_decompose, %function
 SVD_decompose:
 	@ args = 0, pretend = 0, frame = 576

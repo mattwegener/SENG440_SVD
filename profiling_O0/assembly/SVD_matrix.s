@@ -16,7 +16,7 @@
 	.arch armv7-a
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_mul, %function
 SVD_matrix_mul:
 	@ args = 0, pretend = 0, frame = 24
@@ -72,7 +72,7 @@ SVD_matrix_mul:
 	.global	SVD_matrix_trans
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_trans, %function
 SVD_matrix_trans:
 	@ args = 0, pretend = 0, frame = 16
@@ -131,7 +131,7 @@ SVD_matrix_trans:
 	.global	SVD_matrix_copy
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_copy, %function
 SVD_matrix_copy:
 	@ args = 0, pretend = 0, frame = 16
@@ -190,7 +190,7 @@ SVD_matrix_copy:
 	.global	SVD_matrix_dot
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_dot, %function
 SVD_matrix_dot:
 	@ args = 0, pretend = 0, frame = 24
@@ -248,7 +248,7 @@ SVD_matrix_dot:
 	.global	SVD_matrix_equal
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_equal, %function
 SVD_matrix_equal:
 	@ args = 0, pretend = 0, frame = 24
@@ -325,7 +325,7 @@ SVD_matrix_equal:
 	.global	SVD_matrix_isDiagonal
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	SVD_matrix_isDiagonal, %function
 SVD_matrix_isDiagonal:
 	@ args = 0, pretend = 0, frame = 16

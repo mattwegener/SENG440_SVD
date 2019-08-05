@@ -17,7 +17,7 @@
 	.arch armv7-a
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	main, %function
 main:
 	@ args = 0, pretend = 0, frame = 0
@@ -37,7 +37,7 @@ main:
 	.global	Uout
 	.global	Min
 	.data
-	.align	2
+	.align	3
 	.set	.LANCHOR0,. + 0
 	.type	Vout, %object
 	.size	Vout, 64
