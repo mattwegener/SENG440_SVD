@@ -1,9 +1,9 @@
 #!/bin/bash
 
-rm -r profiling_O0
+rm -rf profiling_O0
 mkdir profiling_O0
-rm gmon.out
-rm ./callgrind.out.*
+rm -f gmon.out
+rm -f ./callgrind.out.*
 
 gcc -static profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-abi=hard -mfpu=neon -O0 -pg -o gprof_profile_main_O0
 ./gprof_profile_main_O0
@@ -27,8 +27,8 @@ gcc -static ../../main.c ../../SVD.c ../../SVD_matrix.c ../../SVD_math.c -lm -lc
 cd ..
 cd ..
 
-rm ./callgrind.out.*
-rm gmon.out
-rm ./gprof_profile_main_O0
-rm ./time_profile_main_O0
-rm ./callgrind_profile_main_O0
+rm -f./callgrind.out.*
+rm -f gmon.out
+rm -f ./gprof_profile_main_O0
+rm -f ./time_profile_main_O0
+rm -f ./callgrind_profile_main_O0
