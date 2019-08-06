@@ -254,15 +254,14 @@ static inline int32_t SVD_sin(int32_t x)
     return range_scale * ret; // return with sign appropriate to range
 }
 
-#define ATANQ           (14)
-#define ATANQ_ROUND_BIT     (1 << 13)
-#define ATAN_QPI_2      (25735) // Q14
-#define ATAN_1          (16384) // Q14
-#define ATAN_0_5        (8192) // Q14
-
-#define ATAN_COEFF_0644     (10551) // Q14 format
-#define ATAN_COEFF_0928     (15204) //Q14 format
-#define ATAN_COEFF_0142     (38117834) // Q28 format
+#define ATANQ		(14)
+#define ATANQ_ROUND_BIT		(8192)
+#define ATAN_QPI_2		(25736)
+#define ATAN_1		(16384)
+#define ATAN_0_5		(8192)
+#define ATAN_COEFF_0644		(10551)
+#define ATAN_COEFF_0928		(15204)
+#define ATAN_COEFF_0142		(38117835)
 
 #define ATAN_TO_SINCOS_SHIFT        (ATANQ - SINCOS_Q1)
 #define ATAN_TO_SINCOS_ROUND_BIT    (1 << (ATAN_TO_SINCOS_SHIFT - 1))
