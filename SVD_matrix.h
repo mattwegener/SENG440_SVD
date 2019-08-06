@@ -76,7 +76,6 @@ static inline void SVD_matrix_mul(matrix left, matrix right, matrix out)
 
     ////////// do column 1 ////////////////
     out_neon.val[1] = vdupq_n_s32(0);
-
     scalar_vec = vgetq_lane_s32(right_neon.val[1], 0); // get the scalar
     temp = vmulq_n_s32(left_neon.val[0], scalar_vec); // multiply the elements
     temp = vrshrq_n_s32(temp, MATRIXQ); // right shift with rounding
@@ -132,7 +131,7 @@ static inline void SVD_matrix_mul(matrix left, matrix right, matrix out)
     temp = vrshrq_n_s32(temp, MATRIXQ); // right shift with rounding
     out_neon.val[2] = vaddq_s32(temp,out_neon.val[2]);
 
-    scalar_vec = vgetq_lane_s32(right_neon.val[0], 1); // get the scalar
+    scalar_vec = vgetq_lane_s32(right_neon.val[2], 1); // get the scalar
     temp = vmulq_n_s32(left_neon.val[1], scalar_vec); // multiply the elements
     temp = vrshrq_n_s32(temp, MATRIXQ); // right shift with rounding
     out_neon.val[2] = vaddq_s32(temp,out_neon.val[2]);
