@@ -62,8 +62,8 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
             for(int k = j+1; k < N; k++)
             {
                 #ifdef TEST
-                SVD_matrix_print(S);
-                printf("\n");
+                //SVD_matrix_print(S);
+                //printf("\n");
                 #endif
                 // reload all matrices to identity
                 SVD_matrix_copy(I,Up);
@@ -90,7 +90,7 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 temp_den = TOFIX(den2, ATANQ);
                 diff = SVD_atan( temp_num, temp_den );
                 
-                printf("sum = %f, diff = %f\n,", TOFLT(sum, ATANQ), TOFLT(diff, ATANQ));
+                //printf("sum = %f, diff = %f\n,", TOFLT(sum, ATANQ), TOFLT(diff, ATANQ));
                 // sum and diff both in ATANQ format
                 temp_qL = (sum - diff)/2;
                 temp_qR = sum - temp_qL;
@@ -98,7 +98,7 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 qL = TOFLT(temp_qL, ATANQ);
                 qR = TOFLT(temp_qR, ATANQ);
 
-                printf("qL = %f, qR = %f\n", qL, qR);
+                //printf("qL = %f, qR = %f\n", qL, qR);
                 /////////////////////////////////////
                 
                 //Create U V rotation matrices for mulitplaction
