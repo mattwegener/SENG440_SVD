@@ -21,8 +21,8 @@ gcc -static profile_main.c SVD.c SVD_matrix.c SVD_math.c -lc -lm -marm -mfloat-a
 gcc -static main.c SVD.c SVD_matrix.c SVD_math.c -lm -lc -marm -mfloat-abi=hard -mfpu=neon -O3 -o callgrind_profile_main_O3
 valgrind --tool=callgrind ./callgrind_profile_main_O3
 log_file=$(find . -name 'callgrind.out.*')
-callgrind_annotate --auto=yes -I. --inclusive=no $log_file > ./profiling_O3/callgrind_profile_main_O3_exclusive.txt
-callgrind_annotate --auto=yes -I. --inclusive=yes $log_file > ./profiling_O3/callgrind_profile_main_O3_inclusive.txt
+callgrind_annotate --auto=yes --inclusive=no $log_file > ./profiling_O3/callgrind_profile_main_O3_exclusive.txt
+callgrind_annotate --auto=yes --inclusive=yes $log_file > ./profiling_O3/callgrind_profile_main_O3_inclusive.txt
 
 time ./callgrind_profile_main_O3 > ./profiling_O3/timing.txt
 size ./callgrind_profile_main_O3 > ./profiling_O3/sizing.txt
