@@ -9,11 +9,11 @@
 
 int main(void)
 {
-    //TEST_SVD_math();
-    //TEST_SVD_matrix_equal();
-    //TEST_SVD_matrix_mul();
-    //TEST_SVD_matrix_trans();
-    //TEST_SVD_matrix_copy();
+    TEST_SVD_math();
+    TEST_SVD_matrix_equal();
+    TEST_SVD_matrix_mul();
+    TEST_SVD_matrix_trans();
+    TEST_SVD_matrix_copy();
     TEST_SVD_decompose();
     // if we get here, we have finished the tests.
     printf("All tests succeeded. Exiting...\n\n");
