@@ -4,11 +4,30 @@
 
 #include "SVD_math.h"
 #include "SVD_defs.h"
+
+#ifndef NO_NEON
 #include <arm_neon.h>
+#endif
 
 static inline void SVD_matrix_mul(matrix left, matrix right, matrix out)
 {
-  // modified from Coding for NEON --- Part 3: Matrix Multiplication
+    #ifdef NO_NEON
+    // standard matrix multiplication
+    int i,j,k;
+    
+    for(j = 0; j < N; j++)
+    {
+      for(k = 0; k < N; k++)
+      {
+          out[j][k] = 0;
+          for(i = 0; i < N; i++){
+              out[j][k] += left[j][i] * right[i][k];
+          }
+      }
+    }
+
+    #else
+    // modified from Coding for NEON --- Part 3: Matrix Multiplication
     float32x4x4_t left_neon = vld4q_f32(&(left[0][0]));
     float32x4x4_t right_neon = vld4q_f32(&(right[0][0]));
     float32x4x4_t out_neon;
@@ -76,12 +95,15 @@ static inline void SVD_matrix_mul(matrix left, matrix right, matrix out)
     out_neon.val[3] = vmlaq_f32(out_neon.val[3], scalar_vec, left_neon.val[3]);
    
     //////////// OUTPUT BACK TO MATRIX ////////////
-    vst4q_f32(&out[0][0], out_neon); 
+    vst4q_f32(&out[0][0], out_neon);
+
+    #endif
 }
 
 static inline void SVD_matrix_trans(matrix in, matrix out)
 {
-    /*
+  #ifdef NO_NEON
+  // standard matrix tranpose
   for ( int i = 0; i < N; i++ )
   {
     for ( int j = 0; j < N; j++ )
@@ -89,19 +111,8 @@ static inline void SVD_matrix_trans(matrix in, matrix out)
       out[j][i] = in[i][j];
     }
   }
-  */
-
-  float32x4x4_t temp_matrix = vld4q_f32(&(in[0][0]));
-
-  /*
-  #ifdef TEST
-  if(in[0][0] == temp_matrix.val[0].val[0]){
-      printf("%f == %f\n", in[0][0],temp_matrix.val[0].val[0]);
-  }else{
-      printf("in[0][0] = %f, temp_matrix[0][0] = %f\n", in[0][0],temp_matrix.val[0].val[0]);
-  }
-  #endif
-  */
+  
+  #else
 
   /*void vst1q_lane_f32(Scalar_t* N, Vector_t M, int n);
   Scalar_t: float32_t
@@ -117,28 +128,33 @@ static inline void SVD_matrix_trans(matrix in, matrix out)
   Following should store 1 row back into the out matrix
   vst1q_lane(out[0][0],temp_matrix.val[0]);
   */
-
+  float32x4x4_t temp_matrix = vld4q_f32(&(in[0][0]));
   //for can be unrolled later
   for(int i = 0; i < N; i++){
       vst1q_f32(&(out[i][0]),temp_matrix.val[i]);
   }
+
+  #endif
 }
 
 static inline void SVD_matrix_copy(matrix in, matrix out)
 {
-    /*
+    #ifdef NO_NEON
+    
     for( int i = 0; i < N; i++ )
     {
         for ( int j = 0; j < N; j++ )
         {
             out[i][j] = in[i][j];
         }
-    }*/
-
+    }
+    #else
+    // use neon for copy
     for(int i = 0; i<N; i++){
         float32x4_t temp = vld1q_f32(&(in[i][0]));
         vst1q_f32(&(out[i][0]),temp);
     }
+    #endif
 
 }
 
