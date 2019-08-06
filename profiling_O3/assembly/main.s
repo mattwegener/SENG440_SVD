@@ -20,100 +20,100 @@
 	.fpu neon
 	.type	main, %function
 main:
-	@ args = 0, pretend = 0, frame = 0
+	@ args = 0, pretend = 0, frame = 256
 	@ frame_needed = 0, uses_anonymous_args = 0
-	movw	r3, #:lower16:.LANCHOR0
-	movt	r3, #:upper16:.LANCHOR0
-	add	r0, r3, #192
-	push	{r4, lr}
-	add	r2, r3, #64
-	add	r1, r3, #128
+	movw	ip, #:lower16:.LANCHOR0
+	push	{r4, r5, lr}
+	movt	ip, #:upper16:.LANCHOR0
+	sub	sp, sp, #260
+	mov	lr, ip
+	mov	r4, sp
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	r4!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	r4!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	r4!, {r0, r1, r2, r3}
+	ldm	lr, {r0, r1, r2, r3}
+	add	r5, sp, #64
+	add	lr, ip, #64
+	stm	r4, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	r5!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	r5!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	r5!, {r0, r1, r2, r3}
+	ldm	lr, {r0, r1, r2, r3}
+	add	r4, sp, #128
+	add	lr, ip, #64
+	stm	r5, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	r4!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	r4!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	r4!, {r0, r1, r2, r3}
+	ldm	lr, {r0, r1, r2, r3}
+	add	ip, ip, #64
+	add	lr, sp, #192
+	stm	r4, {r0, r1, r2, r3}
+	ldmia	ip!, {r0, r1, r2, r3}
+	stmia	lr!, {r0, r1, r2, r3}
+	ldmia	ip!, {r0, r1, r2, r3}
+	stmia	lr!, {r0, r1, r2, r3}
+	ldmia	ip!, {r0, r1, r2, r3}
+	stmia	lr!, {r0, r1, r2, r3}
+	ldm	ip, {r0, r1, r2, r3}
+	stm	lr, {r0, r1, r2, r3}
+	mov	r0, sp
+	bl	SVD_matrix_int_to_fix
+	mov	r0, sp
+	add	r3, sp, #128
+	add	r2, sp, #192
+	add	r1, sp, #64
 	bl	SVD_decompose
 	mov	r0, #0
-	pop	{r4, pc}
+	add	sp, sp, #260
+	@ sp needed
+	pop	{r4, r5, pc}
 	.size	main, .-main
-	.global	Sout
-	.global	Vout
-	.global	Uout
-	.global	Min
-	.data
-	.align	3
+	.section	.rodata
+	.align	2
 	.set	.LANCHOR0,. + 0
-	.type	Vout, %object
-	.size	Vout, 64
-Vout:
-	.word	1065353216
+.LC0:
+	.word	31
+	.word	77
+	.word	-11
+	.word	26
+	.word	-42
+	.word	14
+	.word	79
+	.word	-53
+	.word	-68
+	.word	-10
+	.word	45
+	.word	90
+	.word	34
+	.word	16
+	.word	38
+	.word	-19
+.LC1:
+	.word	256
 	.word	0
 	.word	0
 	.word	0
 	.word	0
-	.word	1065353216
+	.word	256
 	.word	0
 	.word	0
 	.word	0
 	.word	0
-	.word	1065353216
+	.word	256
 	.word	0
 	.word	0
 	.word	0
 	.word	0
-	.word	1065353216
-	.type	Sout, %object
-	.size	Sout, 64
-Sout:
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.type	Uout, %object
-	.size	Uout, 64
-Uout:
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.type	Min, %object
-	.size	Min, 64
-Min:
-	.word	1106771968
-	.word	1117388800
-	.word	-1053818880
-	.word	1104150528
-	.word	-1037565952
-	.word	1096810496
-	.word	1117650944
-	.word	-1034682368
-	.word	-1031274496
-	.word	-1054867456
-	.word	1110704128
-	.word	1119092736
-	.word	1107820544
-	.word	1098907648
-	.word	1108869120
-	.word	-1047003136
+	.word	256
 	.ident	"GCC: (GNU) 8.2.1 20180801 (Red Hat 8.2.1-2)"
 	.section	.note.GNU-stack,"",%progbits

@@ -11,91 +11,43 @@
 	.eabi_attribute 18, 4
 	.file	"main.c"
 	.text
-	.global	Min
-	.data
+	.section	.rodata
 	.align	2
-	.type	Min, %object
-	.size	Min, 64
-Min:
-	.word	1106771968
-	.word	1117388800
-	.word	-1053818880
-	.word	1104150528
-	.word	-1037565952
-	.word	1096810496
-	.word	1117650944
-	.word	-1034682368
-	.word	-1031274496
-	.word	-1054867456
-	.word	1110704128
-	.word	1119092736
-	.word	1107820544
-	.word	1098907648
-	.word	1108869120
-	.word	-1047003136
-	.global	Uout
+.LC0:
+	.word	31
+	.word	77
+	.word	-11
+	.word	26
+	.word	-42
+	.word	14
+	.word	79
+	.word	-53
+	.word	-68
+	.word	-10
+	.word	45
+	.word	90
+	.word	34
+	.word	16
+	.word	38
+	.word	-19
 	.align	2
-	.type	Uout, %object
-	.size	Uout, 64
-Uout:
-	.word	1065353216
+.LC1:
+	.word	256
 	.word	0
 	.word	0
 	.word	0
 	.word	0
-	.word	1065353216
+	.word	256
 	.word	0
 	.word	0
 	.word	0
 	.word	0
-	.word	1065353216
+	.word	256
 	.word	0
 	.word	0
 	.word	0
 	.word	0
-	.word	1065353216
-	.global	Vout
-	.align	2
-	.type	Vout, %object
-	.size	Vout, 64
-Vout:
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.global	Sout
-	.align	2
-	.type	Sout, %object
-	.size	Sout, 64
-Sout:
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
-	.word	0
-	.word	0
-	.word	0
-	.word	0
-	.word	1065353216
+	.word	256
 	.text
 	.align	2
 	.global	main
@@ -105,21 +57,71 @@ Sout:
 	.fpu neon
 	.type	main, %function
 main:
-	@ args = 0, pretend = 0, frame = 0
+	@ args = 0, pretend = 0, frame = 256
 	@ frame_needed = 1, uses_anonymous_args = 0
 	push	{fp, lr}
 	add	fp, sp, #4
-	movw	r3, #:lower16:Vout
-	movt	r3, #:upper16:Vout
-	movw	r2, #:lower16:Sout
-	movt	r2, #:upper16:Sout
-	movw	r1, #:lower16:Uout
-	movt	r1, #:upper16:Uout
-	movw	r0, #:lower16:Min
-	movt	r0, #:upper16:Min
+	sub	sp, sp, #256
+	movw	r3, #:lower16:.LC0
+	movt	r3, #:upper16:.LC0
+	sub	ip, fp, #68
+	mov	lr, r3
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldm	lr, {r0, r1, r2, r3}
+	stm	ip, {r0, r1, r2, r3}
+	movw	r3, #:lower16:.LC1
+	movt	r3, #:upper16:.LC1
+	sub	ip, fp, #132
+	mov	lr, r3
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldm	lr, {r0, r1, r2, r3}
+	stm	ip, {r0, r1, r2, r3}
+	movw	r3, #:lower16:.LC1
+	movt	r3, #:upper16:.LC1
+	sub	ip, fp, #196
+	mov	lr, r3
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldm	lr, {r0, r1, r2, r3}
+	stm	ip, {r0, r1, r2, r3}
+	movw	r3, #:lower16:.LC1
+	movt	r3, #:upper16:.LC1
+	sub	ip, fp, #260
+	mov	lr, r3
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldm	lr, {r0, r1, r2, r3}
+	stm	ip, {r0, r1, r2, r3}
+	sub	r3, fp, #68
+	mov	r0, r3
+	bl	SVD_matrix_int_to_fix
+	sub	r3, fp, #196
+	sub	r2, fp, #260
+	sub	r1, fp, #132
+	sub	r0, fp, #68
 	bl	SVD_decompose
 	mov	r3, #0
 	mov	r0, r3
+	sub	sp, fp, #4
+	@ sp needed
 	pop	{fp, pc}
 	.size	main, .-main
 	.ident	"GCC: (GNU) 8.2.1 20180801 (Red Hat 8.2.1-2)"
