@@ -3,23 +3,23 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls   s/call   s/call  name    
- 59.46      3.49     3.49  1200000     0.00     0.00  SVD_matrix_mul
-  9.03      4.02     0.53    10000     0.00     0.00  SVD_decompose
-  7.24      4.45     0.43  2730000     0.00     0.00  SVD_matrix_copy
-  3.49      4.65     0.21   900000     0.00     0.00  SVD_matrix_trans
-  3.24      4.84     0.19   600000     0.00     0.00  SVD_atan
-  3.07      5.02     0.18                             __gnu_mcount_nc
-  3.07      5.20     0.18                             brk
-  2.39      5.34     0.14  1200000     0.00     0.00  SVD_cos
-  2.30      5.48     0.14   600000     0.00     0.00  arctan
-  1.87      5.59     0.11  1200000     0.00     0.00  SVD_sin
-  1.70      5.69     0.10                             __udivmoddi4
-  1.19      5.76     0.07                             __profile_frequency
-  1.02      5.82     0.06                             __aeabi_ldivmod
-  0.34      5.84     0.02                             __aeabi_idivmod
-  0.26      5.85     0.02        1     0.02     5.26  main
-  0.17      5.86     0.01    50000     0.00     0.00  SVD_abs
-  0.17      5.87     0.01    50000     0.00     0.00  SVD_matrix_isDiagonal
+ 57.72      3.29     3.29  1200000     0.00     0.00  SVD_matrix_mul
+  8.16      3.76     0.47  2730000     0.00     0.00  SVD_matrix_copy
+  7.89      4.21     0.45    10000     0.00     0.00  SVD_decompose
+  4.12      4.44     0.24                             __gnu_mcount_nc
+  3.86      4.66     0.22                             brk
+  3.77      4.88     0.22   900000     0.00     0.00  SVD_matrix_trans
+  3.25      5.06     0.19   600000     0.00     0.00  arctan
+  2.54      5.21     0.15   600000     0.00     0.00  SVD_atan
+  2.37      5.34     0.14  1200000     0.00     0.00  SVD_sin
+  2.11      5.46     0.12  1200000     0.00     0.00  SVD_cos
+  1.49      5.55     0.09                             __profile_frequency
+  0.88      5.60     0.05                             __udivmoddi4
+  0.70      5.64     0.04    50000     0.00     0.00  SVD_abs
+  0.53      5.67     0.03                             __aeabi_ldivmod
+  0.26      5.68     0.02        1     0.02     5.07  main
+  0.18      5.69     0.01    50000     0.00     0.00  SVD_matrix_isDiagonal
+  0.18      5.70     0.01                             __aeabi_idivmod
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -57,73 +57,73 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 0.17% of 5.87 seconds
+granularity: each sample hit covers 2 byte(s) for 0.18% of 5.70 seconds
 
 index % time    self  children    called     name
-                0.02    5.25       1/1           __libc_start_main [2]
-[1]     89.6    0.02    5.25       1         main [1]
-                0.53    4.72   10000/10000       SVD_decompose [3]
+                0.02    5.06       1/1           __libc_start_main [2]
+[1]     88.9    0.02    5.06       1         main [1]
+                0.45    4.61   10000/10000       SVD_decompose [3]
 -----------------------------------------------
                                                  <spontaneous>
-[2]     89.6    0.00    5.26                 __libc_start_main [2]
-                0.02    5.25       1/1           main [1]
+[2]     88.9    0.00    5.07                 __libc_start_main [2]
+                0.02    5.06       1/1           main [1]
 -----------------------------------------------
-                0.53    4.72   10000/10000       main [1]
-[3]     89.4    0.53    4.72   10000         SVD_decompose [3]
-                3.49    0.00 1200000/1200000     SVD_matrix_mul [4]
-                0.43    0.00 2730000/2730000     SVD_matrix_copy [5]
-                0.19    0.14  600000/600000      SVD_atan [6]
-                0.21    0.00  900000/900000      SVD_matrix_trans [7]
-                0.14    0.00 1200000/1200000     SVD_cos [10]
-                0.11    0.00 1200000/1200000     SVD_sin [12]
-                0.01    0.01   50000/50000       SVD_matrix_isDiagonal [16]
+                0.45    4.61   10000/10000       main [1]
+[3]     88.7    0.45    4.61   10000         SVD_decompose [3]
+                3.29    0.00 1200000/1200000     SVD_matrix_mul [4]
+                0.47    0.00 2730000/2730000     SVD_matrix_copy [5]
+                0.15    0.19  600000/600000      SVD_atan [6]
+                0.22    0.00  900000/900000      SVD_matrix_trans [9]
+                0.14    0.00 1200000/1200000     SVD_sin [11]
+                0.12    0.00 1200000/1200000     SVD_cos [12]
+                0.01    0.04   50000/50000       SVD_matrix_isDiagonal [14]
 -----------------------------------------------
-                3.49    0.00 1200000/1200000     SVD_decompose [3]
-[4]     59.5    3.49    0.00 1200000         SVD_matrix_mul [4]
+                3.29    0.00 1200000/1200000     SVD_decompose [3]
+[4]     57.7    3.29    0.00 1200000         SVD_matrix_mul [4]
 -----------------------------------------------
-                0.43    0.00 2730000/2730000     SVD_decompose [3]
-[5]      7.2    0.43    0.00 2730000         SVD_matrix_copy [5]
+                0.47    0.00 2730000/2730000     SVD_decompose [3]
+[5]      8.2    0.47    0.00 2730000         SVD_matrix_copy [5]
 -----------------------------------------------
-                0.19    0.14  600000/600000      SVD_decompose [3]
-[6]      5.5    0.19    0.14  600000         SVD_atan [6]
-                0.14    0.00  600000/600000      arctan [11]
------------------------------------------------
-                0.21    0.00  900000/900000      SVD_decompose [3]
-[7]      3.5    0.21    0.00  900000         SVD_matrix_trans [7]
+                0.15    0.19  600000/600000      SVD_decompose [3]
+[6]      5.8    0.15    0.19  600000         SVD_atan [6]
+                0.19    0.00  600000/600000      arctan [10]
 -----------------------------------------------
                                                  <spontaneous>
-[8]      3.1    0.18    0.00                 brk [8]
+[7]      4.1    0.24    0.00                 __gnu_mcount_nc [7]
 -----------------------------------------------
                                                  <spontaneous>
-[9]      3.1    0.18    0.00                 __gnu_mcount_nc [9]
+[8]      3.9    0.22    0.00                 brk [8]
+-----------------------------------------------
+                0.22    0.00  900000/900000      SVD_decompose [3]
+[9]      3.8    0.22    0.00  900000         SVD_matrix_trans [9]
+-----------------------------------------------
+                0.19    0.00  600000/600000      SVD_atan [6]
+[10]     3.2    0.19    0.00  600000         arctan [10]
 -----------------------------------------------
                 0.14    0.00 1200000/1200000     SVD_decompose [3]
-[10]     2.4    0.14    0.00 1200000         SVD_cos [10]
+[11]     2.4    0.14    0.00 1200000         SVD_sin [11]
 -----------------------------------------------
-                0.14    0.00  600000/600000      SVD_atan [6]
-[11]     2.3    0.14    0.00  600000         arctan [11]
------------------------------------------------
-                0.11    0.00 1200000/1200000     SVD_decompose [3]
-[12]     1.9    0.11    0.00 1200000         SVD_sin [12]
+                0.12    0.00 1200000/1200000     SVD_decompose [3]
+[12]     2.1    0.12    0.00 1200000         SVD_cos [12]
 -----------------------------------------------
                                                  <spontaneous>
-[13]     1.7    0.10    0.00                 __udivmoddi4 [13]
+[13]     1.5    0.09    0.00                 __profile_frequency [13]
+-----------------------------------------------
+                0.01    0.04   50000/50000       SVD_decompose [3]
+[14]     0.9    0.01    0.04   50000         SVD_matrix_isDiagonal [14]
+                0.04    0.00   50000/50000       SVD_abs [16]
 -----------------------------------------------
                                                  <spontaneous>
-[14]     1.2    0.07    0.00                 __profile_frequency [14]
+[15]     0.9    0.05    0.00                 __udivmoddi4 [15]
+-----------------------------------------------
+                0.04    0.00   50000/50000       SVD_matrix_isDiagonal [14]
+[16]     0.7    0.04    0.00   50000         SVD_abs [16]
 -----------------------------------------------
                                                  <spontaneous>
-[15]     1.0    0.06    0.00                 __aeabi_ldivmod [15]
------------------------------------------------
-                0.01    0.01   50000/50000       SVD_decompose [3]
-[16]     0.3    0.01    0.01   50000         SVD_matrix_isDiagonal [16]
-                0.01    0.00   50000/50000       SVD_abs [18]
+[17]     0.5    0.03    0.00                 __aeabi_ldivmod [17]
 -----------------------------------------------
                                                  <spontaneous>
-[17]     0.3    0.02    0.00                 __aeabi_idivmod [17]
------------------------------------------------
-                0.01    0.00   50000/50000       SVD_matrix_isDiagonal [16]
-[18]     0.2    0.01    0.00   50000         SVD_abs [18]
+[18]     0.2    0.01    0.00                 __aeabi_idivmod [18]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -216,9 +216,9 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [18] SVD_abs                 [4] SVD_matrix_mul         [14] __profile_frequency
-   [6] SVD_atan                [7] SVD_matrix_trans       [13] __udivmoddi4
-  [10] SVD_cos                [12] SVD_sin                [11] arctan
-   [3] SVD_decompose          [17] __aeabi_idivmod         [8] brk
-   [5] SVD_matrix_copy        [15] __aeabi_ldivmod         [1] main
-  [16] SVD_matrix_isDiagonal   [9] __gnu_mcount_nc
+  [16] SVD_abs                 [4] SVD_matrix_mul         [13] __profile_frequency
+   [6] SVD_atan                [9] SVD_matrix_trans       [15] __udivmoddi4
+  [12] SVD_cos                [11] SVD_sin                [10] arctan
+   [3] SVD_decompose          [18] __aeabi_idivmod         [8] brk
+   [5] SVD_matrix_copy        [17] __aeabi_ldivmod         [1] main
+  [14] SVD_matrix_isDiagonal   [7] __gnu_mcount_nc
