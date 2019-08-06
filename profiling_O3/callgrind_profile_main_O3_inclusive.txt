@@ -1,0 +1,46 @@
+--------------------------------------------------------------------------------
+Profile data file './callgrind.out.4712' (creator: callgrind-3.13.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 6300
+Trigger: Program termination
+Profiled target:  ./callgrind_profile_main_O3 (PID 4712, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+    Ir 
+--------------------------------------------------------------------------------
+53,602  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+    Ir  file:function
+--------------------------------------------------------------------------------
+53,602  ???:0x000104c4 [/root/SENG440_SVD/callgrind_profile_main_O3]
+53,591  ???:(below main) [/root/SENG440_SVD/callgrind_profile_main_O3]
+35,775  ???:main [/root/SENG440_SVD/callgrind_profile_main_O3]
+35,705  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 8,747  ???:__tunables_init [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 7,464  ???:__libc_init_first [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 7,297  ???:_dl_non_dynamic_init [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 7,259  ???:0x0005ecbc [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 6,371  ???:__udivmoddi4 [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 2,866  ???:_dl_init_paths [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 2,462  ???:malloc [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 2,226  ???:getenv [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 2,209  ???:_dl_important_hwcaps [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 2,011  ???:_dl_get_origin [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 1,781  ???:malloc_hook_ini [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 1,080  ???:_int_malloc [/root/SENG440_SVD/callgrind_profile_main_O3]
+   968  ???:ptmalloc_init [/root/SENG440_SVD/callgrind_profile_main_O3]
+   803  ???:malloc'2 [/root/SENG440_SVD/callgrind_profile_main_O3]
+   570  ???:tcache_init.part.3 [/root/SENG440_SVD/callgrind_profile_main_O3]
+   477  ???:exit [/root/SENG440_SVD/callgrind_profile_main_O3]
+
