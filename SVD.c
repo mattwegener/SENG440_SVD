@@ -93,7 +93,7 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 printf("sum = %f, diff = %f\n,", TOFLT(sum, ATANQ), TOFLT(diff, ATANQ));
                 // sum and diff both in ATANQ format
                 temp_qL = (sum - diff)/2;
-                temp_qR = sum - qL;
+                temp_qR = sum - temp_qL;
 
                 qL = TOFLT(temp_qL, ATANQ);
                 qR = TOFLT(temp_qR, ATANQ);
