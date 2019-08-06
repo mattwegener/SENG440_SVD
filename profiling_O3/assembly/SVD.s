@@ -95,7 +95,7 @@ SVD_decompose:
 	vst1.32	{d16-d17}, [r3:64]
 	add	r3, r6, #16
 	str	r3, [sp, #868]
-	mov	r3, #5
+	mov	r3, #4
 	str	r2, [sp, #864]
 	str	lr, [sp, #856]
 	str	r3, [sp, #872]

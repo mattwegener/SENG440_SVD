@@ -1369,7 +1369,7 @@ SVD_decompose:
 	cmp	r3, #2
 	ble	.L80
 	ldr	r3, [fp, #-16]
-	cmp	r3, #5
+	cmp	r3, #4
 	beq	.L91
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
