@@ -77,6 +77,7 @@ void TEST_SVD_matrix_mul()
 {
   // Test Matrix multiplication with identity matrix
     SVD_matrix_mul(m1, I, m3);
+    SVD_matrix_print(m3);
     assert(SVD_matrix_equal(m1, m3));
     SVD_matrix_mul(I, m1, m3);
     assert(SVD_matrix_equal(m1, m3));
