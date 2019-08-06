@@ -5,10 +5,28 @@
 #include "SVD_math.h"
 #include "SVD_defs.h"
 
+#ifndef NO_NEON
 #include <arm_neon.h>
+#endif
 
 static inline void SVD_matrix_mul(matrix left, matrix right, matrix out)
 {
+    #ifdef NO_NEON
+    // standard matrix multiplication
+    int i,j,k;
+    
+    for(j = 0; j < N; j++)
+    {
+      for(k = 0; k < N; k++)
+      {
+          out[j][k] = 0;
+          for(i = 0; i < N; i++){
+              out[j][k] += left[j][i] * right[i][k];
+          }
+      }
+    }
+
+    #else
     // modified from Coding for NEON --- Part 3: Matrix Multiplication
     float32x4x4_t left_neon = vld4q_f32(&(left[0][0]));
     float32x4x4_t right_neon = vld4q_f32(&(right[0][0]));
@@ -78,10 +96,23 @@ static inline void SVD_matrix_mul(matrix left, matrix right, matrix out)
    
     //////////// OUTPUT BACK TO MATRIX ////////////
     vst4q_f32(&out[0][0], out_neon);
+
+    #endif
 }
 
 static inline void SVD_matrix_trans(matrix in, matrix out)
 {
+  #ifdef NO_NEON
+  // standard matrix tranpose
+  for ( int i = 0; i < N; i++ )
+  {
+    for ( int j = 0; j < N; j++ )
+    {
+      out[j][i] = in[i][j];
+    }
+  }
+  
+  #else
 
   /*void vst1q_lane_f32(Scalar_t* N, Vector_t M, int n);
   Scalar_t: float32_t
@@ -102,15 +133,29 @@ static inline void SVD_matrix_trans(matrix in, matrix out)
   for(int i = 0; i < N; i++){
       vst1q_f32(&(out[i][0]),temp_matrix.val[i]);
   }
+
+  #endif
 }
 
 static inline void SVD_matrix_copy(matrix in, matrix out)
 {
+    #ifdef NO_NEON
+    
+    for( int i = 0; i < N; i++ )
+    {
+        for ( int j = 0; j < N; j++ )
+        {
+            out[i][j] = in[i][j];
+        }
+    }
+    #else
     // use neon for copy
     for(int i = 0; i<N; i++){
         float32x4_t temp = vld1q_f32(&(in[i][0]));
         vst1q_f32(&(out[i][0]),temp);
     }
+    #endif
+
 }
 
 static inline bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
