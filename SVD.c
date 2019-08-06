@@ -52,19 +52,22 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     matrix_elem den2 = 0.0;
     int32_t sum = 0;
     int32_t diff = 0;
-    matrix_elem qR = 0;
-    matrix_elem qL = 0;
+    int32_t qR = 0;
+    int32_t qL = 0;
 
+    #ifdef TEST
+        //SVD_matrix_print(S);
+        //printf("\n");
+    #endif
+    //int sweeps = 1;
     while(!SVD_matrix_isDiagonal(S))
     {
+        //printf("/////////////// SWEEP %d/////////////\n\n", sweeps);
         for(int j = 0; j < N-1; j++)
         {
             for(int k = j+1; k < N; k++)
             {
-                #ifdef TEST
-                //SVD_matrix_print(S);
-                //printf("\n");
-                #endif
+                
                 // reload all matrices to identity
                 SVD_matrix_copy(I,Up);
                 SVD_matrix_copy(I,Mp);
@@ -83,7 +86,6 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 /////////// FIXED POINT //////////////
                 int32_t temp_num = TOFIX(num1, ATANQ);
                 int32_t temp_den = TOFIX(den1, ATANQ);
-                int32_t temp_qL, temp_qR;
                 sum = SVD_atan( temp_num, temp_den );
                 
                 temp_num = TOFIX(num2, ATANQ);
@@ -92,25 +94,42 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 
                 //printf("sum = %f, diff = %f\n,", TOFLT(sum, ATANQ), TOFLT(diff, ATANQ));
                 // sum and diff both in ATANQ format
-                temp_qL = (sum - diff)/2;
-                temp_qR = sum - temp_qL;
+                qL = (sum - diff)/2;
+                qR = sum - qL;
 
-                qL = TOFLT(temp_qL, ATANQ);
-                qR = TOFLT(temp_qR, ATANQ);
-
-                //printf("qL = %f, qR = %f\n", qL, qR);
-                /////////////////////////////////////
+                /*
+                printf("Before:\n");
+                printf("ql = %d, qR = %d\n\n", qL, qR );
+                printf("-SINCOS_PI = %d\n\n", -SINCOS_PI);
+                printf("qL = %f, qR = %f\n\n", TOFLT(qL, ATANQ), TOFLT(qR, ATANQ));
+                printf("-SINCOS_PI = %f\n\n", TOFLT(-SINCOS_PI, SINCOS_Q1));
+                */
+                // convert to sin and cosine argument format
                 
-                //Create U V rotation matrices for mulitplaction
-                U_pair[j][j] = SVD_cos(qL);
-                U_pair[j][k] = -1*SVD_sin(qL);
-                U_pair[k][j] = SVD_sin(qL);
-                U_pair[k][k] = SVD_cos(qL);
+                qL = FCONV(qL, ATANQ, SINCOS_Q1);
+                qR = FCONV(qR, ATANQ, SINCOS_Q1);
 
-                V_pair[j][j] = SVD_cos(qR);
-                V_pair[j][k] = -1*SVD_sin(qR);
-                V_pair[k][j] = SVD_sin(qR);
-                V_pair[k][k] = SVD_cos(qR);
+                /*
+                printf("After:\n");
+                printf("ql = %d, qR = %d\n\n", qL, qR );
+                printf("-SINCOS_PI = %d\n\n", -SINCOS_PI);
+                printf("qL = %f, qR = %f\n\n", TOFLT(qL, SINCOS_Q1), TOFLT(qR, SINCOS_Q1));
+                printf("-SINCOS_PI = %f\n\n", TOFLT(-SINCOS_PI, SINCOS_Q1));
+                */
+                
+
+                //Create U V rotation matrices for mulitplaction
+                U_pair[j][j] =  TOFLT( SVD_cos(qL), SINCOS_Q1);
+                U_pair[j][k] = -TOFLT( SVD_sin(qL), SINCOS_Q1);
+                U_pair[k][j] =  TOFLT( SVD_sin(qL), SINCOS_Q1);
+                U_pair[k][k] =  TOFLT( SVD_cos(qL), SINCOS_Q1);
+
+                V_pair[j][j] =  TOFLT( SVD_cos(qR), SINCOS_Q1);
+                V_pair[j][k] = -TOFLT( SVD_sin(qR), SINCOS_Q1);
+                V_pair[k][j] =  TOFLT( SVD_sin(qR), SINCOS_Q1);
+                V_pair[k][k] =  TOFLT( SVD_cos(qR), SINCOS_Q1);
+
+                /////////////////////////////////////////////////////
 
                 //Transpose matrices
                 SVD_matrix_trans(U_pair, U_pair_trans);
@@ -127,8 +146,15 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 SVD_matrix_copy(Vtp,Vt);
                 SVD_matrix_trans(Vt,V);
                 SVD_matrix_copy(Up,U);
+
+                #ifdef TEST
+                //printf("Pair %d -- %d\n\n", j + 1,k + 1);
+                //SVD_matrix_print(S);
+                //printf("\n");
+                #endif
             } //end for
         }//end for
+        
     }//end while
 
     // matrix is diagonalized, now normalize
@@ -163,7 +189,8 @@ static matrix Vout  = {{  1.0,  0.0,  0.0,  0.0, },
                     {  0.0,  1.0,  0.0,  0.0, },
                     {  0.0,  0.0,  1.0,  0.0, },
                     {  0.0,  0.0,  0.0,  1.0, },};
-static matrix Sout  = {{  1.0,  0.0,  0.0,  0.0, },
+static matrix Sout  = {{  1.0,  0.0,  0.0,  0.0, },                //printf("qL = %f, qR = %f\n", qL, qR);
+                /////////////////////////////////////
                     {  0.0,  1.0,  0.0,  0.0, },
                     {  0.0,  0.0,  1.0,  0.0, },
                     {  0.0,  0.0,  0.0,  1.0, },};

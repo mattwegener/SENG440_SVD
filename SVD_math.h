@@ -13,9 +13,10 @@
 #endif
 
 /* convert to and from floating point */
-#define iABS(x)     ((x > 0) ? (x) : (-x))
-#define TOFIX(d, q) ((int)( (d)*(double)(1<<(q)) ))
-#define TOFLT(a, q) ( (double)(a) / (double)(1<<(q)) )
+#define iABS(x)             ((x > 0) ? (x) : (-x))
+#define TOFIX(d, q)         ((int32_t)( (d)*(float)(1<<(q)) ))
+#define TOFLT(a, q)         ( (float)(a) / (float)(1<<(q)) )
+#define FCONV(a, q1, q2)    (((q2)>(q1)) ? (a)<<((q2)-(q1)) : (a)>>((q1)-(q2)))
 
 #define SINCOS_Q1		(12)
 #define SINCOS_Q2		(24)
@@ -77,7 +78,7 @@
 #define COS_LIM_7		(5361)
 #define COS_LIM_8		(6433)
 
-// precondition: x in Q14
+// precondition: x in Q12
 // x between -pi and +pi
 static inline int32_t SVD_cos(int32_t x)
 {
