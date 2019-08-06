@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.2841' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.3506' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 6451
+Timerange: Basic block 0 - 6134
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O3 (PID 2841, part 1)
+Profiled target:  ./callgrind_profile_main_O3 (PID 3506, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,20 +18,20 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
     Ir 
 --------------------------------------------------------------------------------
-52,683  PROGRAM TOTALS
+46,836  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
     Ir  file:function
 --------------------------------------------------------------------------------
-52,683  ???:0x00010410 [/root/SENG440_SVD/callgrind_profile_main_O3]
-52,672  ???:(below main) [/root/SENG440_SVD/callgrind_profile_main_O3]
-34,850  ???:main [/root/SENG440_SVD/callgrind_profile_main_O3]
-34,841  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
+46,836  ???:0x00010410 [/root/SENG440_SVD/callgrind_profile_main_O3]
+46,825  ???:(below main) [/root/SENG440_SVD/callgrind_profile_main_O3]
+29,009  ???:main [/root/SENG440_SVD/callgrind_profile_main_O3]
+29,000  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
  8,747  ???:__tunables_init [/root/SENG440_SVD/callgrind_profile_main_O3]
- 7,914  ???:0x0005e87c [/root/SENG440_SVD/callgrind_profile_main_O3]
  7,464  ???:__libc_init_first [/root/SENG440_SVD/callgrind_profile_main_O3]
  7,297  ???:_dl_non_dynamic_init [/root/SENG440_SVD/callgrind_profile_main_O3]
- 6,818  ???:__udivmoddi4 [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 7,136  ???:0x0005e87c [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 6,260  ???:__udivmoddi4 [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,866  ???:_dl_init_paths [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,462  ???:malloc [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,226  ???:getenv [/root/SENG440_SVD/callgrind_profile_main_O3]
@@ -42,5 +42,7 @@ Auto-annotation:  on
    968  ???:ptmalloc_init [/root/SENG440_SVD/callgrind_profile_main_O3]
    803  ???:malloc'2 [/root/SENG440_SVD/callgrind_profile_main_O3]
    570  ???:tcache_init.part.3 [/root/SENG440_SVD/callgrind_profile_main_O3]
-   483  ???:exit [/root/SENG440_SVD/callgrind_profile_main_O3]
+   477  ???:exit [/root/SENG440_SVD/callgrind_profile_main_O3]
+   471  ???:__run_exit_handlers [/root/SENG440_SVD/callgrind_profile_main_O3]
+   378  ???:strlen [/root/SENG440_SVD/callgrind_profile_main_O3]
 

@@ -89,7 +89,7 @@ SVD_decompose:
 	movw	r2, #12073
 	vld1.32	{d16-d17}, [r0:64]
 	str	r3, [sp, #892]
-	mov	r3, #5
+	mov	r3, #4
 	mov	r8, r9
 	add	r1, sp, #912
 	vst1.32	{d22-d23}, [r1:64]
@@ -574,16 +574,10 @@ SVD_decompose:
 	ble	.L117
 	movw	r1, #9650
 	cmp	r3, r1
-	ble	.L118
-	movw	r1, #10722
-	cmp	r3, r1
-	ble	.L119
-	movw	r1, #11795
-	cmp	r3, r1
 	bgt	.L189
-	movw	r1, #51978
-	movw	r0, #1597
-	movt	r1, 727
+	movw	r1, #56950
+	movw	r0, #3621
+	movt	r1, 412
 	str	r1, [sp, #884]
 	str	r0, [sp, #880]
 	mov	r1, r0
@@ -682,16 +676,10 @@ SVD_decompose:
 	ble	.L134
 	movw	r1, #9650
 	cmp	r3, r1
-	ble	.L135
-	movw	r1, #10722
-	cmp	r3, r1
-	ble	.L136
-	movw	r1, #11795
-	cmp	r3, r1
 	bgt	.L192
-	movw	r1, #51978
-	movw	r0, #1597
-	movt	r1, 727
+	movw	r1, #56950
+	movw	r0, #3621
+	movt	r1, 412
 	str	r1, [sp, #876]
 	str	r0, [sp, #872]
 	mov	r1, r0
@@ -1610,19 +1598,41 @@ SVD_decompose:
 	str	ip, [sp, #820]
 	mov	r0, ip
 	b	.L38
-.L135:
-	movw	r1, #56950
-	movw	r0, #3621
-	movt	r1, 412
-	str	r1, [sp, #876]
+.L192:
+	movw	r1, #10722
+	cmp	r3, r1
+	ble	.L136
+	movw	r1, #11795
+	cmp	r3, r1
+	ble	.L137
+	movw	r0, #12868
+	ldr	ip, [sp, #900]
+	cmp	r3, r0
+	movw	r1, #535
+	ldr	r0, [sp, #876]
+	movne	r0, ip
+	str	r0, [sp, #876]
+	ldr	r0, [sp, #872]
+	movne	r0, r1
 	str	r0, [sp, #872]
 	mov	r1, r0
 	b	.L43
-.L118:
-	movw	r1, #56950
-	movw	r0, #3621
-	movt	r1, 412
-	str	r1, [sp, #884]
+.L189:
+	movw	r1, #10722
+	cmp	r3, r1
+	ble	.L119
+	movw	r1, #11795
+	cmp	r3, r1
+	ble	.L120
+	movw	r0, #12868
+	ldr	ip, [sp, #900]
+	cmp	r3, r0
+	movw	r1, #535
+	ldr	r0, [sp, #884]
+	movne	r0, ip
+	str	r0, [sp, #884]
+	ldr	r0, [sp, #880]
+	movne	r0, r1
 	str	r0, [sp, #880]
 	mov	r1, r0
 	b	.L33
@@ -1638,6 +1648,12 @@ SVD_decompose:
 	str	ip, [sp, #820]
 	mov	r0, ip
 	b	.L38
+.L203:
+	.align	2
+.L202:
+	.word	956301312
+	.word	-2147483648
+	.word	0
 .L186:
 	movw	r0, #10722
 	cmp	r2, r0
@@ -1666,12 +1682,6 @@ SVD_decompose:
 	str	r0, [sp, #872]
 	mov	r1, r0
 	b	.L43
-.L203:
-	.align	2
-.L202:
-	.word	956301312
-	.word	-2147483648
-	.word	0
 .L197:
 	movw	lr, #12868
 	ldr	r5, [sp, #908]
@@ -1700,47 +1710,9 @@ SVD_decompose:
 	str	ip, [sp, #820]
 	mov	r0, ip
 	b	.L38
-.L189:
-	movw	r0, #12868
-	ldr	ip, [sp, #900]
-	cmp	r3, r0
-	movw	r1, #535
-	ldr	r0, [sp, #884]
-	movne	r0, ip
-	str	r0, [sp, #884]
-	ldr	r0, [sp, #880]
-	movne	r0, r1
-	str	r0, [sp, #880]
-	mov	r1, r0
-	b	.L33
-.L192:
-	movw	r0, #12868
-	ldr	ip, [sp, #900]
-	cmp	r3, r0
-	movw	r1, #535
-	ldr	r0, [sp, #876]
-	movne	r0, ip
-	str	r0, [sp, #876]
-	ldr	r0, [sp, #872]
-	movne	r0, r1
-	str	r0, [sp, #872]
-	mov	r1, r0
-	b	.L43
 .L185:
 	ldr	r4, [sp, #888]
 	b	.L4
-.L26:
-	mov	r3, #0
-	ldr	r2, [sp, #716]
-	movt	r3, 49024
-	cmp	ip, #0
-	str	r3, [r2, #-4]	@ float
-	vmovge	s15, r3
-	bge	.L30
-	vldr.32	s13, .L202+4
-	vldr.32	s14, .L202+8
-	vmov	s15, r3
-	b	.L31
 .L36:
 	mov	r3, #0
 	ldr	r2, [sp, #720]
@@ -1753,6 +1725,34 @@ SVD_decompose:
 	vldr.32	s14, .L202+8
 	vmov	s15, r3
 	b	.L41
+.L26:
+	mov	r3, #0
+	ldr	r2, [sp, #716]
+	movt	r3, 49024
+	cmp	ip, #0
+	str	r3, [r2, #-4]	@ float
+	vmovge	s15, r3
+	bge	.L30
+	vldr.32	s13, .L202+4
+	vldr.32	s14, .L202+8
+	vmov	s15, r3
+	b	.L31
+.L120:
+	movw	r1, #51978
+	movw	r0, #1597
+	movt	r1, 727
+	str	r1, [sp, #884]
+	str	r0, [sp, #880]
+	mov	r1, r0
+	b	.L33
+.L137:
+	movw	r1, #51978
+	movw	r0, #1597
+	movt	r1, 727
+	str	r1, [sp, #876]
+	str	r0, [sp, #872]
+	mov	r1, r0
+	b	.L43
 	.size	SVD_decompose, .-SVD_decompose
 	.data
 	.align	3

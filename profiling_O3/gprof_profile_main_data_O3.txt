@@ -3,13 +3,13 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  Ts/call  Ts/call  name    
- 94.83      3.12     3.12                             SVD_decompose
-  3.34      3.23     0.11                             __udivmoddi4
-  1.22      3.27     0.04                             __aeabi_ldivmod
-  0.30      3.28     0.01                             __aeabi_idivmod
-  0.15      3.29     0.01                             memmove
-  0.15      3.29     0.01                             memset
-  0.00      3.29     0.00        1     0.00     0.00  main
+ 95.72      2.91     2.91                             SVD_decompose
+  2.30      2.98     0.07                             __udivmoddi4
+  0.66      3.00     0.02                             __aeabi_idivmod
+  0.66      3.02     0.02                             __aeabi_ldivmod
+  0.33      3.03     0.01                             __gnu_mcount_nc
+  0.33      3.04     0.01                             memset
+  0.00      3.04     0.00        1     0.00     0.00  main
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -47,26 +47,26 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 0.30% of 3.29 seconds
+granularity: each sample hit covers 2 byte(s) for 0.33% of 3.04 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     94.8    3.12    0.00                 SVD_decompose [1]
+[1]     95.7    2.91    0.00                 SVD_decompose [1]
 -----------------------------------------------
                                                  <spontaneous>
-[2]      3.3    0.11    0.00                 __udivmoddi4 [2]
+[2]      2.3    0.07    0.00                 __udivmoddi4 [2]
 -----------------------------------------------
                                                  <spontaneous>
-[3]      1.2    0.04    0.00                 __aeabi_ldivmod [3]
+[3]      0.7    0.02    0.00                 __aeabi_idivmod [3]
 -----------------------------------------------
                                                  <spontaneous>
-[4]      0.3    0.01    0.00                 __aeabi_idivmod [4]
+[4]      0.7    0.02    0.00                 __aeabi_ldivmod [4]
 -----------------------------------------------
                                                  <spontaneous>
-[5]      0.2    0.01    0.00                 memmove [5]
+[5]      0.3    0.01    0.00                 memset [5]
 -----------------------------------------------
                                                  <spontaneous>
-[6]      0.2    0.01    0.00                 memset [6]
+[6]      0.3    0.01    0.00                 __gnu_mcount_nc [6]
 -----------------------------------------------
                 0.00    0.00       1/1           __libc_start_main [588]
 [7]      0.0    0.00    0.00       1         main [7]
@@ -162,6 +162,6 @@ notice and this notice are preserved.
 
 Index by function name
 
-   [1] SVD_decompose           [2] __udivmoddi4            [6] memset
-   [4] __aeabi_idivmod         [7] main
-   [3] __aeabi_ldivmod         [5] memmove
+   [1] SVD_decompose           [6] __gnu_mcount_nc         [5] memset
+   [3] __aeabi_idivmod         [2] __udivmoddi4
+   [4] __aeabi_ldivmod         [7] main
