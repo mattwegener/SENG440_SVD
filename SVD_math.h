@@ -20,6 +20,7 @@
 
 #define SINCOS_Q1		(12)
 #define SINCOS_Q2		(24)
+#define SINCOS_ROUND_BIT    (1 << 11)
 #define SINCOS_1		(4096)
 #define SINCOS_PI		(12867)
 #define SINCOS_PI2		(6433)
@@ -159,7 +160,7 @@ static inline int32_t SVD_cos(int32_t x)
     ret = (slope * x);
     // ret is now in format SINCOS_Q2
     ret += constant; // add the constant, pre-encoded in SINCOS_Q2
-    ret = ret >> SINCOS_Q1; // shift back down to original Q format
+    ret = (ret + SINCOS_ROUND_BIT) >> SINCOS_Q1;
 
     return range_scale * ret; // return with sign appropriate to range
 }
@@ -249,12 +250,13 @@ static inline int32_t SVD_sin(int32_t x)
     ret = (slope * x);
     // ret is now in format SINCOS_Q2
     ret += constant; // add the constant, pre-encoded in SINCOS_Q2
-    ret = ret >> SINCOS_Q1; // shift back down to original Q format
+    ret = (ret + SINCOS_ROUND_BIT) >> SINCOS_Q1;
 
     return range_scale * ret; // return with sign appropriate to range
 }
 
-#define ATANQ       (14)
+#define ATANQ           (14)
+#define ATANQ_ROUND_BIT     (1 << 13)
 #define ATAN_QPI_2      (25735) // Q14
 #define ATAN_1          (16384) // Q14
 #define ATAN_0_5        (8192) // Q14
@@ -278,20 +280,22 @@ static inline int32_t arctan(int32_t x)
     {
         temp = ATAN_COEFF_0142;
         temp += (ATAN_COEFF_0644 * x);
-        temp = temp >> ATANQ;
+        temp = (temp + ATANQ_ROUND_BIT) >> ATANQ;
         return temp;
     }
     
     if (x >= -ATAN_0_5 && x <= ATAN_0_5)
     {
-        return (ATAN_COEFF_0928 * x) >> ATANQ;
+        temp = (ATAN_COEFF_0928 * x);
+        temp = (temp + ATANQ_ROUND_BIT) >> ATANQ;
+        return temp;
     }
 
     if (x < -ATAN_0_5)
     {
         temp = -ATAN_COEFF_0142; // minus sign important!
         temp += (ATAN_COEFF_0644 * x);
-        temp = temp >> ATANQ;
+        temp = (temp + ATANQ_ROUND_BIT) >> ATANQ;
         return temp;
     }
 

@@ -2,7 +2,7 @@
 #ifndef SVD_TYPES_H
 #define SVD_TYPES_H
 
-#define EPS     (0.1f)       //< floating point comparison epsilon
+#define EPS     (0.01f)       //< floating point comparison epsilon
 #define N       (4)             //< Matrix size NxN
 
 typedef float matrix_elem; //< we can change this later to use fixed point

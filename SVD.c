@@ -56,13 +56,13 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     int32_t qL = 0;
 
     #ifdef TEST
-        //SVD_matrix_print(S);
-        //printf("\n");
+        SVD_matrix_print(S);
+        printf("\n");
     #endif
-    //int sweeps = 1;
+    int sweeps = 1;
     while(!SVD_matrix_isDiagonal(S))
     {
-        //printf("/////////////// SWEEP %d/////////////\n\n", sweeps);
+        printf("/////////////// SWEEP %d/////////////\n\n", sweeps);
         for(int j = 0; j < N-1; j++)
         {
             for(int k = j+1; k < N; k++)
@@ -105,9 +105,9 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 printf("-SINCOS_PI = %f\n\n", TOFLT(-SINCOS_PI, SINCOS_Q1));
                 */
                 // convert to sin and cosine argument format
-                
-                qL = FCONV(qL, ATANQ, SINCOS_Q1);
-                qR = FCONV(qR, ATANQ, SINCOS_Q1);
+                //qL and qR are both in Q14... make them Q12 with rounding
+                qL = (qL + 0b10) >> 2;
+                qR = (qR + 0b10) >> 2;
 
                 /*
                 printf("After:\n");
@@ -148,13 +148,13 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 SVD_matrix_copy(Up,U);
 
                 #ifdef TEST
-                //printf("Pair %d -- %d\n\n", j + 1,k + 1);
-                //SVD_matrix_print(S);
-                //printf("\n");
+                printf("Pair %d -- %d\n\n", j + 1,k + 1);
+                SVD_matrix_print(S);
+                printf("\n");
                 #endif
             } //end for
         }//end for
-        
+        sweeps++;
     }//end while
 
     // matrix is diagonalized, now normalize
@@ -189,8 +189,7 @@ static matrix Vout  = {{  1.0,  0.0,  0.0,  0.0, },
                     {  0.0,  1.0,  0.0,  0.0, },
                     {  0.0,  0.0,  1.0,  0.0, },
                     {  0.0,  0.0,  0.0,  1.0, },};
-static matrix Sout  = {{  1.0,  0.0,  0.0,  0.0, },                //printf("qL = %f, qR = %f\n", qL, qR);
-                /////////////////////////////////////
+static matrix Sout  = {{  1.0,  0.0,  0.0,  0.0, },
                     {  0.0,  1.0,  0.0,  0.0, },
                     {  0.0,  0.0,  1.0,  0.0, },
                     {  0.0,  0.0,  0.0,  1.0, },};
