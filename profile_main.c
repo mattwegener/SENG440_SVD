@@ -1,4 +1,5 @@
 #include "SVD.h"
+#include "SVD_matrix.c"
 #include <time.h>
 #include <stdio.h>
 
