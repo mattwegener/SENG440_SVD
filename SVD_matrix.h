@@ -9,19 +9,25 @@
 #include <arm_neon.h>
 #endif
 
+void SVD_matrix_int_to_fix(matrix m);
+void SVD_matrix_fix_to_int(matrix m);
+
 static inline void SVD_matrix_mul(matrix left, matrix right, matrix out)
 {
     #ifdef NO_NEON
     // standard matrix multiplication
     int i,j,k;
+    int32_t temp;
     
     for(j = 0; j < N; j++)
     {
       for(k = 0; k < N; k++)
       {
           out[j][k] = 0;
-          for(i = 0; i < N; i++){
-              out[j][k] += left[j][i] * right[i][k];
+          for(i = 0; i < N; i++)
+          {
+              temp = FMULR_MAT(left[j][i],right[i][k]);
+              out[j][k] += temp;
           }
       }
     }
@@ -166,7 +172,7 @@ static inline bool SVD_matrix_equal(matrix matrix1, matrix matrix2)
     {
       for (j = 0; j < N; j++)
       {
-        if (SVD_abs( matrix1[i][j] - matrix2[i][j]) > EPS)
+        if (  iABS((matrix1[i][j] - matrix2[i][j])) > EPS)
         {
           ret = false;
           break;
@@ -186,7 +192,7 @@ static inline bool SVD_matrix_isDiagonal(matrix in)
         {
             if (i != j)
             {
-                if (SVD_abs(in[i][j]) >= EPS)
+                if (iABS(in[i][j]) >= EPS)
                   return false;
             }
         }

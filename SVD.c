@@ -5,13 +5,17 @@
 #include <stdio.h>
 #endif
 
-static matrix I  = {{  1.0,  0.0,  0.0,  0.0, },
-                    {  0.0,  1.0,  0.0,  0.0, },
-                    {  0.0,  0.0,  1.0,  0.0, },
-                    {  0.0,  0.0,  0.0,  1.0, },};
+static matrix I  = {{  MATRIX_1,  0,  0,  0, },
+                    {  0,  MATRIX_1,  0,  0, },
+                    {  0,  0,  MATRIX_1,  0, },
+                    {  0,  0,  0,  MATRIX_1, },};
 
+// INPUT: M in integer format
+// Precondition: no integers larger than 127
+// Precondition: in Q8 format
 void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V /*OUT*/ )
 {
+
     // TODO
     /*
     Per iteration:
@@ -46,10 +50,10 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     */
     //rows: j
     //cols: k
-    matrix_elem num1 = 0.0;
-    matrix_elem num2 = 0.0;
-    matrix_elem den1 = 0.0;
-    matrix_elem den2 = 0.0;
+    int32_t num1 = 0.0;
+    int32_t num2 = 0.0;
+    int32_t den1 = 0.0;
+    int32_t den2 = 0.0;
     int32_t sum = 0;
     int32_t diff = 0;
     int32_t qR = 0;
@@ -81,23 +85,26 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 SVD_matrix_copy(I,V_pair_trans);
                 
                 //calculate rotation angles
+                // these are all in MATRIXQ format, no shifting needed
                 num1 = S[k][j] + S[j][k];
                 num2 = S[k][j] - S[j][k];
                 den1 = S[k][k] - S[j][j];
                 den2 = S[k][k] + S[j][j];
 
                 /////////// FIXED POINT //////////////
-                int32_t temp_num = TOFIX(num1, ATANQ);
-                int32_t temp_den = TOFIX(den1, ATANQ);
+                // putting these in Q14 for the arctan
+                int32_t temp_num = num1 << (ATANQ - MATRIXQ);
+                int32_t temp_den = den1 << (ATANQ - MATRIXQ);
+                
                 sum = SVD_atan( temp_num, temp_den );
                 
-                temp_num = TOFIX(num2, ATANQ);
-                temp_den = TOFIX(den2, ATANQ);
+                temp_num = num2 << (ATANQ - MATRIXQ);
+                temp_den = den2 << (ATANQ - MATRIXQ);
                 diff = SVD_atan( temp_num, temp_den );
                 
                 //printf("sum = %f, diff = %f\n,", TOFLT(sum, ATANQ), TOFLT(diff, ATANQ));
                 // sum and diff both in ATANQ format
-                qL = (sum - diff)/2;
+                qL = ((sum - diff))/ 2; // TODO: add 1 for the rounding bit // this can be reduced to shift
                 qR = sum - qL;
 
                 /*
@@ -122,15 +129,16 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 
 
                 //Create U V rotation matrices for mulitplaction
-                U_pair[j][j] =  TOFLT( SVD_cos(qL), SINCOS_Q1);
-                U_pair[j][k] = -TOFLT( SVD_sin(qL), SINCOS_Q1);
-                U_pair[k][j] =  TOFLT( SVD_sin(qL), SINCOS_Q1);
-                U_pair[k][k] =  TOFLT( SVD_cos(qL), SINCOS_Q1);
+                // need to shift down by 2, do some rounding
+                U_pair[j][j] =  ( (SVD_cos(qL) + SINCOS_TO_MATRIX_ROUND_BIT) >> SINCOS_TO_MATRIX_SHIFT);
+                U_pair[j][k] = -( (SVD_sin(qL) + SINCOS_TO_MATRIX_ROUND_BIT) >> SINCOS_TO_MATRIX_SHIFT);
+                U_pair[k][j] =  ( (SVD_sin(qL) + SINCOS_TO_MATRIX_ROUND_BIT) >> SINCOS_TO_MATRIX_SHIFT);
+                U_pair[k][k] =  ( (SVD_cos(qL) + SINCOS_TO_MATRIX_ROUND_BIT) >> SINCOS_TO_MATRIX_SHIFT);
 
-                V_pair[j][j] =  TOFLT( SVD_cos(qR), SINCOS_Q1);
-                V_pair[j][k] = -TOFLT( SVD_sin(qR), SINCOS_Q1);
-                V_pair[k][j] =  TOFLT( SVD_sin(qR), SINCOS_Q1);
-                V_pair[k][k] =  TOFLT( SVD_cos(qR), SINCOS_Q1);
+                V_pair[j][j] =  ( (SVD_cos(qR) + SINCOS_TO_MATRIX_ROUND_BIT) >> SINCOS_TO_MATRIX_SHIFT);
+                V_pair[j][k] = -( (SVD_sin(qR) + SINCOS_TO_MATRIX_ROUND_BIT) >> SINCOS_TO_MATRIX_SHIFT);
+                V_pair[k][j] =  ( (SVD_sin(qR) + SINCOS_TO_MATRIX_ROUND_BIT) >> SINCOS_TO_MATRIX_SHIFT);
+                V_pair[k][k] =  ( (SVD_cos(qR) + SINCOS_TO_MATRIX_ROUND_BIT) >> SINCOS_TO_MATRIX_SHIFT);
 
                 /////////////////////////////////////////////////////
 
@@ -214,6 +222,10 @@ static matrix S_expect = {{ 85.57032,   0.00000,    0.00000,    0.00000,  },
 
 void TEST_SVD_decompose(void)
 {
+    SVD_matrix_int_to_fix(Min);
+    SVD_matrix_int_to_fix(Uout);
+    SVD_matrix_int_to_fix(Vout);
+    SVD_matrix_int_to_fix(Sout);
     // TODO
     SVD_decompose(Min, Uout, Sout, Vout);
     /*printf("\nUout = \n");

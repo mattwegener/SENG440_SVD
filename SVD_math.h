@@ -383,6 +383,16 @@ static inline matrix_elem SVD_abs(matrix_elem x)
     return fabs(x);
 }
 
+#define MATRIXQ             (8)
+#define MATRIX_ROUND_BIT    (1 << (MATRIXQ - 1))
+#define MATRIX_1            (1 << MATRIXQ)
+#define MATRIX_0_5          (1 << (MATRIXQ - 1))
+
+#define SINCOS_TO_MATRIX_SHIFT      (SINCOS_Q1 - MATRIXQ)
+#define SINCOS_TO_MATRIX_ROUND_BIT  (1 << (SINCOS_TO_MATRIX_SHIFT - 1))
+
+#define FMULR_MAT(a,b)      ((((a)*(b) + MATRIX_ROUND_BIT) >> MATRIXQ))
+
 
 #ifdef TEST
 void TEST_SVD_math(void);
