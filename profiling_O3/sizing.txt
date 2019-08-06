@@ -1,2 +1,2 @@
    text	   data	    bss	    dec	    hex	filename
- 417153	   5280	   2784	 425217	  67d01	./callgrind_profile_main_O3
+ 416961	   5280	   2784	 425025	  67c41	./callgrind_profile_main_O3
