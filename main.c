@@ -1,5 +1,5 @@
 #include "SVD.h"
-#include "SVD_matrix.c"
+#include "SVD_matrix.h"
 
 
 int main(){
