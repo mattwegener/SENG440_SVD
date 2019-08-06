@@ -2,20 +2,12 @@ Flat profile:
 
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
- time   seconds   seconds    calls  ns/call  ns/call  name    
- 81.74      2.91     2.91                             SVD_decompose
-  4.78      3.08     0.17                             atanf32
-  2.67      3.18     0.10                             __gnu_mcount_nc
-  2.25      3.26     0.08                             brk
-  1.97      3.33     0.07                             cosf32
-  1.83      3.39     0.07   960000    67.71    67.71  SVD_cos
-  1.83      3.46     0.07   960000    67.71    67.71  SVD_sin
-  1.26      3.50     0.05                             __profile_frequency
-  0.84      3.53     0.03                             sinf32
-  0.42      3.55     0.02   320000    46.88    46.88  SVD_abs
-  0.28      3.56     0.01                             _dl_sym
-  0.14      3.56     0.01   480000    10.42    10.42  SVD_atan
-  0.00      3.56     0.00        1     0.00     0.00  main
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+ 93.17      2.32     2.32                             SVD_decompose
+  5.22      2.45     0.13                             __udivmoddi4
+  1.20      2.48     0.03                             __aeabi_ldivmod
+  0.40      2.49     0.01                             __aeabi_idivmod
+  0.00      2.49     0.00        1     0.00     0.00  main
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -53,51 +45,23 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 0.28% of 3.56 seconds
+granularity: each sample hit covers 2 byte(s) for 0.40% of 2.49 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     86.0    2.91    0.15                 SVD_decompose [1]
-                0.07    0.00  960000/960000      SVD_cos [6]
-                0.07    0.00  960000/960000      SVD_sin [7]
-                0.02    0.00  320000/320000      SVD_abs [10]
-                0.01    0.00  480000/480000      SVD_atan [12]
+[1]     93.2    2.32    0.00                 SVD_decompose [1]
 -----------------------------------------------
                                                  <spontaneous>
-[2]      4.8    0.17    0.00                 atanf32 [2]
+[2]      5.2    0.13    0.00                 __udivmoddi4 [2]
 -----------------------------------------------
                                                  <spontaneous>
-[3]      2.7    0.10    0.00                 __gnu_mcount_nc [3]
+[3]      1.2    0.03    0.00                 __aeabi_ldivmod [3]
 -----------------------------------------------
                                                  <spontaneous>
-[4]      2.2    0.08    0.00                 brk [4]
+[4]      0.4    0.01    0.00                 __aeabi_idivmod [4]
 -----------------------------------------------
-                                                 <spontaneous>
-[5]      2.0    0.07    0.00                 cosf32 [5]
------------------------------------------------
-                0.07    0.00  960000/960000      SVD_decompose [1]
-[6]      1.8    0.07    0.00  960000         SVD_cos [6]
------------------------------------------------
-                0.07    0.00  960000/960000      SVD_decompose [1]
-[7]      1.8    0.07    0.00  960000         SVD_sin [7]
------------------------------------------------
-                                                 <spontaneous>
-[8]      1.3    0.05    0.00                 __profile_frequency [8]
------------------------------------------------
-                                                 <spontaneous>
-[9]      0.8    0.03    0.00                 sinf32 [9]
------------------------------------------------
-                0.02    0.00  320000/320000      SVD_decompose [1]
-[10]     0.4    0.02    0.00  320000         SVD_abs [10]
------------------------------------------------
-                                                 <spontaneous>
-[11]     0.3    0.01    0.00                 _dl_sym [11]
------------------------------------------------
-                0.01    0.00  480000/480000      SVD_decompose [1]
-[12]     0.1    0.01    0.00  480000         SVD_atan [12]
------------------------------------------------
-                0.00    0.00       1/1           __libc_start_main [604]
-[13]     0.0    0.00    0.00       1         main [13]
+                0.00    0.00       1/1           __libc_start_main [588]
+[5]      0.0    0.00    0.00       1         main [5]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -190,8 +154,5 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [10] SVD_abs                 [3] __gnu_mcount_nc         [5] cosf32
-  [12] SVD_atan                [8] __profile_frequency    [13] main
-   [6] SVD_cos                [11] _dl_sym                 [9] sinf32
-   [1] SVD_decompose           [2] atanf32
-   [7] SVD_sin                 [4] brk
+   [1] SVD_decompose           [3] __aeabi_ldivmod         [5] main
+   [4] __aeabi_idivmod         [2] __udivmoddi4
