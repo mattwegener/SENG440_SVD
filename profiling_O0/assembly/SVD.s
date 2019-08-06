@@ -1521,7 +1521,7 @@ SVD_matrix_isDiagonal:
 .L118:
 	.align	2
 .L117:
-	.word	953267991
+	.word	869711765
 	.size	SVD_matrix_isDiagonal, .-SVD_matrix_isDiagonal
 	.data
 	.align	2
@@ -1978,7 +1978,7 @@ SVD_decompose:
 .L136:
 	.word	1182793728
 	.word	1174405120
-	.word	953267991
+	.word	869711765
 .L132:
 	ldr	r3, [fp, #-28]
 	lsl	r3, r3, #4
