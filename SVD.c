@@ -85,17 +85,20 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 int32_t temp_den = TOFIX(den1, ATANQ);
                 int32_t temp_qL, temp_qR;
                 sum = SVD_atan( temp_num, temp_den );
-
+                
                 temp_num = TOFIX(num2, ATANQ);
                 temp_den = TOFIX(den2, ATANQ);
                 diff = SVD_atan( temp_num, temp_den );
                 
+                printf("sum = %f, diff = %f\n,", TOFLT(sum, ATANQ), TOFLT(diff, ATANQ));
                 // sum and diff both in ATANQ format
                 temp_qL = (sum - diff)/2;
                 temp_qR = sum - qL;
 
                 qL = TOFLT(temp_qL, ATANQ);
                 qR = TOFLT(temp_qR, ATANQ);
+
+                printf("qL = %f, qR = %f\n", qL, qR);
                 /////////////////////////////////////
                 
                 //Create U V rotation matrices for mulitplaction
