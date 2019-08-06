@@ -62,7 +62,10 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     int sweeps = 1;
     while(!SVD_matrix_isDiagonal(S))
     {
-        //printf("/////////////// SWEEP %d/////////////\n\n", sweeps);
+        #ifdef TEST
+            printf("///////////////// SWEEP %d///////////////////\n\n", sweeps);
+        #endif
+
         for(int j = 0; j < N-1; j++)
         {
             for(int k = j+1; k < N; k++)
@@ -154,8 +157,12 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 #endif
             } //end for
         }//end for
-	if (sweeps == 5) return;
-	sweeps++;
+	    if (sweeps == 5)
+        {
+            fflush(stdout);
+            return;
+        }
+	    sweeps++;
     }//end while
 
     // matrix is diagonalized, now normalize
@@ -172,6 +179,9 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
             }
         }
     }
+    #ifdef TEST
+    fflush(stdout);
+    #endif
 }
 
 
