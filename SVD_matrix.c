@@ -1,19 +1,6 @@
 
 #include "SVD_matrix.h"
 
-#ifdef TEST
-#include <stdio.h>
-#include <assert.h>
-#define println(...) printf("\n")
-
-void SVD_matrix_print(matrix m)
-{
-  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[0][0], MATRIXQ), TOFLT(m[0][1], MATRIXQ), TOFLT(m[0][2], MATRIXQ), TOFLT(m[0][3],MATRIXQ));
-  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[1][0], MATRIXQ), TOFLT(m[1][1], MATRIXQ), TOFLT(m[1][2], MATRIXQ), TOFLT(m[1][3],MATRIXQ));
-  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[2][0], MATRIXQ), TOFLT(m[2][1], MATRIXQ), TOFLT(m[2][2], MATRIXQ), TOFLT(m[2][3],MATRIXQ));
-  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[3][0], MATRIXQ), TOFLT(m[3][1], MATRIXQ), TOFLT(m[3][2], MATRIXQ), TOFLT(m[3][3],MATRIXQ));
-}
-
 void SVD_matrix_int_to_fix(matrix m){
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
@@ -27,6 +14,19 @@ void SVD_matrix_fix_to_int(matrix m){
             m[i][j] = (m[i][j] + MATRIX_ROUND_BIT) >> MATRIXQ;;
         }
     }
+}
+
+#ifdef TEST
+#include <stdio.h>
+#include <assert.h>
+#define println(...) printf("\n")
+
+void SVD_matrix_print(matrix m)
+{
+  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[0][0], MATRIXQ), TOFLT(m[0][1], MATRIXQ), TOFLT(m[0][2], MATRIXQ), TOFLT(m[0][3],MATRIXQ));
+  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[1][0], MATRIXQ), TOFLT(m[1][1], MATRIXQ), TOFLT(m[1][2], MATRIXQ), TOFLT(m[1][3],MATRIXQ));
+  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[2][0], MATRIXQ), TOFLT(m[2][1], MATRIXQ), TOFLT(m[2][2], MATRIXQ), TOFLT(m[2][3],MATRIXQ));
+  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[3][0], MATRIXQ), TOFLT(m[3][1], MATRIXQ), TOFLT(m[3][2], MATRIXQ), TOFLT(m[3][3],MATRIXQ));
 }
 
 
