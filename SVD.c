@@ -106,8 +106,8 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 */
                 // convert to sin and cosine argument format
                 //qL and qR are both in Q14... make them Q12 with rounding
-                qL = (qL + 0b10) >> 2;
-                qR = (qR + 0b10) >> 2;
+                qL = (qL + ATAN_TO_SINCOS_ROUND_BIT) >> ATAN_TO_SINCOS_SHIFT;
+                qR = (qR + ATAN_TO_SINCOS_ROUND_BIT) >> ATAN_TO_SINCOS_SHIFT;
 
                 /*
                 printf("After:\n");
