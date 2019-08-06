@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.3870' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.1310' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 6198
+Timerange: Basic block 0 - 6509
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O3 (PID 3870, part 1)
+Profiled target:  ./callgrind_profile_main_O3 (PID 1310, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,20 +18,20 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
     Ir 
 --------------------------------------------------------------------------------
-47,756  PROGRAM TOTALS
+54,085  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
     Ir  file:function
 --------------------------------------------------------------------------------
-47,756  ???:0x00010410 [/root/SENG440_SVD/callgrind_profile_main_O3]
-47,745  ???:(below main) [/root/SENG440_SVD/callgrind_profile_main_O3]
-29,929  ???:main [/root/SENG440_SVD/callgrind_profile_main_O3]
-29,920  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
+54,085  ???:0x00010410 [/root/SENG440_SVD/callgrind_profile_main_O3]
+54,074  ???:(below main) [/root/SENG440_SVD/callgrind_profile_main_O3]
+36,258  ???:main [/root/SENG440_SVD/callgrind_profile_main_O3]
+36,249  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
  8,747  ???:__tunables_init [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 7,914  ???:0x0005e93c [/root/SENG440_SVD/callgrind_profile_main_O3]
  7,464  ???:__libc_init_first [/root/SENG440_SVD/callgrind_profile_main_O3]
  7,297  ???:_dl_non_dynamic_init [/root/SENG440_SVD/callgrind_profile_main_O3]
- 7,083  ???:0x0005e8bc [/root/SENG440_SVD/callgrind_profile_main_O3]
- 6,209  ???:__udivmoddi4 [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 6,818  ???:__udivmoddi4 [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,866  ???:_dl_init_paths [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,462  ???:malloc [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,226  ???:getenv [/root/SENG440_SVD/callgrind_profile_main_O3]

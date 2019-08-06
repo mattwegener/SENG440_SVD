@@ -34,122 +34,123 @@ SVD_cos:
 	ldr	r3, [fp, #-24]
 	cmp	r3, #0
 	bne	.L2
-	mov	r3, #4096
+	mov	r3, #8192
 	b	.L3
 .L2:
 	ldr	r3, [fp, #-24]
-	movw	r2, #6433
+	movw	r2, #12868
 	cmp	r3, r2
 	bne	.L4
 	mov	r3, #0
 	b	.L3
 .L4:
 	ldr	r3, [fp, #-24]
-	movw	r2, #12867
+	movw	r2, #25736
 	cmp	r3, r2
 	bne	.L5
-	mov	r3, #61440
+	mov	r3, #57344
 	movt	r3, 65535
 	b	.L3
 .L5:
 	ldr	r3, [fp, #-24]
-	movw	r2, #6433
+	movw	r2, #12868
 	cmp	r3, r2
 	ble	.L6
 	ldr	r3, [fp, #-24]
-	rsb	r3, r3, #12864
-	add	r3, r3, #3
+	rsb	r3, r3, #25600
+	add	r3, r3, #136
 	str	r3, [fp, #-24]
 	mvn	r3, #0
 	str	r3, [fp, #-8]
 .L6:
 	ldr	r3, [fp, #-24]
-	cmp	r3, #536
+	cmp	r3, #1072
 	bge	.L7
-	movw	r3, #65268
+	movw	r3, #65001
 	movt	r3, 65535
 	str	r3, [fp, #-12]
-	mov	r3, #16777216
+	mov	r3, #67108864
 	str	r3, [fp, #-16]
 	b	.L8
 .L7:
 	ldr	r3, [fp, #-24]
-	cmp	r3, #1072
-	bge	.L9
-	movw	r3, #64737
+	cmp	r3, #2144
+	bgt	.L9
+	movw	r3, #63939
 	movt	r3, 65535
 	str	r3, [fp, #-12]
-	movw	r3, #22462
-	movt	r3, 260
+	movw	r3, #24316
+	movt	r3, 1041
 	str	r3, [fp, #-16]
 	b	.L8
 .L9:
 	ldr	r3, [fp, #-24]
-	movw	r2, #1607
-	cmp	r3, r2
+	cmp	r3, #3216
 	bgt	.L10
-	movw	r3, #64220
+	movw	r3, #62905
 	movt	r3, 65535
 	str	r3, [fp, #-12]
-	movw	r3, #52737
-	movt	r3, 268
+	movw	r3, #14343
+	movt	r3, 1075
 	str	r3, [fp, #-16]
 	b	.L8
 .L10:
 	ldr	r3, [fp, #-24]
-	cmp	r3, #2144
-	bge	.L11
-	movw	r3, #63725
+	cmp	r3, #4288
+	bgt	.L11
+	movw	r3, #61915
 	movt	r3, 65535
 	str	r3, [fp, #-12]
-	movw	r3, #61940
-	movt	r3, 280
+	movw	r3, #51152
+	movt	r3, 1123
 	str	r3, [fp, #-16]
 	b	.L8
 .L11:
 	ldr	r3, [fp, #-24]
-	cmp	r3, #3216
-	bge	.L12
-	movw	r3, #63049
+	movw	r2, #6433
+	cmp	r3, r2
+	bgt	.L12
+	movw	r3, #60563
 	movt	r3, 65535
 	str	r3, [fp, #-12]
-	movw	r3, #4511
-	movt	r3, 303
+	movw	r3, #18046
+	movt	r3, 1212
 	str	r3, [fp, #-16]
 	b	.L8
 .L12:
 	ldr	r3, [fp, #-24]
-	cmp	r3, #4288
+	movw	r2, #8578
+	cmp	r3, r2
 	bgt	.L13
-	movw	r3, #62295
+	movw	r3, #59055
 	movt	r3, 65535
 	str	r3, [fp, #-12]
-	movw	r3, #5068
-	movt	r3, 340
+	movw	r3, #20275
+	movt	r3, 1360
 	str	r3, [fp, #-16]
 	b	.L8
 .L13:
 	ldr	r3, [fp, #-24]
-	movw	r2, #5360
+	movw	r2, #10722
 	cmp	r3, r2
 	bgt	.L14
-	movw	r3, #61762
+	movw	r3, #57989
 	movt	r3, 65535
 	str	r3, [fp, #-12]
-	movw	r3, #63523
-	movt	r3, 374
+	movw	r3, #57488
+	movt	r3, 1499
 	str	r3, [fp, #-16]
 	b	.L8
 .L14:
 	ldr	r3, [fp, #-24]
-	movw	r2, #6432
+	movw	r2, #12867
 	cmp	r3, r2
 	bgt	.L8
-	movw	r3, #61486
+	movw	r3, #57437
 	movt	r3, 65535
 	str	r3, [fp, #-12]
-	movw	r3, #35786
-	movt	r3, 397
+	movw	r3, #12073
+	movt	r3, 1590
 	str	r3, [fp, #-16]
 .L8:
 	ldr	r3, [fp, #-12]
@@ -161,7 +162,8 @@ SVD_cos:
 	add	r3, r2, r3
 	str	r3, [fp, #-20]
 	ldr	r3, [fp, #-20]
-	asr	r3, r3, #12
+	add	r3, r3, #4096
+	asr	r3, r3, #13
 	str	r3, [fp, #-20]
 	ldr	r3, [fp, #-8]
 	ldr	r2, [fp, #-20]
@@ -205,109 +207,111 @@ SVD_sin:
 	b	.L18
 .L17:
 	ldr	r3, [fp, #-24]
-	movw	r2, #6433
+	movw	r2, #12868
 	cmp	r3, r2
 	bne	.L19
 	ldr	r3, [fp, #-8]
-	lsl	r3, r3, #12
+	lsl	r3, r3, #13
 	b	.L18
 .L19:
 	ldr	r3, [fp, #-24]
-	movw	r2, #12867
+	movw	r2, #25736
 	cmp	r3, r2
 	bne	.L20
 	mov	r3, #0
 	b	.L18
 .L20:
 	ldr	r3, [fp, #-24]
-	movw	r2, #6433
+	movw	r2, #12868
 	cmp	r3, r2
 	ble	.L21
 	ldr	r3, [fp, #-24]
-	rsb	r3, r3, #12864
-	add	r3, r3, #3
+	rsb	r3, r3, #25600
+	add	r3, r3, #136
 	str	r3, [fp, #-24]
 .L21:
 	ldr	r3, [fp, #-24]
-	cmp	r3, #1072
-	bge	.L22
-	movw	r3, #4049
+	cmp	r3, #2144
+	bgt	.L22
+	movw	r3, #8099
 	str	r3, [fp, #-12]
 	mov	r3, #0
 	str	r3, [fp, #-16]
 	b	.L23
 .L22:
 	ldr	r3, [fp, #-24]
-	cmp	r3, #2144
-	bge	.L24
-	movw	r3, #3773
+	cmp	r3, #4288
+	bgt	.L24
+	movw	r3, #7547
 	str	r3, [fp, #-12]
-	movw	r3, #33774
-	movt	r3, 4
+	movw	r3, #4024
+	movt	r3, 18
 	str	r3, [fp, #-16]
 	b	.L23
 .L24:
 	ldr	r3, [fp, #-24]
-	cmp	r3, #3216
-	bge	.L25
-	movw	r3, #3240
+	movw	r2, #6433
+	cmp	r3, r2
+	bgt	.L25
+	movw	r3, #6481
 	str	r3, [fp, #-12]
-	movw	r3, #63001
-	movt	r3, 21
+	movw	r3, #55398
+	movt	r3, 87
 	str	r3, [fp, #-16]
 	b	.L23
 .L25:
 	ldr	r3, [fp, #-24]
-	cmp	r3, #4288
+	movw	r2, #8578
+	cmp	r3, r2
 	bgt	.L26
-	movw	r3, #2486
+	movw	r3, #4973
 	str	r3, [fp, #-12]
-	movw	r3, #63559
-	movt	r3, 58
+	movw	r3, #57628
+	movt	r3, 235
 	str	r3, [fp, #-16]
 	b	.L23
 .L26:
 	ldr	r3, [fp, #-24]
-	movw	r2, #4824
+	movw	r2, #9650
 	cmp	r3, r2
 	bgt	.L27
-	movw	r3, #1810
+	movw	r3, #3621
 	str	r3, [fp, #-12]
-	movw	r3, #14237
-	movt	r3, 103
+	movw	r3, #56950
+	movt	r3, 412
 	str	r3, [fp, #-16]
 	b	.L23
 .L27:
 	ldr	r3, [fp, #-24]
-	movw	r2, #5360
+	movw	r2, #10722
 	cmp	r3, r2
 	bgt	.L28
-	movw	r3, #1315
+	movw	r3, #2631
 	str	r3, [fp, #-12]
-	movw	r3, #41844
-	movt	r3, 139
+	movw	r3, #36307
+	movt	r3, 558
 	str	r3, [fp, #-16]
 	b	.L23
 .L28:
 	ldr	r3, [fp, #-24]
-	movw	r2, #5896
+	movw	r2, #11795
 	cmp	r3, r2
 	bgt	.L29
-	movw	r3, #798
+	movw	r3, #1597
 	str	r3, [fp, #-12]
-	movw	r3, #62146
-	movt	r3, 181
+	movw	r3, #51978
+	movt	r3, 727
 	str	r3, [fp, #-16]
 	b	.L23
 .L29:
 	ldr	r3, [fp, #-24]
-	movw	r2, #6432
+	movw	r2, #12867
 	cmp	r3, r2
 	bgt	.L23
-	movw	r3, #267
+	movw	r3, #535
 	str	r3, [fp, #-12]
-	movw	r3, #47095
-	movt	r3, 229
+	movw	r3, #57308
+	movt	r3, 918
 	str	r3, [fp, #-16]
 .L23:
 	ldr	r3, [fp, #-12]
@@ -319,7 +323,8 @@ SVD_sin:
 	add	r3, r2, r3
 	str	r3, [fp, #-20]
 	ldr	r3, [fp, #-20]
-	asr	r3, r3, #12
+	add	r3, r3, #4096
+	asr	r3, r3, #13
 	str	r3, [fp, #-20]
 	ldr	r3, [fp, #-8]
 	ldr	r2, [fp, #-20]
@@ -347,7 +352,7 @@ arctan:
 	ldr	r3, [fp, #-16]
 	cmp	r3, #8192
 	ble	.L31
-	movw	r3, #41418
+	movw	r3, #41419
 	movt	r3, 581
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-16]
@@ -357,6 +362,7 @@ arctan:
 	add	r3, r2, r3
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-8]
+	add	r3, r3, #8192
 	asr	r3, r3, #14
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-8]
@@ -371,13 +377,18 @@ arctan:
 	ldr	r3, [fp, #-16]
 	movw	r2, #15204
 	mul	r3, r2, r3
+	str	r3, [fp, #-8]
+	ldr	r3, [fp, #-8]
+	add	r3, r3, #8192
 	asr	r3, r3, #14
+	str	r3, [fp, #-8]
+	ldr	r3, [fp, #-8]
 	b	.L32
 .L33:
 	ldr	r3, [fp, #-16]
 	cmn	r3, #8192
 	bge	.L34
-	movw	r3, #24118
+	movw	r3, #24117
 	movt	r3, 64954
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-16]
@@ -387,6 +398,7 @@ arctan:
 	add	r3, r2, r3
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-8]
+	add	r3, r3, #8192
 	asr	r3, r3, #14
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-8]
@@ -420,13 +432,13 @@ SVD_atan:
 	ldr	r3, [fp, #-48]
 	cmp	r3, #0
 	ble	.L37
-	movw	r3, #25735
+	movw	r3, #25736
 	b	.L38
 .L37:
 	ldr	r3, [fp, #-48]
 	cmp	r3, #0
 	bge	.L39
-	movw	r3, #39801
+	movw	r3, #39800
 	movt	r3, 65535
 	b	.L38
 .L39:
@@ -491,12 +503,12 @@ SVD_atan:
 	blt	.L42
 	ldr	r3, [fp, #-8]
 	rsb	r3, r3, #25600
-	add	r3, r3, #135
+	add	r3, r3, #136
 	str	r3, [fp, #-8]
 	b	.L41
 .L42:
 	ldr	r2, [fp, #-8]
-	movw	r3, #39801
+	movw	r3, #39800
 	movt	r3, 65535
 	sub	r3, r3, r2
 	str	r3, [fp, #-8]
@@ -1509,7 +1521,7 @@ SVD_matrix_isDiagonal:
 .L118:
 	.align	2
 .L117:
-	.word	1036831949
+	.word	1008981770
 	.size	SVD_matrix_isDiagonal, .-SVD_matrix_isDiagonal
 	.data
 	.align	2
@@ -1754,10 +1766,12 @@ SVD_decompose:
 	sub	r3, r2, r3
 	str	r3, [fp, #-56]
 	ldr	r3, [fp, #-60]
-	asr	r3, r3, #2
+	add	r3, r3, #1
+	asr	r3, r3, #1
 	str	r3, [fp, #-60]
 	ldr	r3, [fp, #-56]
-	asr	r3, r3, #2
+	add	r3, r3, #1
+	asr	r3, r3, #1
 	str	r3, [fp, #-56]
 	ldr	r0, [fp, #-60]
 	bl	SVD_cos
@@ -1955,8 +1969,8 @@ SVD_decompose:
 	.align	2
 .L133:
 	.word	1182793728
-	.word	1166016512
-	.word	1036831949
+	.word	1174405120
+	.word	1008981770
 .L130:
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
