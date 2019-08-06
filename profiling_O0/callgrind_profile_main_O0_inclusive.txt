@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.1703' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.2116' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 9655
+Timerange: Basic block 0 - 9660
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O0 (PID 1703, part 1)
+Profiled target:  ./callgrind_profile_main_O0 (PID 2116, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,15 +18,15 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-149,811  PROGRAM TOTALS
+149,837  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
      Ir  file:function
 --------------------------------------------------------------------------------
-149,811  ???:0x000103ec [/root/SENG440_SVD/callgrind_profile_main_O0]
-149,800  ???:(below main) [/root/SENG440_SVD/callgrind_profile_main_O0]
-131,984  ???:main [/root/SENG440_SVD/callgrind_profile_main_O0]
-131,970  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O0]
+149,837  ???:0x000103ec [/root/SENG440_SVD/callgrind_profile_main_O0]
+149,826  ???:(below main) [/root/SENG440_SVD/callgrind_profile_main_O0]
+132,010  ???:main [/root/SENG440_SVD/callgrind_profile_main_O0]
+131,996  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O0]
  75,552  ???:SVD_matrix_mul [/root/SENG440_SVD/callgrind_profile_main_O0]
  27,813  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
   9,072  ???:SVD_matrix_trans [/root/SENG440_SVD/callgrind_profile_main_O0]

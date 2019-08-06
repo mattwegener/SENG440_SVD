@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.1777' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.2195' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 5779
+Timerange: Basic block 0 - 5776
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O3 (PID 1777, part 1)
+Profiled target:  ./callgrind_profile_main_O3 (PID 2195, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,12 +18,12 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
     Ir 
 --------------------------------------------------------------------------------
-44,162  PROGRAM TOTALS
+43,410  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
     Ir  file:function
 --------------------------------------------------------------------------------
-17,880  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
+17,128  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
  8,747  ???:__tunables_init [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,706  ???:cosf [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,625  ???:atanf [/root/SENG440_SVD/callgrind_profile_main_O3]
@@ -48,8 +48,8 @@ Auto-annotation:  on
    145  ???:sysmalloc [/root/SENG440_SVD/callgrind_profile_main_O3]
    140  ???:_IO_flush_all_lockp [/root/SENG440_SVD/callgrind_profile_main_O3]
    116  ???:_IO_cleanup [/root/SENG440_SVD/callgrind_profile_main_O3]
-    96  ???:SVD_cos [/root/SENG440_SVD/callgrind_profile_main_O3]
     96  ???:SVD_atan [/root/SENG440_SVD/callgrind_profile_main_O3]
+    96  ???:SVD_cos [/root/SENG440_SVD/callgrind_profile_main_O3]
     96  ???:SVD_sin [/root/SENG440_SVD/callgrind_profile_main_O3]
     93  ???:rindex [/root/SENG440_SVD/callgrind_profile_main_O3]
     79  ???:_dl_discover_osversion [/root/SENG440_SVD/callgrind_profile_main_O3]

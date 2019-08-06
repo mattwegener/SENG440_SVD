@@ -992,7 +992,7 @@ SVD_matrix_isDiagonal:
 .L74:
 	.align	2
 .L73:
-	.word	953267991
+	.word	869711765
 	.size	SVD_matrix_isDiagonal, .-SVD_matrix_isDiagonal
 	.data
 	.align	2
@@ -1023,44 +1023,42 @@ I:
 	.fpu neon
 	.type	SVD_decompose, %function
 SVD_decompose:
-	@ args = 0, pretend = 0, frame = 576
+	@ args = 0, pretend = 0, frame = 584
 	@ frame_needed = 1, uses_anonymous_args = 0
 	push	{r4, fp, lr}
 	add	fp, sp, #8
-	sub	sp, sp, #580
-	str	r0, [fp, #-576]
-	str	r1, [fp, #-580]
-	str	r2, [fp, #-584]
-	str	r3, [fp, #-588]
-	sub	r3, fp, #188
+	sub	sp, sp, #588
+	str	r0, [fp, #-584]
+	str	r1, [fp, #-588]
+	str	r2, [fp, #-592]
+	str	r3, [fp, #-596]
+	sub	r3, fp, #192
 	mov	r2, #64
 	mov	r1, #0
 	mov	r0, r3
 	bl	memset
-	sub	r3, fp, #252
+	sub	r3, fp, #256
 	mov	r2, #64
 	mov	r1, #0
 	mov	r0, r3
 	bl	memset
-	sub	r3, fp, #316
+	sub	r3, fp, #320
 	mov	r2, #64
 	mov	r1, #0
 	mov	r0, r3
 	bl	memset
-	ldr	r1, [fp, #-584]
-	ldr	r0, [fp, #-576]
+	ldr	r1, [fp, #-592]
+	ldr	r0, [fp, #-584]
 	bl	SVD_matrix_copy
-	ldr	r1, [fp, #-580]
+	ldr	r1, [fp, #-588]
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	sub	r3, fp, #124
+	sub	r3, fp, #128
 	mov	r1, r3
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	mov	r3, #0
-	str	r3, [fp, #-32]	@ float
 	mov	r3, #0
 	str	r3, [fp, #-36]	@ float
 	mov	r3, #0
@@ -1075,178 +1073,194 @@ SVD_decompose:
 	str	r3, [fp, #-56]	@ float
 	mov	r3, #0
 	str	r3, [fp, #-60]	@ float
-	b	.L76
-.L81:
 	mov	r3, #0
+	str	r3, [fp, #-64]	@ float
+	mov	r3, #1
 	str	r3, [fp, #-16]
+	b	.L76
+.L83:
+	mov	r3, #0
+	str	r3, [fp, #-20]
 	b	.L77
 .L80:
-	ldr	r3, [fp, #-16]
+	ldr	r3, [fp, #-20]
 	add	r3, r3, #1
-	str	r3, [fp, #-20]
+	str	r3, [fp, #-24]
 	b	.L78
 .L79:
-	sub	r3, fp, #188
+	sub	r3, fp, #192
 	mov	r1, r3
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	sub	r3, fp, #252
+	sub	r3, fp, #256
 	mov	r1, r3
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	sub	r3, fp, #316
+	sub	r3, fp, #320
 	mov	r1, r3
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	sub	r3, fp, #380
+	sub	r3, fp, #384
 	mov	r1, r3
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	sub	r3, fp, #444
+	sub	r3, fp, #448
 	mov	r1, r3
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	sub	r3, fp, #508
+	sub	r3, fp, #512
 	mov	r1, r3
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	sub	r3, fp, #572
+	sub	r3, fp, #576
 	mov	r1, r3
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	ldr	r3, [fp, #-20]
+	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-592]
 	add	r2, r2, r3
-	ldr	r3, [fp, #-16]
+	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s14, [r3]
-	ldr	r3, [fp, #-16]
-	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
-	add	r2, r2, r3
 	ldr	r3, [fp, #-20]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-592]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s15, [r3]
 	vadd.f32	s15, s14, s15
-	vstr.32	s15, [fp, #-32]
-	ldr	r3, [fp, #-20]
-	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
-	add	r2, r2, r3
-	ldr	r3, [fp, #-16]
-	lsl	r3, r3, #2
-	add	r3, r2, r3
-	vldr.32	s14, [r3]
-	ldr	r3, [fp, #-16]
-	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
-	add	r2, r2, r3
-	ldr	r3, [fp, #-20]
-	lsl	r3, r3, #2
-	add	r3, r2, r3
-	vldr.32	s15, [r3]
-	vsub.f32	s15, s14, s15
 	vstr.32	s15, [fp, #-36]
-	ldr	r3, [fp, #-20]
+	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-592]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s14, [r3]
-	ldr	r3, [fp, #-16]
+	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-592]
 	add	r2, r2, r3
-	ldr	r3, [fp, #-16]
+	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s15, [r3]
 	vsub.f32	s15, s14, s15
 	vstr.32	s15, [fp, #-40]
+	ldr	r3, [fp, #-24]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-592]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-24]
+	lsl	r3, r3, #2
+	add	r3, r2, r3
+	vldr.32	s14, [r3]
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-592]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #2
 	add	r3, r2, r3
-	vldr.32	s14, [r3]
-	ldr	r3, [fp, #-16]
+	vldr.32	s15, [r3]
+	vsub.f32	s15, s14, s15
+	vstr.32	s15, [fp, #-44]
+	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-592]
 	add	r2, r2, r3
-	ldr	r3, [fp, #-16]
+	ldr	r3, [fp, #-24]
+	lsl	r3, r3, #2
+	add	r3, r2, r3
+	vldr.32	s14, [r3]
+	ldr	r3, [fp, #-20]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-592]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s15, [r3]
 	vadd.f32	s15, s14, s15
-	vstr.32	s15, [fp, #-44]
-	vldr.32	s1, [fp, #-40]
-	vldr.32	s0, [fp, #-32]
-	bl	SVD_atan
-	vstr.32	s0, [fp, #-48]
+	vstr.32	s15, [fp, #-48]
 	vldr.32	s1, [fp, #-44]
 	vldr.32	s0, [fp, #-36]
 	bl	SVD_atan
 	vstr.32	s0, [fp, #-52]
-	vldr.32	s14, [fp, #-48]
-	vldr.32	s15, [fp, #-52]
+	vldr.32	s1, [fp, #-48]
+	vldr.32	s0, [fp, #-40]
+	bl	SVD_atan
+	vstr.32	s0, [fp, #-56]
+	vldr.32	s14, [fp, #-52]
+	vldr.32	s15, [fp, #-56]
 	vsub.f32	s14, s14, s15
 	vmov.f32	s13, #2.0e+0
 	vdiv.f32	s15, s14, s13
-	vstr.32	s15, [fp, #-60]
-	vldr.32	s14, [fp, #-48]
-	vldr.32	s15, [fp, #-60]
+	vstr.32	s15, [fp, #-64]
+	vldr.32	s14, [fp, #-52]
+	vldr.32	s15, [fp, #-64]
 	vsub.f32	s15, s14, s15
-	vstr.32	s15, [fp, #-56]
-	vldr.32	s0, [fp, #-60]
+	vstr.32	s15, [fp, #-60]
+	vldr.32	s0, [fp, #-64]
 	bl	SVD_cos
 	vmov.f32	s15, s0
-	ldr	r2, [fp, #-16]
+	ldr	r2, [fp, #-20]
 	mov	r3, r2
 	lsl	r3, r3, #2
 	add	r3, r3, r2
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #368
+	sub	r3, r3, #372
 	vstr.32	s15, [r3]
-	vldr.32	s0, [fp, #-60]
+	vldr.32	s0, [fp, #-64]
 	bl	SVD_sin
 	vmov.f32	s15, s0
 	vneg.f32	s15, s15
-	ldr	r3, [fp, #-16]
-	lsl	r2, r3, #2
 	ldr	r3, [fp, #-20]
+	lsl	r2, r3, #2
+	ldr	r3, [fp, #-24]
 	add	r3, r2, r3
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #368
+	sub	r3, r3, #372
 	vstr.32	s15, [r3]
-	vldr.32	s0, [fp, #-60]
+	vldr.32	s0, [fp, #-64]
 	bl	SVD_sin
 	vmov.f32	s15, s0
-	ldr	r3, [fp, #-20]
+	ldr	r3, [fp, #-24]
 	lsl	r2, r3, #2
-	ldr	r3, [fp, #-16]
+	ldr	r3, [fp, #-20]
 	add	r3, r2, r3
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #368
+	sub	r3, r3, #372
+	vstr.32	s15, [r3]
+	vldr.32	s0, [fp, #-64]
+	bl	SVD_cos
+	vmov.f32	s15, s0
+	ldr	r2, [fp, #-24]
+	mov	r3, r2
+	lsl	r3, r3, #2
+	add	r3, r3, r2
+	lsl	r3, r3, #2
+	sub	r2, fp, #12
+	add	r3, r2, r3
+	sub	r3, r3, #372
 	vstr.32	s15, [r3]
 	vldr.32	s0, [fp, #-60]
 	bl	SVD_cos
@@ -1258,191 +1272,188 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #368
+	sub	r3, r3, #436
 	vstr.32	s15, [r3]
-	vldr.32	s0, [fp, #-56]
-	bl	SVD_cos
-	vmov.f32	s15, s0
-	ldr	r2, [fp, #-16]
-	mov	r3, r2
-	lsl	r3, r3, #2
-	add	r3, r3, r2
-	lsl	r3, r3, #2
-	sub	r2, fp, #12
-	add	r3, r2, r3
-	sub	r3, r3, #432
-	vstr.32	s15, [r3]
-	vldr.32	s0, [fp, #-56]
+	vldr.32	s0, [fp, #-60]
 	bl	SVD_sin
 	vmov.f32	s15, s0
 	vneg.f32	s15, s15
-	ldr	r3, [fp, #-16]
-	lsl	r2, r3, #2
 	ldr	r3, [fp, #-20]
+	lsl	r2, r3, #2
+	ldr	r3, [fp, #-24]
 	add	r3, r2, r3
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #432
+	sub	r3, r3, #436
 	vstr.32	s15, [r3]
-	vldr.32	s0, [fp, #-56]
+	vldr.32	s0, [fp, #-60]
 	bl	SVD_sin
 	vmov.f32	s15, s0
-	ldr	r3, [fp, #-20]
+	ldr	r3, [fp, #-24]
 	lsl	r2, r3, #2
-	ldr	r3, [fp, #-16]
+	ldr	r3, [fp, #-20]
 	add	r3, r2, r3
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #432
+	sub	r3, r3, #436
 	vstr.32	s15, [r3]
-	vldr.32	s0, [fp, #-56]
+	vldr.32	s0, [fp, #-60]
 	bl	SVD_cos
 	vmov.f32	s15, s0
-	ldr	r2, [fp, #-20]
+	ldr	r2, [fp, #-24]
 	mov	r3, r2
 	lsl	r3, r3, #2
 	add	r3, r3, r2
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #432
+	sub	r3, r3, #436
 	vstr.32	s15, [r3]
-	sub	r2, fp, #508
-	sub	r3, fp, #380
+	sub	r2, fp, #512
+	sub	r3, fp, #384
 	mov	r1, r2
 	mov	r0, r3
 	bl	SVD_matrix_trans
-	sub	r2, fp, #572
-	sub	r3, fp, #444
+	sub	r2, fp, #576
+	sub	r3, fp, #448
 	mov	r1, r2
 	mov	r0, r3
 	bl	SVD_matrix_trans
-	sub	r2, fp, #188
-	sub	r3, fp, #508
+	sub	r2, fp, #192
+	sub	r3, fp, #512
 	mov	r1, r3
-	ldr	r0, [fp, #-580]
+	ldr	r0, [fp, #-588]
 	bl	SVD_matrix_mul
-	sub	r2, fp, #316
-	sub	r1, fp, #124
-	sub	r3, fp, #444
+	sub	r2, fp, #320
+	sub	r1, fp, #128
+	sub	r3, fp, #448
 	mov	r0, r3
 	bl	SVD_matrix_mul
-	sub	r2, fp, #252
-	sub	r3, fp, #380
-	ldr	r1, [fp, #-584]
+	sub	r2, fp, #256
+	sub	r3, fp, #384
+	ldr	r1, [fp, #-592]
 	mov	r0, r3
 	bl	SVD_matrix_mul
-	sub	r1, fp, #572
-	sub	r3, fp, #252
-	ldr	r2, [fp, #-584]
+	sub	r1, fp, #576
+	sub	r3, fp, #256
+	ldr	r2, [fp, #-592]
 	mov	r0, r3
 	bl	SVD_matrix_mul
-	sub	r2, fp, #124
-	sub	r3, fp, #316
+	sub	r2, fp, #128
+	sub	r3, fp, #320
 	mov	r1, r2
 	mov	r0, r3
 	bl	SVD_matrix_copy
-	sub	r3, fp, #124
+	sub	r3, fp, #128
+	ldr	r1, [fp, #-596]
+	mov	r0, r3
+	bl	SVD_matrix_trans
+	sub	r3, fp, #192
 	ldr	r1, [fp, #-588]
 	mov	r0, r3
-	bl	SVD_matrix_trans
-	sub	r3, fp, #188
-	ldr	r1, [fp, #-580]
-	mov	r0, r3
 	bl	SVD_matrix_copy
+	ldr	r3, [fp, #-24]
+	add	r3, r3, #1
+	str	r3, [fp, #-24]
+.L78:
+	ldr	r3, [fp, #-24]
+	cmp	r3, #3
+	ble	.L79
 	ldr	r3, [fp, #-20]
 	add	r3, r3, #1
 	str	r3, [fp, #-20]
-.L78:
+.L77:
 	ldr	r3, [fp, #-20]
-	cmp	r3, #3
-	ble	.L79
+	cmp	r3, #2
+	ble	.L80
+	ldr	r3, [fp, #-16]
+	cmp	r3, #5
+	beq	.L91
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-16]
-.L77:
-	ldr	r3, [fp, #-16]
-	cmp	r3, #2
-	ble	.L80
 .L76:
-	ldr	r0, [fp, #-584]
+	ldr	r0, [fp, #-592]
 	bl	SVD_matrix_isDiagonal
 	mov	r3, r0
 	cmp	r3, #0
-	beq	.L81
-	mov	r3, #0
-	str	r3, [fp, #-24]
-	b	.L82
-.L87:
+	beq	.L83
 	mov	r3, #0
 	str	r3, [fp, #-28]
-	b	.L83
-.L86:
-	ldr	r3, [fp, #-24]
-	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
-	add	r2, r2, r3
+	b	.L84
+.L89:
+	mov	r3, #0
+	str	r3, [fp, #-32]
+	b	.L85
+.L88:
 	ldr	r3, [fp, #-28]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-592]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-32]
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s15, [r3]
-	ldr	r3, [fp, #-24]
+	ldr	r3, [fp, #-28]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-592]
 	add	r4, r2, r3
 	vmov.f32	s0, s15
 	bl	SVD_abs
 	vmov.f32	s15, s0
-	ldr	r3, [fp, #-28]
+	ldr	r3, [fp, #-32]
 	lsl	r3, r3, #2
 	add	r3, r4, r3
 	vstr.32	s15, [r3]
-	ldr	r3, [fp, #-24]
-	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
-	add	r2, r2, r3
 	ldr	r3, [fp, #-28]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-592]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-32]
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	vldr.32	s15, [r3]
-	vldr.32	s14, .L89
+	vldr.32	s14, .L92
 	vcmpe.f32	s15, s14
 	vmrs	APSR_nzcv, FPSCR
-	bpl	.L84
-	ldr	r3, [fp, #-24]
-	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
-	add	r2, r2, r3
+	bpl	.L86
 	ldr	r3, [fp, #-28]
+	lsl	r3, r3, #4
+	ldr	r2, [fp, #-592]
+	add	r2, r2, r3
+	ldr	r3, [fp, #-32]
 	lsl	r3, r3, #2
 	add	r3, r2, r3
 	mov	r2, #0
 	str	r2, [r3]	@ float
-.L84:
+.L86:
+	ldr	r3, [fp, #-32]
+	add	r3, r3, #1
+	str	r3, [fp, #-32]
+.L85:
+	ldr	r3, [fp, #-32]
+	cmp	r3, #3
+	ble	.L88
 	ldr	r3, [fp, #-28]
 	add	r3, r3, #1
 	str	r3, [fp, #-28]
-.L83:
+.L84:
 	ldr	r3, [fp, #-28]
 	cmp	r3, #3
-	ble	.L86
-	ldr	r3, [fp, #-24]
-	add	r3, r3, #1
-	str	r3, [fp, #-24]
-.L82:
-	ldr	r3, [fp, #-24]
-	cmp	r3, #3
-	ble	.L87
+	ble	.L89
+	b	.L75
+.L91:
 	nop
+.L75:
 	sub	sp, fp, #8
 	@ sp needed
 	pop	{r4, fp, pc}
-.L90:
+.L93:
 	.align	2
-.L89:
-	.word	953267991
+.L92:
+	.word	869711765
 	.size	SVD_decompose, .-SVD_decompose
 	.ident	"GCC: (GNU) 8.2.1 20180801 (Red Hat 8.2.1-2)"
 	.section	.note.GNU-stack,"",%progbits
