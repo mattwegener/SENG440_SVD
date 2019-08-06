@@ -159,7 +159,9 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
         }//end for
 	    if (sweeps == 5)
         {
+            #ifdef TEST
             fflush(stdout);
+            #endif
             return;
         }
 	    sweeps++;
