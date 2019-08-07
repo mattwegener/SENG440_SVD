@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-#define EPS     (1 << (5))    //< floating point comparison epsilon
+#define EPS     (1 << (3))    //< floating point comparison epsilon
 #define N       (4)             //< Matrix size NxN
 
 typedef int32_t matrix_elem; //< we can change this later to use fixed point
