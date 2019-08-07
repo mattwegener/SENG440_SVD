@@ -1,10 +1,12 @@
 
 #include "SVD.h"
 
-static matrix I  = {{  1.0,  0.0,  0.0,  0.0, },
-                    {  0.0,  1.0,  0.0,  0.0, },
-                    {  0.0,  0.0,  1.0,  0.0, },
-                    {  0.0,  0.0,  0.0,  1.0, },};
+matrix I  =
+                    {{  1.0,  0.0,  0.0,  0.0, },
+                     {  0.0,  1.0,  0.0,  0.0, },
+                     {  0.0,  0.0,  1.0,  0.0, },
+                     {  0.0,  0.0,  0.0,  1.0, },};
+
 
 void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V /*OUT*/ )
 {
@@ -23,15 +25,9 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     V' = V12*Vt
     */
 
-    matrix Vt;
-    matrix Up = {0};
-    matrix Mp = {0};
-    matrix Vtp = {0};
-    matrix U_pair, V_pair, U_pair_trans, V_pair_trans;
-
     SVD_matrix_copy(M,S);
     SVD_matrix_copy(I, U);
-    SVD_matrix_copy(I, Vt);
+    SVD_matrix_copy(I, V); // V is the transpose during the algorithm, has to be tranposed at the end
 
     //matrix_elem pair_m[2][2];
     /*
@@ -51,21 +47,16 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     matrix_elem qR = 0.0;
     matrix_elem qL = 0.0;
 
+    matrix Temp;
+
     while(!SVD_matrix_isDiagonal(S))
     {
         for(int j = 0; j < N-1; j++)
         {
             for(int k = j+1; k < N; k++)
             {
-                // reload all matrices to identity
-                SVD_matrix_copy(I,Up);
-                SVD_matrix_copy(I,Mp);
-                SVD_matrix_copy(I,Vtp);
-                SVD_matrix_copy(I,U_pair);
-                SVD_matrix_copy(I,V_pair);
-                SVD_matrix_copy(I,U_pair_trans); 
-                SVD_matrix_copy(I,V_pair_trans);
-                
+                // reload temp 
+                SVD_matrix_copy(I, Temp);
                 //calculate rotation angles
                 num1 = S[k][j] + S[j][k];
                 num2 = S[k][j] - S[j][k];
@@ -77,35 +68,36 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 qL = (sum - diff)/2;
                 qR = sum - qL;
                 
-                //Create U V rotation matrices for mulitplaction
-                U_pair[j][j] = SVD_cos(qL);
-                U_pair[j][k] = -1*SVD_sin(qL);
-                U_pair[k][j] = SVD_sin(qL);
-                U_pair[k][k] = SVD_cos(qL);
+                //Calculate left rotation matrix Uij
+                Temp[j][j] = SVD_cos(qL);
+                Temp[j][k] = -1*SVD_sin(qL);
+                Temp[k][j] = SVD_sin(qL);
+                Temp[k][k] = SVD_cos(qL);
 
-                V_pair[j][j] = SVD_cos(qR);
-                V_pair[j][k] = -1*SVD_sin(qR);
-                V_pair[k][j] = SVD_sin(qR);
-                V_pair[k][k] = SVD_cos(qR);
+                // M' = Uij * M
+                SVD_matrix_in_place_left_mul(Temp, S);
+                // U' = U * Uij^T
+                SVD_matrix_in_place_right_mul_by_trans(U, Temp);
 
-                //Transpose matrices
-                SVD_matrix_trans(U_pair, U_pair_trans);
-                SVD_matrix_trans(V_pair, V_pair_trans);
 
-                //DO algorithm multiplaction
-                SVD_matrix_mul(U, U_pair_trans, Up);
-                SVD_matrix_mul(V_pair, Vt, Vtp);
+                // reload temp 
+                SVD_matrix_copy(I, Temp);
 
-                SVD_matrix_mul(U_pair,S,Mp); //U pair * S -> M'
-                SVD_matrix_mul(Mp,V_pair_trans,S); //M' * V pair t -> S
+                // calculate right rotation matrix Vij
+                Temp[j][j] = SVD_cos(qR);
+                Temp[j][k] = -1*SVD_sin(qR);
+                Temp[k][j] = SVD_sin(qR);
+                Temp[k][k] = SVD_cos(qR);
 
-                //Update S, U, V, Vt
-                SVD_matrix_copy(Vtp,Vt);
-                SVD_matrix_trans(Vt,V);
-                SVD_matrix_copy(Up,U);
+                // M'' = M' * Vij^T
+                SVD_matrix_in_place_right_mul_by_trans(S, Temp);
+                // V'^T = Vij * V^T
+                SVD_matrix_in_place_left_mul(Temp, V);
             } //end for
         }//end for
     }//end while
+
+    SVD_matrix_in_place_trans(V);
 
     // matrix is diagonalized, now normalize
     for (int i = 0; i < N; i++)
@@ -153,13 +145,19 @@ void TEST_SVD_decompose(void)
 {
     // TODO
     SVD_decompose(Min, Uout, Sout, Vout);
-    /*printf("\nUout = \n");
+    
+    printf("\n/////////////// SVD DECOMP RESULT ////////////\n");
+    printf("\nINPUT ----------------------------------------\n");
+    printf("\nM = \n");
+    SVD_matrix_print(Min);
+    printf("\nOUTPUT ---------------------------------------\n");
+    printf("\nU = \n");
     SVD_matrix_print(Uout);
-    printf("\nSout = \n");
+    printf("\nS = \n");
     SVD_matrix_print(Sout);
-    printf("\nVout = \n");
-    SVD_matrix_print(Vout);*/
-
+    printf("\nV = \n");
+    SVD_matrix_print(Vout);
+    printf("\n");
     assert(SVD_matrix_equal(Sout, S_expect));
 }
 #endif
