@@ -157,14 +157,11 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 #endif
             } //end for
         }//end for
-	    if (sweeps == 4)
-        {
-            #ifdef TEST
+        #ifdef TEST
             fflush(stdout);
-            #endif
-            return;
+            sweeps++;
+        #endif
         }
-	    sweeps++;
     }//end while
 
     // matrix is diagonalized, now normalize
