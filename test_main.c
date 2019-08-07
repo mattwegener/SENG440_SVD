@@ -12,7 +12,12 @@ int main(void)
     TEST_SVD_math();
     TEST_SVD_matrix_equal();
     TEST_SVD_matrix_mul();
+    TEST_SVD_matrix_in_place_left_mul();
+    TEST_SVD_matrix_in_place_right_mul();
     TEST_SVD_matrix_trans();
+    TEST_SVD_matrix_in_place_trans();
+    TEST_SVD_matrix_in_place_left_mul_by_trans();
+    TEST_SVD_matrix_in_place_right_mul_by_trans();
     TEST_SVD_matrix_copy();
     TEST_SVD_decompose();
     // if we get here, we have finished the tests.
