@@ -3,26 +3,26 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  us/call  us/call  name    
- 49.03      1.77     1.77   960000     1.84     1.84  SVD_matrix_mul
- 22.36      2.57     0.81                             SVD_decompose
-  6.53      2.81     0.24                             __gnu_mcount_nc
-  4.72      2.98     0.17                             brk
-  4.44      3.14     0.16                             atanf32
-  2.50      3.23     0.09                             cosf32
-  2.50      3.32     0.09                             sinf32
-  1.53      3.37     0.06   960000     0.06     0.06  SVD_sin
-  1.53      3.43     0.06                             __profile_frequency
-  1.39      3.48     0.05   960000     0.05     0.05  SVD_cos
-  1.25      3.52     0.05  2190000     0.02     0.02  SVD_matrix_copy
-  0.56      3.54     0.02                             _dl_sym
-  0.42      3.56     0.02   720000     0.02     0.02  SVD_matrix_trans
-  0.28      3.57     0.01   320000     0.03     0.03  SVD_abs
-  0.28      3.58     0.01    50000     0.20     0.30  SVD_matrix_isDiagonal
-  0.28      3.59     0.01                             SVD_tan
-  0.14      3.59     0.01   480000     0.01     0.01  SVD_atan
-  0.14      3.60     0.01                             memmove
-  0.14      3.60     0.01                             memset
-  0.00      3.60     0.00        1     0.00     0.00  main
+ 24.85      0.83     0.83   480000     1.72     1.72  SVD_matrix_in_place_right_mul_by_trans
+ 24.40      1.64     0.81   480000     1.69     1.69  SVD_matrix_in_place_left_mul
+ 21.99      2.37     0.73                             SVD_decompose
+  5.42      2.55     0.18                             __gnu_mcount_nc
+  5.12      2.72     0.17                             atanf32
+  3.77      2.84     0.13   960000     0.13     0.13  SVD_cos
+  2.71      2.93     0.09   960000     0.09     0.09  SVD_sin
+  2.71      3.02     0.09                             sinf32
+  2.11      3.09     0.07                             cosf32
+  1.51      3.14     0.05   480000     0.10     0.10  SVD_atan
+  1.51      3.19     0.05                             __profile_frequency
+  1.51      3.24     0.05                             brk
+  0.90      3.27     0.03   510000     0.06     0.06  SVD_matrix_copy
+  0.45      3.29     0.02                             SVD_tan
+  0.30      3.30     0.01   320000     0.03     0.03  SVD_abs
+  0.30      3.31     0.01    50000     0.20     0.30  SVD_matrix_isDiagonal
+  0.30      3.32     0.01                             _dl_sym
+  0.15      3.32     0.01                             SVD_matrix_in_place_left_mul_by_trans
+  0.00      3.32     0.00    10000     0.00     0.00  SVD_matrix_in_place_trans
+  0.00      3.32     0.00        1     0.00     0.00  main
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -60,77 +60,78 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 0.28% of 3.60 seconds
+granularity: each sample hit covers 2 byte(s) for 0.30% of 3.32 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     76.7    0.81    1.96                 SVD_decompose [1]
-                1.77    0.00  960000/960000      SVD_matrix_mul [2]
-                0.06    0.00  960000/960000      SVD_sin [8]
-                0.05    0.00  960000/960000      SVD_cos [10]
-                0.05    0.00 2190000/2190000     SVD_matrix_copy [11]
-                0.02    0.00  720000/720000      SVD_matrix_trans [13]
+[1]     80.7    0.73    1.95                 SVD_decompose [1]
+                0.83    0.00  480000/480000      SVD_matrix_in_place_right_mul_by_trans [2]
+                0.81    0.00  480000/480000      SVD_matrix_in_place_left_mul [3]
+                0.13    0.00  960000/960000      SVD_cos [6]
+                0.09    0.00  960000/960000      SVD_sin [7]
+                0.05    0.00  480000/480000      SVD_atan [10]
+                0.03    0.00  510000/510000      SVD_matrix_copy [13]
                 0.01    0.01   50000/50000       SVD_matrix_isDiagonal [14]
-                0.01    0.00  480000/480000      SVD_atan [17]
-                0.01    0.00  160000/320000      SVD_abs [15]
+                0.01    0.00  160000/320000      SVD_abs [16]
+                0.00    0.00   10000/10000       SVD_matrix_in_place_trans [19]
 -----------------------------------------------
-                1.77    0.00  960000/960000      SVD_decompose [1]
-[2]     49.0    1.77    0.00  960000         SVD_matrix_mul [2]
+                0.83    0.00  480000/480000      SVD_decompose [1]
+[2]     24.8    0.83    0.00  480000         SVD_matrix_in_place_right_mul_by_trans [2]
 -----------------------------------------------
-                                                 <spontaneous>
-[3]      6.5    0.24    0.00                 __gnu_mcount_nc [3]
------------------------------------------------
-                                                 <spontaneous>
-[4]      4.7    0.17    0.00                 brk [4]
+                0.81    0.00  480000/480000      SVD_decompose [1]
+[3]     24.4    0.81    0.00  480000         SVD_matrix_in_place_left_mul [3]
 -----------------------------------------------
                                                  <spontaneous>
-[5]      4.4    0.16    0.00                 atanf32 [5]
+[4]      5.4    0.18    0.00                 __gnu_mcount_nc [4]
 -----------------------------------------------
                                                  <spontaneous>
-[6]      2.5    0.09    0.00                 cosf32 [6]
+[5]      5.1    0.17    0.00                 atanf32 [5]
+-----------------------------------------------
+                0.13    0.00  960000/960000      SVD_decompose [1]
+[6]      3.8    0.13    0.00  960000         SVD_cos [6]
+-----------------------------------------------
+                0.09    0.00  960000/960000      SVD_decompose [1]
+[7]      2.7    0.09    0.00  960000         SVD_sin [7]
 -----------------------------------------------
                                                  <spontaneous>
-[7]      2.5    0.09    0.00                 sinf32 [7]
------------------------------------------------
-                0.06    0.00  960000/960000      SVD_decompose [1]
-[8]      1.5    0.06    0.00  960000         SVD_sin [8]
+[8]      2.7    0.09    0.00                 sinf32 [8]
 -----------------------------------------------
                                                  <spontaneous>
-[9]      1.5    0.06    0.00                 __profile_frequency [9]
+[9]      2.1    0.07    0.00                 cosf32 [9]
 -----------------------------------------------
-                0.05    0.00  960000/960000      SVD_decompose [1]
-[10]     1.4    0.05    0.00  960000         SVD_cos [10]
------------------------------------------------
-                0.05    0.00 2190000/2190000     SVD_decompose [1]
-[11]     1.3    0.05    0.00 2190000         SVD_matrix_copy [11]
+                0.05    0.00  480000/480000      SVD_decompose [1]
+[10]     1.5    0.05    0.00  480000         SVD_atan [10]
 -----------------------------------------------
                                                  <spontaneous>
-[12]     0.6    0.02    0.00                 _dl_sym [12]
+[11]     1.5    0.05    0.00                 brk [11]
 -----------------------------------------------
-                0.02    0.00  720000/720000      SVD_decompose [1]
-[13]     0.4    0.02    0.00  720000         SVD_matrix_trans [13]
+                                                 <spontaneous>
+[12]     1.5    0.05    0.00                 __profile_frequency [12]
+-----------------------------------------------
+                0.03    0.00  510000/510000      SVD_decompose [1]
+[13]     0.9    0.03    0.00  510000         SVD_matrix_copy [13]
 -----------------------------------------------
                 0.01    0.01   50000/50000       SVD_decompose [1]
-[14]     0.4    0.01    0.01   50000         SVD_matrix_isDiagonal [14]
-                0.01    0.00  160000/320000      SVD_abs [15]
+[14]     0.5    0.01    0.01   50000         SVD_matrix_isDiagonal [14]
+                0.01    0.00  160000/320000      SVD_abs [16]
+-----------------------------------------------
+                                                 <spontaneous>
+[15]     0.5    0.02    0.00                 SVD_tan [15]
 -----------------------------------------------
                 0.01    0.00  160000/320000      SVD_decompose [1]
                 0.01    0.00  160000/320000      SVD_matrix_isDiagonal [14]
-[15]     0.3    0.01    0.00  320000         SVD_abs [15]
+[16]     0.3    0.01    0.00  320000         SVD_abs [16]
 -----------------------------------------------
                                                  <spontaneous>
-[16]     0.3    0.01    0.00                 SVD_tan [16]
------------------------------------------------
-                0.01    0.00  480000/480000      SVD_decompose [1]
-[17]     0.1    0.01    0.00  480000         SVD_atan [17]
+[17]     0.3    0.01    0.00                 _dl_sym [17]
 -----------------------------------------------
                                                  <spontaneous>
-[18]     0.1    0.01    0.00                 memmove [18]
+[18]     0.2    0.01    0.00                 SVD_matrix_in_place_left_mul_by_trans [18]
 -----------------------------------------------
-                                                 <spontaneous>
-[19]     0.1    0.01    0.00                 memset [19]
+                0.00    0.00   10000/10000       SVD_decompose [1]
+[19]     0.0    0.00    0.00   10000         SVD_matrix_in_place_trans [19]
 -----------------------------------------------
-                0.00    0.00       1/1           __libc_start_main [616]
+                0.00    0.00       1/1           __libc_start_main [621]
 [20]     0.0    0.00    0.00       1         main [20]
 -----------------------------------------------
 
@@ -224,10 +225,10 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [15] SVD_abs                [13] SVD_matrix_trans        [4] brk
-  [17] SVD_atan                [8] SVD_sin                 [6] cosf32
-  [10] SVD_cos                [16] SVD_tan                [20] main
-   [1] SVD_decompose           [3] __gnu_mcount_nc        [18] memmove
-  [11] SVD_matrix_copy         [9] __profile_frequency    [19] memset
-  [14] SVD_matrix_isDiagonal  [12] _dl_sym                 [7] sinf32
-   [2] SVD_matrix_mul          [5] atanf32
+  [16] SVD_abs                 [2] SVD_matrix_in_place_right_mul_by_trans [17] _dl_sym
+  [10] SVD_atan               [19] SVD_matrix_in_place_trans [5] atanf32
+   [6] SVD_cos                [14] SVD_matrix_isDiagonal  [11] brk
+   [1] SVD_decompose           [7] SVD_sin                 [9] cosf32
+  [13] SVD_matrix_copy        [15] SVD_tan                [20] main
+   [3] SVD_matrix_in_place_left_mul [4] __gnu_mcount_nc    [8] sinf32
+  [18] SVD_matrix_in_place_left_mul_by_trans [12] __profile_frequency

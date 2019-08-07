@@ -11,6 +11,7 @@
 	.eabi_attribute 18, 4
 	.file	"SVD.c"
 	.text
+	.global	I
 	.data
 	.align	2
 	.type	I, %object
@@ -41,39 +42,23 @@ I:
 	.fpu neon
 	.type	SVD_decompose, %function
 SVD_decompose:
-	@ args = 0, pretend = 0, frame = 576
+	@ args = 0, pretend = 0, frame = 128
 	@ frame_needed = 1, uses_anonymous_args = 0
 	push	{r4, fp, lr}
 	add	fp, sp, #8
-	sub	sp, sp, #580
-	str	r0, [fp, #-576]
-	str	r1, [fp, #-580]
-	str	r2, [fp, #-584]
-	str	r3, [fp, #-588]
-	sub	r3, fp, #188
-	mov	r2, #64
-	mov	r1, #0
-	mov	r0, r3
-	bl	memset
-	sub	r3, fp, #252
-	mov	r2, #64
-	mov	r1, #0
-	mov	r0, r3
-	bl	memset
-	sub	r3, fp, #316
-	mov	r2, #64
-	mov	r1, #0
-	mov	r0, r3
-	bl	memset
-	ldr	r1, [fp, #-584]
-	ldr	r0, [fp, #-576]
+	sub	sp, sp, #132
+	str	r0, [fp, #-128]
+	str	r1, [fp, #-132]
+	str	r2, [fp, #-136]
+	str	r3, [fp, #-140]
+	ldr	r1, [fp, #-136]
+	ldr	r0, [fp, #-128]
 	bl	SVD_matrix_copy
-	ldr	r1, [fp, #-580]
+	ldr	r1, [fp, #-132]
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
-	sub	r3, fp, #124
-	mov	r1, r3
+	ldr	r1, [fp, #-140]
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
@@ -104,44 +89,14 @@ SVD_decompose:
 	str	r3, [fp, #-20]
 	b	.L4
 .L5:
-	sub	r3, fp, #188
-	mov	r1, r3
-	movw	r0, #:lower16:I
-	movt	r0, #:upper16:I
-	bl	SVD_matrix_copy
-	sub	r3, fp, #252
-	mov	r1, r3
-	movw	r0, #:lower16:I
-	movt	r0, #:upper16:I
-	bl	SVD_matrix_copy
-	sub	r3, fp, #316
-	mov	r1, r3
-	movw	r0, #:lower16:I
-	movt	r0, #:upper16:I
-	bl	SVD_matrix_copy
-	sub	r3, fp, #380
-	mov	r1, r3
-	movw	r0, #:lower16:I
-	movt	r0, #:upper16:I
-	bl	SVD_matrix_copy
-	sub	r3, fp, #444
-	mov	r1, r3
-	movw	r0, #:lower16:I
-	movt	r0, #:upper16:I
-	bl	SVD_matrix_copy
-	sub	r3, fp, #508
-	mov	r1, r3
-	movw	r0, #:lower16:I
-	movt	r0, #:upper16:I
-	bl	SVD_matrix_copy
-	sub	r3, fp, #572
+	sub	r3, fp, #124
 	mov	r1, r3
 	movw	r0, #:lower16:I
 	movt	r0, #:upper16:I
 	bl	SVD_matrix_copy
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-16]
 	lsl	r3, r3, #2
@@ -149,7 +104,7 @@ SVD_decompose:
 	vldr.32	s14, [r3]
 	ldr	r3, [fp, #-16]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #2
@@ -159,7 +114,7 @@ SVD_decompose:
 	vstr.32	s15, [fp, #-32]
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-16]
 	lsl	r3, r3, #2
@@ -167,7 +122,7 @@ SVD_decompose:
 	vldr.32	s14, [r3]
 	ldr	r3, [fp, #-16]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #2
@@ -177,7 +132,7 @@ SVD_decompose:
 	vstr.32	s15, [fp, #-36]
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #2
@@ -185,7 +140,7 @@ SVD_decompose:
 	vldr.32	s14, [r3]
 	ldr	r3, [fp, #-16]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-16]
 	lsl	r3, r3, #2
@@ -195,7 +150,7 @@ SVD_decompose:
 	vstr.32	s15, [fp, #-40]
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-20]
 	lsl	r3, r3, #2
@@ -203,7 +158,7 @@ SVD_decompose:
 	vldr.32	s14, [r3]
 	ldr	r3, [fp, #-16]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-16]
 	lsl	r3, r3, #2
@@ -239,7 +194,7 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #368
+	sub	r3, r3, #112
 	vstr.32	s15, [r3]
 	vldr.32	s0, [fp, #-60]
 	bl	SVD_sin
@@ -252,7 +207,7 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #368
+	sub	r3, r3, #112
 	vstr.32	s15, [r3]
 	vldr.32	s0, [fp, #-60]
 	bl	SVD_sin
@@ -264,7 +219,7 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #368
+	sub	r3, r3, #112
 	vstr.32	s15, [r3]
 	vldr.32	s0, [fp, #-60]
 	bl	SVD_cos
@@ -276,8 +231,21 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #368
+	sub	r3, r3, #112
 	vstr.32	s15, [r3]
+	sub	r3, fp, #124
+	ldr	r1, [fp, #-136]
+	mov	r0, r3
+	bl	SVD_matrix_in_place_left_mul
+	sub	r3, fp, #124
+	mov	r1, r3
+	ldr	r0, [fp, #-132]
+	bl	SVD_matrix_in_place_right_mul_by_trans
+	sub	r3, fp, #124
+	mov	r1, r3
+	movw	r0, #:lower16:I
+	movt	r0, #:upper16:I
+	bl	SVD_matrix_copy
 	vldr.32	s0, [fp, #-56]
 	bl	SVD_cos
 	vmov.f32	s15, s0
@@ -288,7 +256,7 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #432
+	sub	r3, r3, #112
 	vstr.32	s15, [r3]
 	vldr.32	s0, [fp, #-56]
 	bl	SVD_sin
@@ -301,7 +269,7 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #432
+	sub	r3, r3, #112
 	vstr.32	s15, [r3]
 	vldr.32	s0, [fp, #-56]
 	bl	SVD_sin
@@ -313,7 +281,7 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #432
+	sub	r3, r3, #112
 	vstr.32	s15, [r3]
 	vldr.32	s0, [fp, #-56]
 	bl	SVD_cos
@@ -325,51 +293,16 @@ SVD_decompose:
 	lsl	r3, r3, #2
 	sub	r2, fp, #12
 	add	r3, r2, r3
-	sub	r3, r3, #432
+	sub	r3, r3, #112
 	vstr.32	s15, [r3]
-	sub	r2, fp, #508
-	sub	r3, fp, #380
-	mov	r1, r2
-	mov	r0, r3
-	bl	SVD_matrix_trans
-	sub	r2, fp, #572
-	sub	r3, fp, #444
-	mov	r1, r2
-	mov	r0, r3
-	bl	SVD_matrix_trans
-	sub	r2, fp, #188
-	sub	r3, fp, #508
-	mov	r1, r3
-	ldr	r0, [fp, #-580]
-	bl	SVD_matrix_mul
-	sub	r2, fp, #316
-	sub	r1, fp, #124
-	sub	r3, fp, #444
-	mov	r0, r3
-	bl	SVD_matrix_mul
-	sub	r2, fp, #252
-	sub	r3, fp, #380
-	ldr	r1, [fp, #-584]
-	mov	r0, r3
-	bl	SVD_matrix_mul
-	sub	r1, fp, #572
-	sub	r3, fp, #252
-	ldr	r2, [fp, #-584]
-	mov	r0, r3
-	bl	SVD_matrix_mul
-	sub	r2, fp, #124
-	sub	r3, fp, #316
-	mov	r1, r2
-	mov	r0, r3
-	bl	SVD_matrix_copy
 	sub	r3, fp, #124
-	ldr	r1, [fp, #-588]
+	mov	r1, r3
+	ldr	r0, [fp, #-136]
+	bl	SVD_matrix_in_place_right_mul_by_trans
+	sub	r3, fp, #124
+	ldr	r1, [fp, #-140]
 	mov	r0, r3
-	bl	SVD_matrix_trans
-	sub	r3, fp, #188
-	ldr	r1, [fp, #-580]
-	mov	r0, r3
-	bl	SVD_matrix_copy
+	bl	SVD_matrix_in_place_left_mul
 	ldr	r3, [fp, #-20]
 	add	r3, r3, #1
 	str	r3, [fp, #-20]
@@ -385,11 +318,13 @@ SVD_decompose:
 	cmp	r3, #2
 	ble	.L6
 .L2:
-	ldr	r0, [fp, #-584]
+	ldr	r0, [fp, #-136]
 	bl	SVD_matrix_isDiagonal
 	mov	r3, r0
 	cmp	r3, #0
 	beq	.L7
+	ldr	r0, [fp, #-140]
+	bl	SVD_matrix_in_place_trans
 	mov	r3, #0
 	str	r3, [fp, #-24]
 	b	.L8
@@ -400,7 +335,7 @@ SVD_decompose:
 .L12:
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-28]
 	lsl	r3, r3, #2
@@ -408,7 +343,7 @@ SVD_decompose:
 	vldr.32	s15, [r3]
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r4, r2, r3
 	vmov.f32	s0, s15
 	bl	SVD_abs
@@ -419,7 +354,7 @@ SVD_decompose:
 	vstr.32	s15, [r3]
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-28]
 	lsl	r3, r3, #2
@@ -431,7 +366,7 @@ SVD_decompose:
 	bpl	.L10
 	ldr	r3, [fp, #-24]
 	lsl	r3, r3, #4
-	ldr	r2, [fp, #-584]
+	ldr	r2, [fp, #-136]
 	add	r2, r2, r3
 	ldr	r3, [fp, #-28]
 	lsl	r3, r3, #2

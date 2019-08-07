@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.1754' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.5415' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 7379
+Timerange: Basic block 0 - 6145
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O3 (PID 1754, part 1)
+Profiled target:  ./callgrind_profile_main_O3 (PID 5415, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,20 +18,20 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
     Ir 
 --------------------------------------------------------------------------------
-65,700  PROGRAM TOTALS
+48,095  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
     Ir  file:function
 --------------------------------------------------------------------------------
-65,700  ???:0x00010410 [/root/SENG440_SVD/callgrind_profile_main_O3]
-65,689  ???:(below main) [/root/SENG440_SVD/callgrind_profile_main_O3]
-47,873  ???:main [/root/SENG440_SVD/callgrind_profile_main_O3]
-47,864  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
-31,008  ???:SVD_matrix_mul [/root/SENG440_SVD/callgrind_profile_main_O3]
+48,095  ???:0x00010410 [/root/SENG440_SVD/callgrind_profile_main_O3]
+48,084  ???:(below main) [/root/SENG440_SVD/callgrind_profile_main_O3]
+30,268  ???:main [/root/SENG440_SVD/callgrind_profile_main_O3]
+30,259  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 9,312  ???:SVD_matrix_in_place_right_mul_by_trans [/root/SENG440_SVD/callgrind_profile_main_O3]
+ 9,312  ???:SVD_matrix_in_place_left_mul [/root/SENG440_SVD/callgrind_profile_main_O3]
  8,747  ???:__tunables_init [/root/SENG440_SVD/callgrind_profile_main_O3]
  7,464  ???:__libc_init_first [/root/SENG440_SVD/callgrind_profile_main_O3]
  7,297  ???:_dl_non_dynamic_init [/root/SENG440_SVD/callgrind_profile_main_O3]
- 3,942  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,866  ???:_dl_init_paths [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,802  ???:SVD_cos [/root/SENG440_SVD/callgrind_profile_main_O3]
  2,721  ???:SVD_atan [/root/SENG440_SVD/callgrind_profile_main_O3]
@@ -45,8 +45,9 @@ Auto-annotation:  on
  2,011  ???:_dl_get_origin [/root/SENG440_SVD/callgrind_profile_main_O3]
  1,781  ???:malloc_hook_ini [/root/SENG440_SVD/callgrind_profile_main_O3]
  1,080  ???:_int_malloc [/root/SENG440_SVD/callgrind_profile_main_O3]
- 1,080  ???:SVD_matrix_trans [/root/SENG440_SVD/callgrind_profile_main_O3]
    968  ???:ptmalloc_init [/root/SENG440_SVD/callgrind_profile_main_O3]
+   918  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O3]
    803  ???:malloc'2 [/root/SENG440_SVD/callgrind_profile_main_O3]
    570  ???:tcache_init.part.3 [/root/SENG440_SVD/callgrind_profile_main_O3]
+   477  ???:exit [/root/SENG440_SVD/callgrind_profile_main_O3]
 

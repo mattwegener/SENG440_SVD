@@ -19,92 +19,67 @@
 	.fpu neon
 	.type	SVD_decompose, %function
 SVD_decompose:
-	@ args = 0, pretend = 0, frame = 536
+	@ args = 0, pretend = 0, frame = 88
 	@ frame_needed = 0, uses_anonymous_args = 0
 	push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
 	vpush.64	{d8, d9}
-	mov	r9, r2
-	mov	r4, r0
-	sub	sp, sp, #540
+	sub	sp, sp, #92
 	mov	r5, r1
-	str	r1, [sp, #12]
-	mov	r2, #64
-	mov	r1, #0
-	add	r0, sp, #88
-	str	r3, [sp, #20]
-	bl	memset
-	mov	r2, #64
-	mov	r1, #0
-	add	r0, sp, #152
-	bl	memset
-	mov	r2, #64
-	mov	r1, #0
-	add	r0, sp, #216
-	bl	memset
-	mov	r1, r9
-	mov	r0, r4
+	str	r1, [sp, #20]
+	mov	r1, r2
+	mov	r4, r3
+	mov	fp, r2
+	str	r3, [sp, #16]
 	bl	SVD_matrix_copy
 	movw	r0, #:lower16:.LANCHOR0
 	mov	r1, r5
 	movt	r0, #:upper16:.LANCHOR0
 	bl	SVD_matrix_copy
 	movw	r0, #:lower16:.LANCHOR0
-	add	r1, sp, #24
-	mov	r10, r0
+	mov	r1, r4
+	mov	r4, r0
 	movt	r0, #:upper16:.LANCHOR0
 	bl	SVD_matrix_copy
-	mov	r0, r9
+	mov	r3, r4
+	mov	r0, fp
+	movt	r3, #:upper16:.LANCHOR0
+	str	r3, [sp, #4]
 	bl	SVD_matrix_isDiagonal
 	cmp	r0, #0
-	movt	r10, #:upper16:.LANCHOR0
+	vmov.f32	s19, #5.0e-1
 	bne	.L16
 .L5:
-	mov	r3, #16
-	vmov.f32	s19, #5.0e-1
-	str	r3, [sp, #16]
-	add	r3, sp, #284
-	str	r3, [sp, #4]
-	add	r3, sp, #348
-	add	fp, r9, #4
-	str	r3, [sp, #8]
+	mov	r10, fp
+	str	r0, [sp, #12]
+	str	fp, [sp, #8]
+	add	r6, sp, #28
 .L4:
-	ldr	r3, [sp, #16]
-	ldmib	sp, {r7, r8}
-	mov	r6, fp
-	mov	r5, r3
-	add	r4, r3, #4
+	ldr	r3, [sp, #12]
+	sub	r5, r6, #4
+	add	r3, r3, #1
+	mov	r4, r3
+	mov	r8, r5
+	mov	r7, r6
+	mov	r9, r10
+	str	r3, [sp, #12]
 .L3:
-	add	r1, sp, #88
-	mov	r0, r10
+	ldr	r0, [sp, #4]
+	add	r1, sp, #24
 	bl	SVD_matrix_copy
-	add	r1, sp, #152
-	mov	r0, r10
-	bl	SVD_matrix_copy
-	add	r1, sp, #216
-	mov	r0, r10
-	bl	SVD_matrix_copy
-	add	r1, sp, #280
-	mov	r0, r10
-	bl	SVD_matrix_copy
-	add	r1, sp, #344
-	mov	r0, r10
-	bl	SVD_matrix_copy
-	add	r1, sp, #408
-	mov	r0, r10
-	bl	SVD_matrix_copy
-	add	r1, sp, #472
-	mov	r0, r10
-	bl	SVD_matrix_copy
-	add	r2, r9, r5
-	add	r3, r9, r4
-	vldmia.32	r6!, {s14}
-	vldr.32	s0, [r2]
-	vldr.32	s15, [fp, #-4]
-	vldr.32	s1, [r3]
-	vsub.f32	s17, s0, s14
-	vadd.f32	s18, s1, s15
-	vadd.f32	s0, s0, s14
-	vsub.f32	s1, s1, s15
+	ldr	r1, [sp, #8]
+	lsl	r3, r4, #2
+	add	r2, r3, r4
+	add	r2, fp, r2, lsl #2
+	add	r3, r1, r3
+	add	r9, r9, #16
+	vldr.32	s15, [r3]
+	vldr.32	s1, [r2]
+	vldr.32	s14, [r10]
+	vldr.32	s0, [r9]
+	vadd.f32	s18, s1, s14
+	vsub.f32	s17, s0, s15
+	vsub.f32	s1, s1, s14
+	vadd.f32	s0, s0, s15
 	bl	SVD_atan
 	vmov.f32	s1, s18
 	vmov.f32	s16, s0
@@ -114,98 +89,70 @@ SVD_decompose:
 	vmul.f32	s17, s0, s19
 	vmov.f32	s0, s17
 	bl	SVD_cos
-	ldr	r3, [sp, #4]
-	vstr.32	s0, [r3, #-4]
+	vstr.32	s0, [r6, #-4]
 	vmov.f32	s0, s17
 	bl	SVD_sin
 	vneg.f32	s15, s0
 	vmov.f32	s0, s17
+	vstr.32	s15, [r7]
+	bl	SVD_sin
+	vstr.32	s0, [r5, #16]
+	vmov.f32	s0, s17
+	bl	SVD_cos
+	mov	r1, fp
+	vstr.32	s0, [r8, #20]
+	add	r0, sp, #24
+	bl	SVD_matrix_in_place_left_mul
+	vsub.f32	s16, s16, s17
+	add	r1, sp, #24
+	ldr	r0, [sp, #20]
+	bl	SVD_matrix_in_place_right_mul_by_trans
+	add	r1, sp, #24
+	ldr	r0, [sp, #4]
+	bl	SVD_matrix_copy
+	vmov.f32	s0, s16
+	bl	SVD_cos
+	vstr.32	s0, [r6, #-4]
+	vmov.f32	s0, s16
+	bl	SVD_sin
+	vneg.f32	s15, s0
+	vmov.f32	s0, s16
 	vstmia.32	r7!, {s15}
 	bl	SVD_sin
-	add	r3, sp, #280
-	add	r3, r3, r5
-	vstr.32	s0, [r3]
-	vmov.f32	s0, s17
-	bl	SVD_cos
-	vsub.f32	s16, s16, s17
-	add	r3, sp, #280
-	add	r3, r3, r4
-	vstr.32	s0, [r3]
-	vmov.f32	s0, s16
-	bl	SVD_cos
-	ldr	r3, [sp, #8]
-	vstr.32	s0, [r3, #-4]
-	vmov.f32	s0, s16
-	bl	SVD_sin
-	vneg.f32	s15, s0
-	vmov.f32	s0, s16
-	vstmia.32	r8!, {s15}
-	bl	SVD_sin
-	add	r3, sp, #344
-	add	r3, r3, r5
-	vstr.32	s0, [r3]
-	vmov.f32	s0, s16
-	bl	SVD_cos
-	add	r3, sp, #344
-	add	r3, r3, r4
-	vstr.32	s0, [r3]
-	add	r1, sp, #408
-	add	r0, sp, #280
-	bl	SVD_matrix_trans
-	add	r1, sp, #472
-	add	r0, sp, #344
-	bl	SVD_matrix_trans
-	add	r2, sp, #88
-	add	r1, sp, #408
-	ldr	r0, [sp, #12]
-	bl	SVD_matrix_mul
-	add	r2, sp, #216
-	add	r1, sp, #24
-	add	r0, sp, #344
-	bl	SVD_matrix_mul
-	add	r2, sp, #152
-	mov	r1, r9
-	add	r0, sp, #280
-	bl	SVD_matrix_mul
-	add	r3, sp, #472
-	mov	r1, r3
-	mov	r2, r9
-	add	r0, sp, #152
-	bl	SVD_matrix_mul
-	add	r1, sp, #24
-	add	r0, sp, #216
-	bl	SVD_matrix_copy
-	ldr	r1, [sp, #20]
-	add	r0, sp, #24
-	bl	SVD_matrix_trans
-	add	r4, r4, #20
-	ldr	r1, [sp, #12]
-	add	r0, sp, #88
-	bl	SVD_matrix_copy
-	cmp	r4, #80
 	add	r5, r5, #16
+	vstr.32	s0, [r5]
+	vmov.f32	s0, s16
+	bl	SVD_cos
+	add	r8, r8, #20
+	add	r1, sp, #24
+	mov	r0, fp
+	vstr.32	s0, [r8]
+	bl	SVD_matrix_in_place_right_mul_by_trans
+	add	r4, r4, #1
+	ldr	r1, [sp, #16]
+	add	r0, sp, #24
+	bl	SVD_matrix_in_place_left_mul
+	cmp	r4, #4
 	bne	.L3
-	ldr	r3, [sp, #16]
-	add	fp, fp, #20
-	add	r3, r3, #20
-	str	r3, [sp, #16]
-	cmp	r3, #76
-	ldr	r3, [sp, #4]
-	add	r3, r3, #20
-	str	r3, [sp, #4]
+	ldr	r3, [sp, #12]
+	add	r10, r10, #20
+	cmp	r3, #3
 	ldr	r3, [sp, #8]
-	add	r3, r3, #20
+	add	r6, r6, #20
+	add	r3, r3, #16
 	str	r3, [sp, #8]
 	bne	.L4
-	mov	r0, r9
+	mov	r0, fp
 	bl	SVD_matrix_isDiagonal
 	cmp	r0, #0
 	beq	.L5
 .L16:
+	ldr	r0, [sp, #16]
+	bl	SVD_matrix_in_place_trans
 	vldr.32	s16, .L17
 	mov	r7, #0
-	add	r6, r9, #16
-	add	r4, r9, #80
+	add	r6, fp, #16
+	add	r4, fp, #80
 .L6:
 	sub	r5, r6, #16
 .L9:
@@ -220,7 +167,7 @@ SVD_decompose:
 	add	r6, r5, #16
 	cmp	r4, r6
 	bne	.L6
-	add	sp, sp, #540
+	add	sp, sp, #92
 	@ sp needed
 	vldm	sp!, {d8-d9}
 	pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
@@ -229,6 +176,7 @@ SVD_decompose:
 .L17:
 	.word	953267991
 	.size	SVD_decompose, .-SVD_decompose
+	.global	I
 	.data
 	.align	3
 	.set	.LANCHOR0,. + 0

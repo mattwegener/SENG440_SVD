@@ -1,12 +1,12 @@
 --------------------------------------------------------------------------------
-Profile data file './callgrind.out.1696' (creator: callgrind-3.13.0)
+Profile data file './callgrind.out.5357' (creator: callgrind-3.13.0)
 --------------------------------------------------------------------------------
 I1 cache: 
 D1 cache: 
 LL cache: 
-Timerange: Basic block 0 - 27487
+Timerange: Basic block 0 - 22094
 Trigger: Program termination
-Profiled target:  ./callgrind_profile_main_O0 (PID 1696, part 1)
+Profiled target:  ./callgrind_profile_main_O0 (PID 5357, part 1)
 Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
@@ -18,26 +18,30 @@ Auto-annotation:  on
 --------------------------------------------------------------------------------
      Ir 
 --------------------------------------------------------------------------------
-442,299  PROGRAM TOTALS
+346,863  PROGRAM TOTALS
 
 --------------------------------------------------------------------------------
      Ir  file:function
 --------------------------------------------------------------------------------
-284,160  ???:SVD_matrix_mul [/root/SENG440_SVD/callgrind_profile_main_O0]
- 90,885  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
- 29,880  ???:SVD_matrix_trans [/root/SENG440_SVD/callgrind_profile_main_O0]
+144,720  ???:SVD_matrix_in_place_right_mul_by_trans [/root/SENG440_SVD/callgrind_profile_main_O0]
+144,720  ???:SVD_matrix_in_place_left_mul [/root/SENG440_SVD/callgrind_profile_main_O0]
+ 21,165  ???:SVD_matrix_copy [/root/SENG440_SVD/callgrind_profile_main_O0]
   8,747  ???:__tunables_init [/root/SENG440_SVD/callgrind_profile_main_O0]
-  7,541  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O0]
+  6,279  ???:SVD_decompose [/root/SENG440_SVD/callgrind_profile_main_O0]
   2,706  ???:cosf [/root/SENG440_SVD/callgrind_profile_main_O0]
   2,625  ???:atanf [/root/SENG440_SVD/callgrind_profile_main_O0]
   2,616  ???:sinf [/root/SENG440_SVD/callgrind_profile_main_O0]
   1,729  ???:getenv [/root/SENG440_SVD/callgrind_profile_main_O0]
   1,626  ???:_dl_important_hwcaps [/root/SENG440_SVD/callgrind_profile_main_O0]
-  1,152  ???:SVD_cos [/root/SENG440_SVD/callgrind_profile_main_O0]
   1,152  ???:SVD_sin [/root/SENG440_SVD/callgrind_profile_main_O0]
+  1,152  ???:SVD_cos [/root/SENG440_SVD/callgrind_profile_main_O0]
     835  ???:_int_malloc [/root/SENG440_SVD/callgrind_profile_main_O0]
     726  ???:ptmalloc_init [/root/SENG440_SVD/callgrind_profile_main_O0]
     672  ???:SVD_atan [/root/SENG440_SVD/callgrind_profile_main_O0]
     602  ???:SVD_matrix_isDiagonal [/root/SENG440_SVD/callgrind_profile_main_O0]
     378  ???:strlen [/root/SENG440_SVD/callgrind_profile_main_O0]
+    330  ???:_dl_aux_init [/root/SENG440_SVD/callgrind_profile_main_O0]
+    320  ???:SVD_abs [/root/SENG440_SVD/callgrind_profile_main_O0]
+    293  ???:SVD_matrix_in_place_trans [/root/SENG440_SVD/callgrind_profile_main_O0]
+    265  ???:__tunable_get_val [/root/SENG440_SVD/callgrind_profile_main_O0]
 
