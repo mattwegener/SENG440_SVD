@@ -1,6 +1,11 @@
 
 #include "SVD_matrix.h"
 
+#ifdef TEST
+#include <stdio.h>
+#include <assert.h>
+#define println(...) printf("\n")
+
 void SVD_matrix_in_place_left_mul(matrix left, matrix rightInPlace)
 {
 	int i,j,k; // i is row, j is column, K is element in row/colum corresponding
@@ -235,10 +240,6 @@ bool SVD_matrix_isDiagonal(matrix in)
   return true;
 }
 
-#ifdef TEST
-#include <stdio.h>
-#include <assert.h>
-#define println(...) printf("\n")
 
 void SVD_matrix_print(matrix m)
 {
@@ -297,13 +298,6 @@ void TEST_SVD_matrix_equal()
   // Test : test SVD_matrix_equal
   assert(SVD_matrix_equal(m1, m2));
 }
-void TEST_SVD_matrix_dot()
-{
-// Test : test that dot product with identity gives selected element
-    assert(SVD_matrix_dot(I,m1, 0, 0) == 1.0);
-    assert(SVD_matrix_dot(I,m1, 0, 1) == 2.0);
-    assert(SVD_matrix_dot(I,m1, 0, 2) == 3.0);
-    assert(SVD_matrix_dot(I,m1, 0, 3) == 4.0);
 
     assert(SVD_matrix_dot(I,m1, 1, 0) == 5.0);
     assert(SVD_matrix_dot(I,m1, 1, 1) == 6.0);

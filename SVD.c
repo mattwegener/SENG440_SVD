@@ -1,11 +1,14 @@
 
 #include "SVD.h"
 
-matrix I  =
-                    {{  1.0,  0.0,  0.0,  0.0, },
-                     {  0.0,  1.0,  0.0,  0.0, },
-                     {  0.0,  0.0,  1.0,  0.0, },
-                     {  0.0,  0.0,  0.0,  1.0, },};
+#ifdef TEST
+    #include <stdio.h>
+#endif
+
+static matrix I  = {{  1.0,  0.0,  0.0,  0.0, },
+                    {  0.0,  1.0,  0.0,  0.0, },
+                    {  0.0,  0.0,  1.0,  0.0, },
+                    {  0.0,  0.0,  0.0,  1.0, },};
 
 
 void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V /*OUT*/ )
@@ -47,10 +50,20 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
     matrix_elem qR = 0.0;
     matrix_elem qL = 0.0;
 
+    #ifdef TEST
+        SVD_matrix_print(S);
+        printf("\n");
+        int sweeps = 1;
+    #endif
+    
     matrix Temp;
 
     while(!SVD_matrix_isDiagonal(S))
     {
+        #ifdef TEST
+            printf("///////////////// SWEEP %d///////////////////\n\n", sweeps);
+        #endif
+
         for(int j = 0; j < N-1; j++)
         {
             for(int k = j+1; k < N; k++)
@@ -93,8 +106,16 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
                 SVD_matrix_in_place_right_mul_by_trans(S, Temp);
                 // V'^T = Vij * V^T
                 SVD_matrix_in_place_left_mul(Temp, V);
+                #ifdef TEST
+                printf("Pair %d -- %d\n\n", j + 1,k + 1);
+                SVD_matrix_print(S);
+                printf("\n");
+                #endif
             } //end for
         }//end for
+        #ifdef TEST
+        sweeps++;
+        #endif
     }//end while
 
     SVD_matrix_in_place_trans(V);
@@ -113,6 +134,10 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
             }
         }
     }
+
+    #ifdef TEST
+    fflush(stdout);
+    #endif
 }
 
 
