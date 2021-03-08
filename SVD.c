@@ -1,6 +1,7 @@
 
 #include "SVD.h"
 
+
 static matrix I  = {{  FIX_1,  0,       0,      0, },
                     {  0,      FIX_1,   0,      0, },
                     {  0,      0,       FIX_1,  0, },
@@ -8,6 +9,9 @@ static matrix I  = {{  FIX_1,  0,       0,      0, },
 
 void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V /*OUT*/ )
 {
+    int sweep_stop = 0;
+    printf("Enter sweep to display:");
+    scanf("%d", &sweep_stop);
     // TODO
     /*
     Per iteration:
@@ -132,7 +136,8 @@ void SVD_decompose(matrix M /*IN*/, matrix U /*OUT*/, matrix S /*OUT*/, matrix V
         }//end for
 
         printf("END SWEEP\n");
-        if (sweeps == 5) return;
+        SVD_matrix_print(S);
+        if (sweeps == sweep_stop) return;
         sweeps++;
     }//end while
 

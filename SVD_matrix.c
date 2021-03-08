@@ -99,10 +99,10 @@ void SVD_matrix_fix_to_int(matrix m, int q){
 
 void SVD_matrix_print(matrix m)
 {
-  printf("%d %d %d %d\n", m[0][0], m[0][1], m[0][2], m[0][3]);
-  printf("%d %d %d %d\n", m[1][0], m[1][1], m[1][2], m[1][3]);
-  printf("%d %d %d %d\n", m[2][0], m[2][1], m[2][2], m[2][3]);
-  printf("%d %d %d %d\n", m[3][0], m[3][1], m[3][2], m[3][3]);
+  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[0][0], Q), TOFLT(m[0][1], Q), TOFLT(m[0][2],Q), TOFLT(m[0][3],Q));
+  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[1][0], Q), TOFLT(m[1][1], Q), TOFLT(m[1][2],Q), TOFLT(m[1][3],Q));
+  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[2][0], Q), TOFLT(m[2][1], Q), TOFLT(m[2][2],Q), TOFLT(m[2][3],Q));
+  printf("%10.5f %10.5f %10.5f %10.5f\n", TOFLT(m[3][0], Q), TOFLT(m[3][1], Q), TOFLT(m[3][2],Q), TOFLT(m[3][3],Q));
 }
 
 #ifdef TEST
